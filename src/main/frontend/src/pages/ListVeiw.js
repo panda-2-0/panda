@@ -79,13 +79,6 @@ class ListVeiw extends React.Component {
             return price.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
         }
 
-        // const moveWriting= (event)=>{       //일단 아이디만 받아서 넘겨서 게시물 상세 페이지에서 백엔드로 데베 불어오는게 나을듯(WritingConten 테이블이랑, Writing 테이블 개체 다불러야함)
-        //
-        //     let getId=event.currentTarget.id
-        //     navigate('/pages/noticeConfirm?search='+getId, {state:{
-        //             word:getId
-        //         }});
-        // }
         return (
             <div className={styles.list_view_wrap}>
                 <button onClick={this.handlePrevBtn} className={(!!slideSpot ? `${styles.left_btn}` : `${styles.left_btn_hidden}`)}>
@@ -94,7 +87,7 @@ class ListVeiw extends React.Component {
             <div className={styles.list_view_box}>
                 <ul className={styles.list}>
                     <div style={{ transform: `translateX(${slideSpot}px)`}} className={styles.slide_item}>
-                        {list&&list.map((item,i) => (
+                        {list&&Array.isArray(list)&&list.map((item,i) => (
                             <li key={i} className={styles.list_item}>
                                 <Link to={'/pages/noticeConfirm?search='+item.writingId} state={{ word:item.writingId }} style={{ textDecoration: "none" }} id={item.writingId}>
                                     <div className={styles.list_container}>

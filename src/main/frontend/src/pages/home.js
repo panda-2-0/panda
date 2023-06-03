@@ -7,7 +7,7 @@ import axios from "axios";
 function Home() {
     const movePage = useNavigate();
     let [recommend_item, setRecommendItem] = useState([]);   // 추천 제품 리스트
-    let [popular, setPopular] = useState([]);   // 인기상품 + 광고 리스트
+    let [popular, setPopular] = useState([]);   // 인기상품 + 광고 리스트\
 
     function goSearchResult(){
         //movePage('/pages/SearchResult');
@@ -44,6 +44,13 @@ function Home() {
         });
     },[]);
 
+    function goCategorySearch(event){    //카테고리 검색
+        console.log(event.currentTarget.id);
+        const searchdata=new FormData();
+        searchdata.append('word', event.currentTarget.id);
+        movePage('/pages/SearchResult?search_popularity='+event.currentTarget.id, {state:{word:event.currentTarget.id}});
+    }
+
     return (
         <div className={styles.App}>
             <div className={styles.home_page}>
@@ -52,12 +59,11 @@ function Home() {
                         <section className={styles.top_section}>
                             <h1 className={styles.head}>추천 매물</h1>
                             <div className={styles.list_wrap}>
-                                {/*<ListVeiw list={recommend_item}></ListVeiw>*/}
-                                <ListVeiw></ListVeiw>
+                                <ListVeiw list={recommend_item}></ListVeiw>
                             </div>
-                            <div className={styles.more_wrap}>
-                                <a className={styles.more} onClick={goSearchResult}>추천 매물 더 보기</a>
-                            </div>
+                            {/*<div className={styles.more_wrap}>*/}
+                            {/*    <a className={styles.more} onClick={goSearchResult}>추천 매물 더 보기</a>*/}
+                            {/*</div>*/}
                         </section>
                         <section className={styles.mid_section}>
                             <h1 className={styles.head}>인기 매물</h1>
@@ -65,7 +71,10 @@ function Home() {
                                 <ListVeiw list={popular}></ListVeiw>
                             </div>
                             <div className={styles.more_wrap}>
-                                <a className={styles.more} onClick={goSearchResult}>인기 매물 더 보기</a>
+                                <form name='search_popular' id='search_popular' method='get'>
+                                    <input name='search_popular' id='search_popular' placeholder='  검색'defaultValue="" style={{ display: 'none' }}></input>
+                                </form>
+                                <a type="submit" form="search_popular" onClick={goCategorySearch} className={styles.more}>인기 매물 더 보기</a>
                             </div>
                         </section>
                     </div>
