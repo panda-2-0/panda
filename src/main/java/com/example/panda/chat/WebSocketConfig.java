@@ -32,11 +32,11 @@ public class WebSocketConfig implements WebSocketConfigurer {
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
         registry.addHandler(new ChatHandler(chatRoomService, webSocketSessionManager), "/chat")
                 .addInterceptors(handshakeInterceptor)
-                .setAllowedOrigins("http://localhost:3000");
+                .setAllowedOrigins("http://localhost:8000");
 
         registry.addHandler(new MessageHandler(chatService, chatRoomService, writingCompleteService,
                         userService, purchaseHistoryService, webSocketSessionManager), "/chat/{roomId}")
                 .addInterceptors(handshakeInterceptor)
-                .setAllowedOrigins("http://localhost:3000");
+                .setAllowedOrigins("http://localhost:8000");
     }
 }

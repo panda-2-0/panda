@@ -47,8 +47,8 @@ function Login() {
         axios.post('/login', formData, {
             headers: {
                 "Content-Type": "multipart/form-data",
-                "Access-Control-Allow-Origin": `http://localhost:3000`,
-                'Access-Control-Allow-Credentials':"true",
+                // "Access-Control-Allow-Origin": `http://localhost:8000`,
+                // 'Access-Control-Allow-Credentials':"true",
             },
         })
             .then((response) => {
