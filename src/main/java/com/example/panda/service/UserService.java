@@ -16,8 +16,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -27,17 +25,6 @@ public class UserService {
     private final UserSaveRepository userSaveRepository;
     private final PasswordEncoder passwordEncoder;
 
-//    public List<UserDTO> findAll() {
-//        List<UserEntity> userEntityList = userRepository.findAll();
-//        List<UserDTO> userDTOList = new ArrayList<>();
-//
-//        for(UserEntity userEntity : userEntityList) {
-//            userDTOList.add(UserDTO.toUserDTO(userEntity));
-//        }
-//
-//        return userDTOList;
-//
-//    }
     public UserDTO findbyId(String id){      //UserDTO리턴
         Optional<UserEntity> userEntity=userRepository.findByEmail(id);
         UserDTO userDTO=UserDTO.toUserDTO(userEntity.get());

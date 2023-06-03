@@ -1,9 +1,6 @@
 package com.example.panda.controller;
 
-import com.example.panda.dto.AdvertiseDTO;
 import com.example.panda.dto.WritingDTO;
-import com.example.panda.dto.WritingResponseDTO;
-import com.example.panda.entity.UserEntity;
 import com.example.panda.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
@@ -11,7 +8,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor

@@ -53,6 +53,7 @@ public class SignController {
         if (auth != null) {
             new SecurityContextLogoutHandler().logout(request, response, auth);
         }
+        log.info("logout");
         return HttpStatus.OK;
     }
 }

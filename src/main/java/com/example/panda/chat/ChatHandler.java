@@ -8,7 +8,6 @@ package com.example.panda.chat;
 
 import com.example.panda.dto.ChatRoomDTO;
 import com.example.panda.service.ChatRoomService;
-import com.example.panda.service.ChatService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.socket.CloseStatus;

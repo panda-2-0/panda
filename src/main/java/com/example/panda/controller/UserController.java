@@ -23,20 +23,11 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
     private final UserService userService;
 
-//    @GetMapping("/me")  // 사용자 정보 가져오기
-    //public ResponseEntity<UserResponseDTO> getMyMemberInfo() {
-    //UserResponseDTO myInfoBySecurity = userService.getMyInfoBySecurity();
-    //System.out.println(myInfoBySecurity.getNickname());
-    //return ResponseEntity.ok((myInfoBySecurity));
-    // }
-
     @GetMapping("/me")  // 사용자 정보 가져오기
     public UserDTO getMyMemberInfo() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetails userDetails = (UserDetails)authentication.getPrincipal();
         UserDTO userDTO = userService.findbyId(userDetails.getUsername());
-
-//        System.out.println(userDTO);
 
         return userDTO;
     }
