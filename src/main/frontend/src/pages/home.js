@@ -13,7 +13,6 @@ function Home() {
         //movePage('/pages/SearchResult');
     }
 
-
     useEffect(() => {   // 로그인 되었는지 확인
         axios.get('/check')
             .then((response)=>{
@@ -35,9 +34,16 @@ function Home() {
             alert('로그인이 필요합니다.');
             movePage('/pages/loginPage');
         });
+        axios.post('/api/sendAssociation',null,{})
+            .then((response) => {
+                console.log('추천 목록을 가져오는데 성공');
+                setRecommendItem(response.data);
+            }).catch((error) => {
+            console.log(error);
+        })
         axios.get('/get/popular')   // 인기상품 + 광고 가져오기
             .then((response)=>{
-                console.log(response.data);
+                console.log('광고 + 인기 상품을 가져오는데 성공');
                 setPopular(response.data);
             }).catch(error => {
             console.error(error);
@@ -61,9 +67,6 @@ function Home() {
                             <div className={styles.list_wrap}>
                                 <ListVeiw list={recommend_item}></ListVeiw>
                             </div>
-                            {/*<div className={styles.more_wrap}>*/}
-                            {/*    <a className={styles.more} onClick={goSearchResult}>추천 매물 더 보기</a>*/}
-                            {/*</div>*/}
                         </section>
                         <section className={styles.mid_section}>
                             <h1 className={styles.head}>인기 매물</h1>

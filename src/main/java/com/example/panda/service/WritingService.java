@@ -59,6 +59,15 @@ public class WritingService {
         return writingDTO;
     }
 
+    public List<WritingResponseDTO> findResponseById(List<Integer> widList){
+        List<WritingEntity> writingEntityList = writingDSLRepository.findByIdList(widList);
+        List<WritingResponseDTO> writingResponseDTOList = new LinkedList<WritingResponseDTO>();
+        for(WritingEntity we : writingEntityList){
+            writingResponseDTOList.add(WritingResponseDTO.toWritingResponseDTO(we, false));
+        }
+        return writingResponseDTOList;
+    }
+
     public List<WritingResponseDTO> findPopular(){
         List<WritingEntity> writingEntityList = writingDSLRepository.findPopularWriting();
         List<WritingResponseDTO> writingResponseDTOList = new LinkedList<>();

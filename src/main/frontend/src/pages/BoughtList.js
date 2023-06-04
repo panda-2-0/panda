@@ -28,11 +28,6 @@ function BoughtList() {
             .then(response => setData(response.data))
             .catch(error => console.log(error))
     }, []);
-    useEffect(() => {
-        axios.post('/api/sendAssociation',null,{})
-            .then(response => console.log('성공'))
-            .catch(error => console.log(error))
-    }, []);
 
     return (
         <div className={styles.wraper}>

@@ -23,6 +23,12 @@ public class WritingDSLRepository {
                         .or(writingEntity.detail_category.like(word)))
                 .fetch();
     }
+    public List<WritingEntity> findByIdList(List<Integer> widList){
+        return queryFactory
+                .selectFrom(writingEntity)
+                .where(writingEntity.wid.in(widList))
+                .fetch();
+    }
     public List<WritingEntity> findPopularWriting(){
         return queryFactory
                 .selectFrom(writingEntity)
