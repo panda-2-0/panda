@@ -50,4 +50,13 @@ public class PurchaseHistoryService {
 
         return purchaseHistoryDTOList;
     }
+
+    public List<PurchaseHistoryDTO> findAll(){
+        List<PurchaseHistoryEntity> purchaseHistoryEntities=purchaseHistoryRepository.findAll();
+        List<PurchaseHistoryDTO> purchaseHistoryDTOList=new ArrayList<>();
+        for(PurchaseHistoryEntity purchaseHistory:purchaseHistoryEntities){
+            purchaseHistoryDTOList.add(PurchaseHistoryDTO.toPurchaseHistoryDTO(purchaseHistory));
+        }
+        return purchaseHistoryDTOList;
+    }
 }
