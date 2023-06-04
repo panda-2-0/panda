@@ -40,7 +40,7 @@ function Home() {
                 setRecommendItem(response.data);
             }).catch((error) => {
             console.log(error);
-        })
+        });
         axios.get('/get/popular')   // 인기상품 + 광고 가져오기
             .then((response)=>{
                 console.log('광고 + 인기 상품을 가져오는데 성공');
