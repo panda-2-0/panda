@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import styles from '../Css_dir/Chat.module.css'
-import profile from "../imgs/profileEx.PNG";
+import profile from "../imgs/logo512_512.png";
 import notify from "../imgs/noReadNotify.png";
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
@@ -37,16 +37,22 @@ const ChatList = React.memo(({ chatRooms, onClick, toChatList}) => {
                     diff = "어제";
                 else diff = `${date1.format("A h:mm")}`;
 
+                let isMe = chatList.buyer.email === toChatList.email;
+
                 return (
                     <li className = {`${styles.profile_list} ${toChatList.roomId === chatList.roomId ? styles.profile_list_clicked : null}`} key={index} onClick={() => onClick(chatList.roomId,
-                        chatList.buyer.email === toChatList.email ? chatList.seller.nickname : chatList.buyer.nickname,
-                        chatList.buyer.email === toChatList.email)} >
+                        isMe ? chatList.seller.nickname : chatList.buyer.nickname,
+                        isMe,
+                    isMe ? chatList.seller.userImg === null ? profile : atob(chatList.seller.userImg) :
+                    chatList.buyer.userImg === null ? profile : atob(chatList.buyer.userImg))} >
                         <div className={styles.p_profile} >
-                            <img src={profile} width="100%" height="100%"></img>
+                            <img src={chatList.buyer.email === toChatList.email ?
+                                chatList.seller.userImg === null ? profile : atob(chatList.seller.userImg) :
+                                chatList.buyer.userImg === null ? profile : atob(chatList.buyer.userImg)} width="100%" height="100%"></img>
                         </div>
                         <div className={styles.p_info}>
                             {
-                                chatList.buyer.email === toChatList.email ?
+                                isMe ?
                                     <div className={`${toChatList.roomId === chatList.roomId ? styles.black_color : styles.whitesmoke_color} ${styles.p_name}`}>
                                         {chatList.seller.nickname}
                                     </div>

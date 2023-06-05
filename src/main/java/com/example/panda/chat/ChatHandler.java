@@ -7,7 +7,9 @@
 package com.example.panda.chat;
 
 import com.example.panda.dto.ChatRoomDTO;
+import com.example.panda.dto.UserDTO;
 import com.example.panda.service.ChatRoomService;
+import com.example.panda.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.socket.CloseStatus;
@@ -23,6 +25,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class ChatHandler extends TextWebSocketHandler {
     private final ChatRoomService chatRoomService;
+    private final UserService userService;
     private final WebSocketSessionManager webSocketSessionManager;
 
     
@@ -32,9 +35,12 @@ public class ChatHandler extends TextWebSocketHandler {
         String email = (String) session.getAttributes().get("user");
         webSocketSessionManager.registerSession(email, session);
 
+        UserDTO myInfo = userService.findbyId(email);
         List<ChatRoomDTO> chatRooms = chatRoomService.findByUserEmail(email);
 
         Map<String, Object> map = new HashMap<>();
+
+        map.put("userImg", myInfo.getUserImg());
         map.put("email", email);
         map.put("chatRooms", chatRooms);
 

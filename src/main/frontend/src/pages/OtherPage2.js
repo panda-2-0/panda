@@ -4,6 +4,7 @@ import FixBar from "./FixBar";
 import axios from 'axios';
 import styles from "../Css_dir/SearchResult.module.css";
 import inputStyles from "../Css_dir/login_mem.module.css";
+import profile from "../imgs/logo512_512.png";
 import Modal from "react-modal";
 
 const pw_regex = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/;
@@ -194,8 +195,9 @@ function OtherPage() {
                 setUserInfo(response.data);
                 setPhone(response.data.phoneNumber);
                 setAddr(response.data.address);
-                setNickname(response.data.nickname)
-                setPreviewImage(`${atob(response.data.userImg)}`);
+                setNickname(response.data.nickname);
+                if(response.data.userImg != null)
+                    setPreviewImage(`${atob(response.data.userImg)}`);
             })
             .catch(error => console.log(error))
     }, []);
@@ -256,7 +258,7 @@ function OtherPage() {
                 <div id='root'>
                     <div className={styles.form_profile}>
                         <label className={styles.form_label}>프로필 사진</label>
-                        <img src={previewImage} className={styles.form_profile_img}/>
+                        <img src={previewImage == null ? profile : previewImage} className={styles.form_profile_img}/>
                         <div className={styles.selectImg}>
                             <div className={styles.img_button} onClick={imageSelectClick}>이미지 선택</div>
                             <input type="file" ref={imageInput} onChange={handleFileChange} hidden={true} />

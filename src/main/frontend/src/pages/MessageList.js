@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 import styles from '../Css_dir/Chat.module.css'
 import dayjs from 'dayjs';
-import profile from "../imgs/profileEx.PNG";
+import profile from "../imgs/logo512_512.png";
 import smile from "../imgs/emo_smile.png";
 import normal from "../imgs/emo_normal.png";
 import sad from "../imgs/emo_sad.png";
@@ -217,7 +217,7 @@ const MessageList = React.memo(({ messages, toMessageList, socket}) => {
             </Modal>
             <div className={styles.chat_header}>
                 <div className={styles.chat_image}>
-                    <img src={profile} width="100%" height="100%"></img>
+                    <img src={toMessageList.userImg === null ? profile : toMessageList.userImg} width="100%" height="100%"></img>
                 </div>
                 <div className={styles.chat_info}>
                     <div className={styles.chat_name}>{toMessageList.op_Id}</div>

@@ -1,5 +1,5 @@
 import styles from '../Css_dir/Chat.module.css'
-import profile from '../imgs/profileEx.PNG'
+import profile from '../imgs/logo512_512.png'
 import React, {useEffect, useRef, useState} from 'react';
 import MessageList from './MessageList';
 import ChatList from './ChatList';
@@ -22,6 +22,7 @@ function Chat() {
         lng: -122.4194
     };
 
+    const [userImg, setUserImg] = useState([]);
 
     const [messages, setMessages] = useState([]);
     const [chatRooms, setChatRooms] = useState([]);
@@ -79,6 +80,7 @@ function Chat() {
         const socket = new WebSocket('ws://localhost:8080/chat');
         socket.onmessage = (event) => {
             let receivedMap = JSON.parse(event.data);
+            setUserImg(receivedMap.userImg);
             setChatRooms(receivedMap.chatRooms);
             setToChatList(prevState => ({...prevState, email:receivedMap.email}));
 
@@ -133,7 +135,7 @@ function Chat() {
                                         return room;
                                     }
                                 }));
-                                chatListClick(null, null, null);
+                                chatListClick(null, null, null, null);
                                 setRoomId(null);
                             }
                         }
@@ -275,9 +277,9 @@ function Chat() {
         }
     };
 
-    const chatListClick = (roomId, op, amIBuyer) => {
+    const chatListClick = (roomId, op, amIBuyer, userImg) => {
         setRoomId(roomId);
-        setToMessageList(prevState => ({...prevState, op_Id: op, amIBuyer: amIBuyer}));
+        setToMessageList(prevState => ({...prevState, op_Id: op, amIBuyer: amIBuyer, userImg:userImg}));
         setToChatList(prevState => ({...prevState, roomId:roomId}));
         setChatRooms(prevChatRooms => {
            return prevChatRooms.map(chatRoom => {
@@ -336,7 +338,7 @@ function Chat() {
                 <ul>
                 <li className={styles.profile_First}>
                         <div className={styles.p_profile}>
-                            <img src={profile} width="100%" height="100%"></img>
+                            <img src={userImg == null ? profile : atob(userImg)} width="100%" height="100%"></img>
                         </div>
                         <div className={styles.p_info}>
                             <div className={`${styles.p_name} ${styles.whitesmoke_color}`}>나</div>

@@ -7,7 +7,7 @@ import OtherPage from "./OtherPage";
 import OtherPage2 from "./OtherPage2";
 import BoughtList from "./BoughtList";
 import Inquiry_list from "./Inquiry_list";
-import profile from '../profileEx.PNG'
+import profile from '../imgs/logo512_512.png'
 import SearchResult from "./SearchResult";
 
 function FixBar() {
