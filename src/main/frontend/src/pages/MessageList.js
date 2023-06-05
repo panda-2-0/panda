@@ -234,14 +234,20 @@ const MessageList = React.memo(({ messages, toMessageList, socket}) => {
 
                 const date1 = dayjs(message.chatDate);
                 const date2 = dayjs(new Date());
-                let date;
-                if(date2.diff(date1, 'year') > 0)
-                    date = date1.format('yyyy년 M월 D일 A h시 m분');
-                else if(date2.diff(date1, 'day') > 0)
-                    date = date1.format('M월 D일 A h시 m분');
-                else
-                    date = date1.format('오늘 A h시 m분');
 
+                let date;
+
+                if(dayjs(message.chatDate).isValid()) {
+                    if(date2.diff(date1, 'year') > 0)
+                        date = date1.format('yyyy년 M월 D일 A h시 m분');
+                    else if(date2.diff(date1, 'day') > 0)
+                        date = date1.format('M월 D일 A h시 m분');
+                    else
+                        date = date1.format('오늘 A h시 m분');
+                }
+                else {
+                    date="";
+                }
                 return (
                     <li key={index}>
                         {
