@@ -84,7 +84,7 @@ function OtherPage() {
             nickname: nickname,
             phoneNumber: phone,
             address: addr,
-            userImg: previewImage
+            userImg: btoa(previewImage)
         }
 
         axios.post('/account/user', user, {
@@ -195,7 +195,7 @@ function OtherPage() {
                 setPhone(response.data.phoneNumber);
                 setAddr(response.data.address);
                 setNickname(response.data.nickname)
-                setPreviewImage(`${response.data.userImg}`);
+                setPreviewImage(`${atob(response.data.userImg)}`);
             })
             .catch(error => console.log(error))
     }, []);

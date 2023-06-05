@@ -7,9 +7,14 @@
 // 업데이트 : -
 package com.example.panda.service;
 
+import com.example.panda.dto.ChatDTO;
 import com.example.panda.dto.UserDTO;
 import com.example.panda.dto.UserResponseDTO;
+import com.example.panda.entity.ChatEntity;
+import com.example.panda.entity.ChatRoomEntity;
 import com.example.panda.entity.UserEntity;
+import com.example.panda.repository.ChatRepository;
+import com.example.panda.repository.ChatRoomRepository;
 import com.example.panda.repository.UserRepository;
 import com.example.panda.repository.UserSaveRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +26,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
+import java.util.Optional;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -31,6 +39,8 @@ public class SignService {
     private final UserSaveRepository userSaveRepository;
     private final PasswordEncoder passwordEncoder;
 //    private final TokenProvider tokenProvider;
+    private final ChatRoomRepository chatRoomRepository;
+    private final ChatRepository chatRepository;
 
     public UserResponseDTO joinMem(UserDTO userDTO) {
         // UserDTO를 통해 사용자 정보를 받아 이미 회원가입 되어있는 사용자인지 확인 후 아니라면 DB에 사용자를 저장한다.
@@ -39,7 +49,12 @@ public class SignService {
             return null;
         }
         UserEntity user = userDTO.toUser(passwordEncoder);  // 비밀번호는 인코딩을 하여 UserEntitiy를 생성하도록 한다.
-        return UserResponseDTO.of(userSaveRepository.save(user));
+
+        UserResponseDTO userResponseDTO = UserResponseDTO.of(userSaveRepository.save(user));
+        // 회원 가입 시 챗봇 생성
+        createChatbot(user);
+
+        return userResponseDTO;
     }
 
     @Transactional
@@ -81,5 +96,16 @@ public class SignService {
             return false;
         }
 //        return authentication.isAuthenticated();
+    }
+
+    private void createChatbot(UserEntity user) {
+        Optional<UserEntity> chatbot = userRepository.findByEmail("chatbot");
+
+        if(chatbot.isPresent()) {
+            Long roomId = chatRoomRepository.save(new ChatRoomEntity(null, user, chatbot.get(), "저는 판다 봇입니다. 궁금한게 있으시다면 물어보세요! (ex: 인기 상품 추천해줘)", new Date(), false, false, null, 0, 0, false, false))
+                    .getRoom_id();
+
+            chatRepository.save(ChatEntity.toSaveEntity(new ChatDTO(roomId, "저는 판다 봇입니다. 궁금한게 있으시다면 물어보세요! (ex: 인기 상품 추천해줘)", false, new Date(), null, 0, 0, "")));
+        }
     }
 }

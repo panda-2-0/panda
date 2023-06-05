@@ -12,6 +12,9 @@ import com.example.panda.dto.UserDTO;
 import com.example.panda.service.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.*;
+import org.springframework.http.converter.StringHttpMessageConverter;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
@@ -19,6 +22,9 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 import org.springframework.web.util.UriTemplate;
 
 import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -68,6 +74,7 @@ public class MessageHandler extends TextWebSocketHandler {
         UserDTO seller = chatRoomDTO.getSeller();
 
         if (chatDTO.getType().equals("send")) {
+
             // 누군가 보낸 메시지일 경우
 
             chatDTO.setChatDate(new Date());
@@ -94,7 +101,49 @@ public class MessageHandler extends TextWebSocketHandler {
                 buyerMap.put("opNickname", seller.getNickname());
                 buyerMap.put("opUserImg", seller.getUserImg());
             }
+
             sendMessage(buyerSession, buyerMap);
+
+            if(seller.getEmail().equals("chatbot")) {
+                RestTemplate restTemplate = new RestTemplate();
+                restTemplate.getMessageConverters()
+                        .add(0, new StringHttpMessageConverter(StandardCharsets.UTF_8));
+
+                String url = "http://127.0.0.1:5000/chatbot";
+                HttpHeaders headers = new HttpHeaders();
+                headers.setContentType(MediaType.TEXT_PLAIN);
+
+                HttpEntity<String> requestEntity = new HttpEntity<>(chatDTO.getContent(), headers);
+
+                ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, requestEntity, String.class);
+
+                String responseMessage = "요청 실패, 서버 관리자에게 문의하세요.";
+                if(response.getStatusCode().is2xxSuccessful()) {
+                    String responseBody = response.getBody();
+
+                    if(responseBody.equals("인기")) {
+                        responseMessage = responseBody; // 임시
+                    } else if (responseBody.equals("비싼")) {
+                        responseMessage = responseBody; // 임시
+                    } else if (responseBody.equals("싼")) {
+                        responseMessage = responseBody; // 임시
+                    } else if (responseBody.equals("구매 이력")) {
+                        responseMessage = responseBody; // 임시
+                    } else {
+                        responseMessage = responseBody;
+                    }
+                    System.out.println("응답 : " + responseBody);
+                } else {
+                    System.out.println("요청 실패 : " + response.getStatusCode());
+                }
+
+                ChatDTO chatbotMessage = new ChatDTO(chatDTO.getRoomId(), responseMessage, false, new Date(), null, 0, 0, "chatbot");
+                buyerMap.put("messageType", "receiver");
+                buyerMap.put("message", chatbotMessage);
+                sendMessage(buyerSession, buyerMap);
+
+                return;
+            }
 
             Map<String, Object> sellerMap = new HashMap<>();
             sellerMap.put("type", "chat");

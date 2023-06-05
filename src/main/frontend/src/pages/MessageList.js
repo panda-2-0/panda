@@ -19,29 +19,32 @@ const MessageList = React.memo(({ messages, toMessageList, socket}) => {
     const messageRef = useRef();
 
     useEffect(() => {
-        if(!messages[0]) return;
+        // console.log(messages.length);
+        if(messages.length < 1) return;
         // 시작할 때 messages 배열이 빈채로 하위 컴포넌트가 시작되어 오류 메시지가 출력되는 것을 방지
 
-        let type = messages[messages.length-1].type;
-        // 스크롤을 내려야 하는가?
+        else {
+            let type = messages[messages.length - 1].type;
+            // 스크롤을 내려야 하는가?
 
-        if(type === 'true') {// 스크롤을 내려야 함
-            chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
-        }
-
-        else if(type === 'isBottom') {
-            if(chatContainerRef.current.scrollTop + chatContainerRef.current.clientHeight
-            >= chatContainerRef.current.scrollHeight - (128 + messageRef.current.offsetHeight))
-                // 현재 사용자가 메시지를 받는 사람이며, 스크롤이 밑에 있는지 확인해야함
-                // 밑에 없으면 현재 스크롤을 올려서 메시지를 보고 있다는 의미.
-                // scrollTop, clientHeight 를 더한게 꼭 128 차이가 나길래 -128을 해줌.
-                // 메시지 크기가 128이던데 아마 메시지 크기랑 연관된 것으로 보임.
+            if(type === 'true' && chatContainerRef.current) {// 스크롤을 내려야 함
                 chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
-        }
-        else if (type === 'false'){
-            // 위로 올려서 이전 데이터를 가져온 상황.
-            // 스크롤을 이전 메시지까지만 두어야함.
-            chatContainerRef.current.scrollTop = 2560;
+            }
+
+            else if(type === 'isBottom') {
+                if(chatContainerRef.current.scrollTop + chatContainerRef.current.clientHeight
+                >= chatContainerRef.current.scrollHeight - (128 + messageRef.current.offsetHeight))
+                    // 현재 사용자가 메시지를 받는 사람이며, 스크롤이 밑에 있는지 확인해야함
+                    // 밑에 없으면 현재 스크롤을 올려서 메시지를 보고 있다는 의미.
+                    // scrollTop, clientHeight 를 더한게 꼭 128 차이가 나길래 -128을 해줌.
+                    // 메시지 크기가 128이던데 아마 메시지 크기랑 연관된 것으로 보임.
+                    chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+            }
+            else if (type === 'false'){
+                // 위로 올려서 이전 데이터를 가져온 상황.
+                // 스크롤을 이전 메시지까지만 두어야함.
+                chatContainerRef.current.scrollTop = 2560;
+            }
         }
     }, [messages])
 
