@@ -96,4 +96,22 @@ public class WritingService {
         writingRepository.save(writingEntity);
     }
 
+    public List<WritingResponseDTO> findCheap() {
+        List<WritingEntity> writingEntityList = writingDSLRepository.findCheapWriting();
+        List<WritingResponseDTO> writingResponseDTOList = new LinkedList<>();
+        for(WritingEntity we : writingEntityList){
+            writingResponseDTOList.add(WritingResponseDTO.toWritingResponseDTO(we, false));
+        }
+        return writingResponseDTOList;
+    }
+
+    public List<WritingResponseDTO> findExpensive() {
+        List<WritingEntity> writingEntityList = writingDSLRepository.findExpensiveWriting();
+        List<WritingResponseDTO> writingResponseDTOList = new LinkedList<>();
+        for(WritingEntity we : writingEntityList){
+            writingResponseDTOList.add(WritingResponseDTO.toWritingResponseDTO(we, false));
+        }
+        return writingResponseDTOList;
+    }
+
 }

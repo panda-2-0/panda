@@ -6,9 +6,7 @@
  */
 package com.example.panda.chat;
 
-import com.example.panda.dto.ChatDTO;
-import com.example.panda.dto.ChatRoomDTO;
-import com.example.panda.dto.UserDTO;
+import com.example.panda.dto.*;
 import com.example.panda.service.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -34,6 +32,7 @@ import java.util.Map;
 public class MessageHandler extends TextWebSocketHandler {
     private final ChatService chatService;
     private final ChatRoomService chatRoomService;
+    private final WritingService writingService;
     private final WritingCompleteService writingCompleteService;
     private final UserService userService;
     private final PurchaseHistoryService purchaseHistoryService;
@@ -120,19 +119,65 @@ public class MessageHandler extends TextWebSocketHandler {
                 String responseMessage = "요청 실패, 서버 관리자에게 문의하세요.";
                 if(response.getStatusCode().is2xxSuccessful()) {
                     String responseBody = response.getBody();
+                    System.out.println("응답 : " + responseBody);
 
-                    if(responseBody.equals("인기")) {
-                        responseMessage = responseBody; // 임시
-                    } else if (responseBody.equals("비싼")) {
-                        responseMessage = responseBody; // 임시
-                    } else if (responseBody.equals("싼")) {
-                        responseMessage = responseBody; // 임시
-                    } else if (responseBody.equals("구매 이력")) {
-                        responseMessage = responseBody; // 임시
-                    } else {
+                    StringBuilder sb = new StringBuilder();
+
+                    if(responseBody.equals("인기")) { // 인기 상품 10개 조회
+                        List<WritingResponseDTO> writingResponseDTOList = writingService.findPopular();
+
+                        for (WritingResponseDTO writingResponseDTO : writingResponseDTOList)
+                            sb.append(writingResponseDTO.getWritingName()).append('\n');
+
+                        if(sb.length() == 0)
+                            responseMessage = "현재 상품이 없습니다.";
+                         else {
+                             sb.append("인기 상품 목록입니다.");
+                             responseMessage = sb.toString();
+                        }
+
+                    } else if (responseBody.equals("비싼")) { // 비싼 상품 10개 조회
+                        List<WritingResponseDTO> writingResponseDTOList = writingService.findExpensive();
+
+                        for (WritingResponseDTO writingResponseDTO : writingResponseDTOList)
+                            sb.append(writingResponseDTO.getWritingName()).append('\n');
+
+                        if(sb.length() == 0)
+                            responseMessage = "현재 상품이 없습니다.";
+                        else {
+                            sb.append("비싼 상품 목록입니다.");
+                            responseMessage = sb.toString();
+                        }
+
+                    } else if (responseBody.equals("싼")) {  // 싼 상품 10개 조회
+                        List<WritingResponseDTO> writingResponseDTOList = writingService.findCheap();
+
+                        for (WritingResponseDTO writingResponseDTO : writingResponseDTOList)
+                            sb.append(writingResponseDTO.getWritingName()).append("\n");
+
+                        if(sb.length() == 0)
+                            responseMessage = "현재 상품이 없습니다.";
+                        else {
+                            sb.append("싼 상품 목록입니다.");
+                            responseMessage = sb.toString();
+                        }
+                    } else if (responseBody.equals("구매이력")) {   // 구매 이력 조회
+                        List<PurchaseHistoryDTO> purchaseHistoryDTOList = purchaseHistoryService.findbyEmail(email);
+
+                        int count = 0;
+                        for(PurchaseHistoryDTO purchaseHistoryDTO : purchaseHistoryDTOList) {
+                            if (count++ > 10) break;
+                            sb.append(purchaseHistoryDTO.getWritingCompleteDTO().getWriting_name()).append('\n');
+                        }
+                        if(sb.length() == 0) {
+                            responseMessage = "아무런 구매 기록이 없습니다.";
+                        } else {
+                            sb.append("구매 기록입니다.");
+                            responseMessage = sb.toString();
+                        }
+                    } else {    // 일반적인 대답
                         responseMessage = responseBody;
                     }
-                    System.out.println("응답 : " + responseBody);
                 } else {
                     System.out.println("요청 실패 : " + response.getStatusCode());
                 }

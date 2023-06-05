@@ -209,6 +209,7 @@ body::-webkit-scrollbar {
 .op_message {
     background: black;
     color: white;
+    white-space: pre-line;
     padding: 18px 20px;
     line-height: 26px;
     font-size: 16px;
@@ -241,6 +242,7 @@ body::-webkit-scrollbar {
 .my_message {
     background: forestgreen;
     color: white;
+    white-space: pre-line;
     padding: 18px 20px;
     line-height: 26px;
     font-size: 16px;

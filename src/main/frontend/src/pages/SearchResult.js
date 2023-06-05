@@ -167,11 +167,11 @@ function SearchResult() {
                     </form>
                     <button type="submit" form="search_price" className={styles.btn_5} id='search_price' >가격순</button>
 
-                    <form name='search_sell' id='search_sell' method='get'>
-                        <input name='search_sell' id='search_sell' placeholder='  검색'defaultValue={decodeURIComponent(location.search.toString().split("=").at(1))}
-                               style={{ display: 'none' }}></input>
-                    </form>
-                    <button type="submit" form="search_sell" className={styles.btn_5} id='search_sell'>판매순</button>
+                    {/*<form name='search_sell' id='search_sell' method='get'>*/}
+                    {/*    <input name='search_sell' id='search_sell' placeholder='  검색'defaultValue={decodeURIComponent(location.search.toString().split("=").at(1))}*/}
+                    {/*           style={{ display: 'none' }}></input>*/}
+                    {/*</form>*/}
+                    {/*<button type="submit" form="search_sell" className={styles.btn_5} id='search_sell'>판매순</button>*/}
                 </div>
                 {/*<ListViewADs></ListViewADs>*/}
                 {firstPage()}

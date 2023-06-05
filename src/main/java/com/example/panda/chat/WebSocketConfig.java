@@ -22,6 +22,7 @@ public class WebSocketConfig implements WebSocketConfigurer {
     private final ChatRoomService chatRoomService;
     private final ChatService chatService;
     private final WritingCompleteService writingCompleteService;
+    private final WritingService writingService;
     private final UserService userService;
     private final PurchaseHistoryService purchaseHistoryService;
     private final HandshakeInterceptor handshakeInterceptor;
@@ -33,7 +34,7 @@ public class WebSocketConfig implements WebSocketConfigurer {
                 .addInterceptors(handshakeInterceptor)
                 .setAllowedOrigins("http://localhost:8000");
 
-        registry.addHandler(new MessageHandler(chatService, chatRoomService, writingCompleteService,
+        registry.addHandler(new MessageHandler(chatService, chatRoomService, writingService, writingCompleteService,
                         userService, purchaseHistoryService, webSocketSessionManager), "/chat/{roomId}")
                 .addInterceptors(handshakeInterceptor)
                 .setAllowedOrigins("http://localhost:8000");

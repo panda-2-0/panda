@@ -36,4 +36,20 @@ public class WritingDSLRepository {
                 .limit(10)
                 .fetch();
     }
+
+    public List<WritingEntity> findCheapWriting() {
+        return queryFactory
+                .selectFrom(writingEntity)
+                .orderBy(writingEntity.price.asc())
+                .limit(10)
+                .fetch();
+    }
+
+    public List<WritingEntity> findExpensiveWriting() {
+        return queryFactory
+                .selectFrom(writingEntity)
+                .orderBy(writingEntity.price.desc())
+                .limit(10)
+                .fetch();
+    }
 }
