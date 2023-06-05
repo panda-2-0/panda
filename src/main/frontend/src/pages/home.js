@@ -8,6 +8,7 @@ function Home() {
     const movePage = useNavigate();
     let [recommend_item, setRecommendItem] = useState([]);   // 추천 제품 리스트
     let [popular, setPopular] = useState([]);   // 인기상품 + 광고 리스트\
+    let [rend, setRend] = useState(true);
 
     useEffect(() => {   // 로그인 되었는지 확인
         axios.get('/check')
@@ -56,7 +57,6 @@ function Home() {
             }).catch(error => {
             console.error(error);
         });
-
     },[]);
 
     function goCategorySearch(event){    //카테고리 검색
@@ -66,7 +66,6 @@ function Home() {
         movePage('/pages/SearchResult?search_popularity='+event.currentTarget.id, {state:{word:event.currentTarget.id}});
     }
 
-
     return (
         <div className={styles.App}>
             <div className={styles.home_page}>
@@ -75,13 +74,13 @@ function Home() {
                         <section className={styles.top_section}>
                             <h1 className={styles.head}>추천 매물</h1>
                             <div className={styles.list_wrap}>
-                                <ListVeiw list={recommend_item}></ListVeiw>
+                                {recommend_item.length !== 0 ? <ListVeiw list={recommend_item}></ListVeiw> : <ListVeiw></ListVeiw>}
                             </div>
                         </section>
                         <section className={styles.mid_section}>
                             <h1 className={styles.head}>인기 매물</h1>
                             <div className={styles.rank_wrap}>
-                                <ListVeiw list={popular}></ListVeiw>
+                                {popular.length !== 0 ? <ListVeiw list={popular}></ListVeiw>:<ListVeiw></ListVeiw>}
                             </div>
                             <div className={styles.more_wrap}>
                                 <form name='search_popular' id='search_popular' method='get'>

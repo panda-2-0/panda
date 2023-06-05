@@ -3,71 +3,74 @@ import styles from '../Css_dir/listVeiw.module.css';
 import {Link, useNavigate} from "react-router-dom";
 
 class ListVeiw extends React.Component {
-    state = {
-        slideSpot: 0,
-        //현재 화면에 보이고 있는 슬라이드의 시작점
-    };
-
-
-    imgQuantity = 15;
-    slideWidth =
-        IMG_WIDTH * (this.imgQuantity + 1) + (this.imgQuantity) * SLIDE_GAP * 2;
-    //슬라이드 내부 컨텐츠의 전체 길이를 구해준다.
-    inner_len = window.innerWidth;
-    hiddenedSlideWidth = (this.inner_len < 210 ? this.slideWidth:
-        (this.inner_len < 430 ? this.slideWidth - (IMG_WIDTH + SLIDE_GAP):
-            (this.inner_len < 650 ? this.slideWidth - 2*(IMG_WIDTH + SLIDE_GAP):
-                (this.inner_len < 870 ? this.slideWidth - 3*(IMG_WIDTH + SLIDE_GAP):
-                    (this.inner_len < 1310 ? this.slideWidth - 4*(IMG_WIDTH + SLIDE_GAP):
-                        (this.inner_len < 1310 ? this.slideWidth - 5*(IMG_WIDTH + SLIDE_GAP):this.slideWidth - 6*(IMG_WIDTH + SLIDE_GAP)))))));
-    //슬라이드 내부 컨텐츠 전체 길이에서 윈도우의 innerWidth 값을 빼 남아있는 슬라이드의 길이를 구한다.
     slideEnd;
     //슬라이드의 끝부분에 갔을 때 next 버튼이 없어지도록 만들 때 사용할 변수이다.
+    constructor(props) {
+        super(props);
+        this.state = {
+            slideSpot: 0,
+            //현재 화면에 보이고 있는 슬라이드의 시작점
+        };
+
+        this.imgQuantity = Array.isArray(this.props.list) ? this.props.list.length : 15;
+
+        this.slideWidth =
+            IMG_WIDTH * (this.imgQuantity + 1) + (this.imgQuantity) * SLIDE_GAP * 2;
+        //슬라이드 내부 컨텐츠의 전체 길이를 구해준다.
+        this.inner_len = window.innerWidth;
+        this.hiddenedSlideWidth = (this.inner_len < 210 ? this.slideWidth:
+            (this.inner_len < 430 ? this.slideWidth - (IMG_WIDTH + SLIDE_GAP):
+                (this.inner_len < 650 ? this.slideWidth - 2*(IMG_WIDTH + SLIDE_GAP):
+                    (this.inner_len < 870 ? this.slideWidth - 3*(IMG_WIDTH + SLIDE_GAP):
+                        (this.inner_len < 1310 ? this.slideWidth - 4*(IMG_WIDTH + SLIDE_GAP):
+                            (this.inner_len < 1310 ? this.slideWidth - 5*(IMG_WIDTH + SLIDE_GAP):this.slideWidth - 6*(IMG_WIDTH + SLIDE_GAP)))))));
+        //슬라이드 내부 컨텐츠 전체 길이에서 윈도우의 innerWidth 값을 빼 남아있는 슬라이드의 길이를 구한다.
+        this.forceUpdate();
+    }
+
 
     handlePrevBtn = () => {
         const { slideSpot } = this.state;
-        if (Math.abs(slideSpot) < SLIDE_MOVING_UNIT) {
-            //슬라이드 왼쪽으로 남은 값이 한 번에 이동하는 값보다 작으면
-
-            this.setState({
-                slideSpot: 0,
-                //0까지만 이동
-
-            });
-        } else {
-            //그 외의 경우
-
-            this.setState({
-                slideSpot: slideSpot + SLIDE_MOVING_UNIT,
-                //현재 위치에서 한 번에 이동해야 하는 값만큼 이동
-
-            });
+        if(!!slideSpot) {
+            if (Math.abs(slideSpot) < SLIDE_MOVING_UNIT) {
+                //슬라이드 왼쪽으로 남은 값이 한 번에 이동하는 값보다 작으면
+                this.setState({
+                    slideSpot: 0,
+                    //0까지만 이동
+                });
+            } else {
+                //그 외의 경우
+                this.setState({
+                    slideSpot: slideSpot + SLIDE_MOVING_UNIT,
+                    //현재 위치에서 한 번에 이동해야 하는 값만큼 이동
+                });
+            }
         }
     };
 
     handleNextBtn = () => {
         const { slideSpot } = this.state;
+        if(slideSpot !== this.slideEnd){
+            if (this.hiddenedSlideWidth - Math.abs(slideSpot) <= SLIDE_MOVING_UNIT) {
+                //남아있는 슬라이드의 길이에서 현재 슬라이드의 위치값을 뺀 값이 한 번에 움직여야 하는 값보다 작으면
+                this.setState({
+                    slideSpot: slideSpot - (this.hiddenedSlideWidth - Math.abs(slideSpot)),
+                        //남은 길이만큼만 이동하고
+                });
+                this.slideEnd =
+                    slideSpot - (this.hiddenedSlideWidth - Math.abs(slideSpot));
 
-        if (this.hiddenedSlideWidth - Math.abs(slideSpot) <= SLIDE_MOVING_UNIT) {
-            //남아있는 슬라이드의 길이에서 현재 슬라이드의 위치값을 뺀 값이 한 번에 움직여야 하는 값보다 작으면
+                //slideEnd의 값을 slideSpot의 값과 동일하게 만들어 nextBtn을 보이지 않게 한다
 
-            this.setState({
-                slideSpot: slideSpot - (this.hiddenedSlideWidth - Math.abs(slideSpot)),
-                //남은 길이만큼만 이동하고
+            } else {
+                //남아있는 슬라이드의 길이가 한 번에 움직여야 하는 값보다 크면
 
-            });
-            this.slideEnd =
-                slideSpot - (this.hiddenedSlideWidth - Math.abs(slideSpot));
-            //slideEnd의 값을 slideSpot의 값과 동일하게 만들어 nextBtn을 보이지 않게 한다
+                this.setState({
+                    slideSpot: slideSpot - SLIDE_MOVING_UNIT,
+                    //한 번에 움직여야 하는 만큼 값을 빼준다
 
-        } else {
-            //남아있는 슬라이드의 길이가 한 번에 움직여야 하는 값보다 크면
-
-            this.setState({
-                slideSpot: slideSpot - SLIDE_MOVING_UNIT,
-                //한 번에 움직여야 하는 만큼 값을 빼준다
-
-            });
+                });
+            }
         }
     };
 
@@ -78,7 +81,6 @@ class ListVeiw extends React.Component {
         const dividePriceUnit=(price)=>{
             return price.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
         }
-
         return (
             <div className={styles.list_view_wrap}>
                 <button onClick={this.handlePrevBtn} className={(!!slideSpot ? `${styles.left_btn}` : `${styles.left_btn_hidden}`)}>
