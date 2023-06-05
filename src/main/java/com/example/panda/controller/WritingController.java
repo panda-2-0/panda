@@ -84,7 +84,6 @@ public class WritingController {
 ///api/noticeRegister
     @PostMapping("/api/noticeRegister")
     public void boardwritepro(@RequestBody WritingDTO writingDTO){
-        System.out.println(writingDTO);
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetails userDetails = (UserDetails)authentication.getPrincipal();
 
@@ -112,11 +111,9 @@ public class WritingController {
     @GetMapping("/api/UserInfo")
     public UserEntity getUserInfo()
     {
-
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetails userDetails = (UserDetails)authentication.getPrincipal();
         UserEntity userEntity =userService.findbyEmail(userDetails.getUsername());
-        System.out.println(userEntity.getEmail());
         return userEntity;
     }
     
