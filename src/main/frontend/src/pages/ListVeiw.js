@@ -25,7 +25,6 @@ class ListVeiw extends React.Component {
                         (this.inner_len < 1310 ? this.slideWidth - 4*(IMG_WIDTH + SLIDE_GAP):
                             (this.inner_len < 1310 ? this.slideWidth - 5*(IMG_WIDTH + SLIDE_GAP):this.slideWidth - 6*(IMG_WIDTH + SLIDE_GAP)))))));
         //슬라이드 내부 컨텐츠 전체 길이에서 윈도우의 innerWidth 값을 빼 남아있는 슬라이드의 길이를 구한다.
-        this.forceUpdate();
     }
 
 
@@ -77,6 +76,20 @@ class ListVeiw extends React.Component {
     render() {
         const { slideSpot } = this.state;
         const { list } = this.props;
+
+        this.imgQuantity = Array.isArray(list) ? this.props.list.length : 15;
+
+        this.slideWidth =
+            IMG_WIDTH * (this.imgQuantity + 1) + (this.imgQuantity) * SLIDE_GAP * 2;
+        //슬라이드 내부 컨텐츠의 전체 길이를 구해준다.
+        this.inner_len = window.innerWidth;
+        this.hiddenedSlideWidth = (this.inner_len < 210 ? this.slideWidth:
+            (this.inner_len < 430 ? this.slideWidth - (IMG_WIDTH + SLIDE_GAP):
+                (this.inner_len < 650 ? this.slideWidth - 2*(IMG_WIDTH + SLIDE_GAP):
+                    (this.inner_len < 870 ? this.slideWidth - 3*(IMG_WIDTH + SLIDE_GAP):
+                        (this.inner_len < 1310 ? this.slideWidth - 4*(IMG_WIDTH + SLIDE_GAP):
+                            (this.inner_len < 1310 ? this.slideWidth - 5*(IMG_WIDTH + SLIDE_GAP):this.slideWidth - 6*(IMG_WIDTH + SLIDE_GAP)))))));
+        //슬라이드 내부 컨텐츠 전체 길이에서 윈도우의 innerWidth 값을 빼 남아있는 슬라이드의 길이를 구한다.
 
         const dividePriceUnit=(price)=>{
             return price.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
