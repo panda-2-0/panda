@@ -118,7 +118,7 @@
     height: 90vh;
     position: absolute;
     top: 71px;
-    right: -100vw;
+    right: -110vw;
     transition: 0.5s;
     border-radius: 0 0 0 40px;
     z-index: 20;

@@ -140,7 +140,7 @@ const NoticeRegist = () => {
         axios.post('/api/noticeRegister', writing, {
             headers: {
                 "Content-Type": `application/json`,
-                "Access-Control-Allow-Origin": `http://localhost:3000`,
+                "Access-Control-Allow-Origin": `http://localhost:8000`,
                 'Access-Control-Allow_Credentials':"true",
             },
         })
@@ -164,7 +164,7 @@ const NoticeRegist = () => {
                     <strong>게시글 작성</strong>
                     <p>판매자는 하단 등록 버튼을 눌러 판매 등록을 할 수 있습니다.</p>
                 </div>
-                <form onSubmit={registerInfo} enctype={"multipart/form-data"}>
+                <form onSubmit={registerInfo} encType={"multipart/form-data"}>
                     <div className={styles.board_write_wrap}>
                         <div className={styles.board_write}>
                             <div className={styles.title}>
