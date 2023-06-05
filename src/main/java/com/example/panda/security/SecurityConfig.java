@@ -14,6 +14,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.stereotype.Component;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -29,6 +30,8 @@ import java.util.Arrays;
 @RequiredArgsConstructor
 public class SecurityConfig {
     private final CustomUserDetailsService userDetailsService;
+
+    private final AuthenticationFailureHandler customFailureHandler;
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
@@ -48,6 +51,7 @@ public class SecurityConfig {
                         .anyRequest().authenticated());
         http.formLogin()
                 .loginPage("/login").usernameParameter("email").passwordParameter("password")
+                .failureHandler(customFailureHandler)
                 .loginProcessingUrl("/login").defaultSuccessUrl("/",true);
         http.logout().logoutSuccessUrl("/").deleteCookies("JSESSIONID");
         http.userDetailsService(userDetailsService);

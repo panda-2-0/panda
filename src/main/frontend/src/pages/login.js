@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import styles from '../Css_dir/login_mem.module.css';
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
@@ -59,13 +59,16 @@ function Login() {
                     goHome();
                 } else {
                     console.log('로그인 실패');
+                    console.log(response.data);
                     document.cookie="isLogin=false; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;"
+                    sessionStorage.clear();
                 }
             })
             .catch(error => {
                 console.error(error);
                 console.log('로그인 실패');
                 document.cookie="isLogin=false; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;"
+                sessionStorage.clear();
                 alert('로그인 실패\n이메일과 비밀번호를 확인해 주세요.');
             });
     }

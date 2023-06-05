@@ -41,6 +41,7 @@ public class SignController {
         log.info("login controller start");
         return HttpStatus.OK;
     }
+
     @GetMapping("/check")
     public boolean loginCheck() {
         log.info("loginCheck controller start");

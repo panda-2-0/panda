@@ -51,6 +51,7 @@ function TopNav() {
                 if(response.status === 200) {
                     console.log('로그아웃 성공');
                     document.cookie = "isLogin=false; path=/; expires=Thu, 01 JAN 1999 00:00:10 GMT";
+                    sessionStorage.clear();
                     alert('로그아웃 되었습니다.');
                     movePage('/');
                     window.location.reload();
@@ -79,6 +80,7 @@ function TopNav() {
                 else{
                     console.log('need login');
                     document.cookie = "isLogin=false; path=/; expires=Thu, 01 JAN 1999 00:00:10 GMT";
+                    sessionStorage.clear();
                     alert('로그인이 필요합니다.');
                     movePage('/pages/loginPage');
                 }
@@ -86,6 +88,7 @@ function TopNav() {
             console.error(error);
             console.log('need login');
             document.cookie = "isLogin=false; path=/; expires=Thu, 01 JAN 1999 00:00:10 GMT";
+            sessionStorage.clear();
             alert('로그인이 필요합니다.');
             movePage('/pages/loginPage');
         });
@@ -103,6 +106,7 @@ function TopNav() {
                 else{
                     console.log('need login');
                     document.cookie = "isLogin=false; path=/; expires=Thu, 01 JAN 1999 00:00:10 GMT";
+                    sessionStorage.clear();
                     alert('로그인이 필요합니다.');
                     movePage('/pages/loginPage');
                 }
@@ -110,6 +114,7 @@ function TopNav() {
             console.error(error);
             console.log('need login');
             document.cookie = "isLogin=false; path=/; expires=Thu, 01 JAN 1999 00:00:10 GMT";
+            sessionStorage.clear();
             alert('로그인이 필요합니다.');
             movePage('/pages/loginPage');
         });

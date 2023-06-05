@@ -90,7 +90,7 @@ function OtherPage() {
         axios.post('/account/user', user, {
             headers: {
                 "Content-Type": `application/json`,
-                "Access-Control-Allow-Origin": `http://localhost:3000`,
+                "Access-Control-Allow-Origin": `http://localhost:8000`,
                 'Access-Control-Allow_Credentials':"true",
             },
         })

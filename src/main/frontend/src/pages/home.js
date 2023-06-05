@@ -9,10 +9,6 @@ function Home() {
     let [recommend_item, setRecommendItem] = useState([]);   // 추천 제품 리스트
     let [popular, setPopular] = useState([]);   // 인기상품 + 광고 리스트\
 
-    function goSearchResult(){
-        //movePage('/pages/SearchResult');
-    }
-
     useEffect(() => {   // 로그인 되었는지 확인
         axios.get('/check')
             .then((response)=>{
@@ -24,6 +20,7 @@ function Home() {
                 else{
                     console.log('need login');
                     document.cookie = "isLogin=false; path=/; expires=Thu, 01 JAN 1999 00:00:10 GMT";
+                    sessionStorage.clear();
                     alert('로그인이 필요합니다.');
                     movePage('/pages/loginPage');
                 }
@@ -31,16 +28,27 @@ function Home() {
             console.error(error);
             console.log('need login');
             document.cookie = "isLogin=false; path=/; expires=Thu, 01 JAN 1999 00:00:10 GMT";
+            sessionStorage.clear();
             alert('로그인이 필요합니다.');
             movePage('/pages/loginPage');
         });
-        axios.post('/api/sendAssociation',null,{})
-            .then((response) => {
-                console.log('추천 목록을 가져오는데 성공');
-                setRecommendItem(response.data);
-            }).catch((error) => {
-            console.log(error);
-        });
+        const savedAssociation = sessionStorage.getItem("association");
+
+        if(savedAssociation && savedAssociation.length !== 0){
+            const parsedAssociation = JSON.parse(savedAssociation);
+            setRecommendItem(parsedAssociation);
+        }
+        else {
+            axios.post('/api/sendAssociation', null, {})
+                .then((response) => {
+                    console.log('추천 목록을 가져오는데 성공');
+                    setRecommendItem(response.data);
+                    console.log(response.data);
+                    sessionStorage.setItem("association", JSON.stringify(response.data));
+                }).catch((error) => {
+                console.log(error);
+            });
+        }
         axios.get('/get/popular')   // 인기상품 + 광고 가져오기
             .then((response)=>{
                 console.log('광고 + 인기 상품을 가져오는데 성공');
@@ -48,6 +56,7 @@ function Home() {
             }).catch(error => {
             console.error(error);
         });
+
     },[]);
 
     function goCategorySearch(event){    //카테고리 검색
@@ -56,6 +65,7 @@ function Home() {
         searchdata.append('word', event.currentTarget.id);
         movePage('/pages/SearchResult?search_popularity='+event.currentTarget.id, {state:{word:event.currentTarget.id}});
     }
+
 
     return (
         <div className={styles.App}>
