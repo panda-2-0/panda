@@ -131,21 +131,21 @@ class ListVeiw extends React.Component {
 }
 
 ListVeiw.defaultProps = {
-    list:[{"writingId":123, "writingImg":"imgs/logo192_192.png", "writingName":"귀여운 판다", "price":123, "addr":"경북 경산시 대학로 280", "userPoint":50, "ad":true},
-    {"writingId":123, "writingImg":"imgs/logo192_192.png", "writingName":"귀여운 판다", "price":123, "addr":"경북 경산시 대학로 280", "userPoint":50, "ad":true},
-    {"writingId":123, "writingImg":"imgs/logo192_192.png", "writingName":"귀여운 판다", "price":123, "addr":"경북 경산시 대학로 280", "userPoint":50, "ad":true},
-    {"writingId":123, "writingImg":"imgs/logo192_192.png", "writingName":"귀여운 판다", "price":123, "addr":"경북 경산시 대학로 280", "userPoint":50, "ad":false},
-    {"writingId":123, "writingImg":"imgs/logo192_192.png", "writingName":"귀여운 판다", "price":123, "addr":"경북 경산시 대학로 280", "userPoint":50, "ad":false},
-    {"writingId":123, "writingImg":"imgs/logo192_192.png", "writingName":"귀여운 판다", "price":123, "addr":"경북 경산시 대학로 280", "userPoint":50, "ad":false},
-        {"writingId":123, "writingImg":"imgs/logo192_192.png", "writingName":"귀여운 판다", "price":123, "addr":"경북 경산시 대학로 280", "userPoint":50, "ad":false},
-        {"writingId":123, "writingImg":"imgs/logo192_192.png", "writingName":"귀여운 판다", "price":123, "addr":"경북 경산시 대학로 280", "userPoint":50, "ad":false},
-        {"writingId":123, "writingImg":"imgs/logo192_192.png", "writingName":"귀여운 판다", "price":123, "addr":"경북 경산시 대학로 280", "userPoint":50, "ad":false},
-        {"writingId":123, "writingImg":"imgs/logo192_192.png", "writingName":"귀여운 판다", "price":123, "addr":"경북 경산시 대학로 280", "userPoint":50, "ad":false},
-        {"writingId":123, "writingImg":"imgs/logo192_192.png", "writingName":"귀여운 판다", "price":123, "addr":"경북 경산시 대학로 280", "userPoint":50, "ad":false},
-        {"writingId":123, "writingImg":"imgs/logo192_192.png", "writingName":"귀여운 판다", "price":123, "addr":"경북 경산시 대학로 280", "userPoint":50, "ad":false},
-        {"writingId":123, "writingImg":"imgs/logo192_192.png", "writingName":"귀여운 판다", "price":123, "addr":"경북 경산시 대학로 280", "userPoint":50, "ad":false},
-        {"writingId":123, "writingImg":"imgs/logo192_192.png", "writingName":"귀여운 판다", "price":123, "addr":"경북 경산시 대학로 280", "userPoint":50, "ad":false},
-        {"writingId":123, "writingImg":"imgs/logo192_192.png", "writingName":"귀여운 판다", "price":123, "addr":"경북 경산시 대학로 280", "userPoint":50, "ad":false},],
+    list:[{"writingId":123, "writingImg":"", "writingName":"데이터 로드 중", "price":1234567, "addr":"경북 경산시 대학로 280", "userPoint":50, "ad":false},
+        {"writingId":123, "writingImg":"", "writingName":"데이터 로드 중", "price":1234567, "addr":"경북 경산시 대학로 280", "userPoint":50, "ad":false},
+        {"writingId":123, "writingImg":"", "writingName":"데이터 로드 중", "price":1234567, "addr":"경북 경산시 대학로 280", "userPoint":50, "ad":false},
+        {"writingId":123, "writingImg":"", "writingName":"데이터 로드 중", "price":1234567, "addr":"경북 경산시 대학로 280", "userPoint":50, "ad":false},
+        {"writingId":123, "writingImg":"", "writingName":"데이터 로드 중", "price":1234567, "addr":"경북 경산시 대학로 280", "userPoint":50, "ad":false},
+        {"writingId":123, "writingImg":"", "writingName":"데이터 로드 중", "price":1234567, "addr":"경북 경산시 대학로 280", "userPoint":50, "ad":false},
+        {"writingId":123, "writingImg":"", "writingName":"데이터 로드 중", "price":1234567, "addr":"경북 경산시 대학로 280", "userPoint":50, "ad":false},
+        {"writingId":123, "writingImg":"", "writingName":"데이터 로드 중", "price":1234567, "addr":"경북 경산시 대학로 280", "userPoint":50, "ad":false},
+        {"writingId":123, "writingImg":"", "writingName":"데이터 로드 중", "price":1234567, "addr":"경북 경산시 대학로 280", "userPoint":50, "ad":false},
+        {"writingId":123, "writingImg":"", "writingName":"데이터 로드 중", "price":1234567, "addr":"경북 경산시 대학로 280", "userPoint":50, "ad":false},
+        {"writingId":123, "writingImg":"", "writingName":"데이터 로드 중", "price":1234567, "addr":"경북 경산시 대학로 280", "userPoint":50, "ad":false},
+        {"writingId":123, "writingImg":"", "writingName":"데이터 로드 중", "price":1234567, "addr":"경북 경산시 대학로 280", "userPoint":50, "ad":false},
+        {"writingId":123, "writingImg":"", "writingName":"데이터 로드 중", "price":1234567, "addr":"경북 경산시 대학로 280", "userPoint":50, "ad":false},
+        {"writingId":123, "writingImg":"", "writingName":"데이터 로드 중", "price":1234567, "addr":"경북 경산시 대학로 280", "userPoint":50, "ad":false},
+        {"writingId":123, "writingImg":"", "writingName":"데이터 로드 중", "price":1234567, "addr":"경북 경산시 대학로 280", "userPoint":50, "ad":false},],
     len:15};
 
 const SLIDE_GAP = 14;  //각 슬라이드 사이 간격
