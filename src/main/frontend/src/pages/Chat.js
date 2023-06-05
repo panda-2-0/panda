@@ -105,7 +105,7 @@ function Chat() {
                         // 스크롤을 내려야 하는가 true or false,
                         // 더 이상 불러올 메시지가 없는가 full의 내용이 담김.
                         // 또한 채팅을 보낸 사람 sender, 받은 사람 receiver 내용이 담김.
-
+                        // console.log(type);
                         if (type === "evaluate") {
                             let evaluateRoom = parsedMap.evaluateRoom;
 
@@ -138,7 +138,7 @@ function Chat() {
                             }
                         }
 
-                        else if (type === "chatList") {  // chat === undefined -> 채팅방을 클릭했다는 의미
+                        else if (type === "chatList") {  // type === "chatList"" -> 채팅방을 클릭했다는 의미
                             let chatList = parsedMap.messages;  // 채팅방을 눌렀을 때 가져올 메시지 목록
                             let messageType = parsedMap.messageType; // -> 해당 메시지가 어떤 정보를 담고 있는지
 

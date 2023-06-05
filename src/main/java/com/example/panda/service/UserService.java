@@ -77,7 +77,7 @@ public class UserService {
         user.setNickname(userDTO.getNickname());
         user.setPhoneNumber(userDTO.getPhoneNumber());
         user.setAddress(userDTO.getAddress());
-        user.setUserImg(userDTO.getUserImg().getBytes());
+        user.setUserImg(userDTO.getUserImg());
 
         return UserResponseDTO.of(userSaveRepository.save(user));
     }
