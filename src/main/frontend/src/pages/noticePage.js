@@ -73,24 +73,14 @@ function NoticePage(){
                                         <div className={styles.num}>{post.writing_Id}</div>
                                         <div className={styles.title} onClick={movePage1} id={post.writing_Id}>{post.writing_name}</div>
                                         <div className={styles.writer}>{post.user_name}</div>
-                                        <div className={styles.date}>2023.04.28</div>
+                                        <div className={styles.date}>2020.20.20</div>
                                         <div className={styles.count}>33</div>
                                     </div>
                                     )
                                  ))}
 
                         </div>
-                        <div className={styles.board_page}>
-                            <a href="#" className={styles.num}><b>〈〈</b></a>
-                            <a href="#" className={styles.num}><b>〈</b></a>
-                            <a href="#" className={styles.num}>1</a>
-                            <a href="#" className={styles.num}>2</a>
-                            <a href="#" className={styles.num}>3</a>
-                            <a href="#" className={styles.num}>4</a>
-                            <a href="#" className={styles.num}>5</a>
-                            <a href="#" className={styles.num}><b>〉</b></a>
-                            <a href="#" className={styles.num}><b>〉〉</b></a>
-                        </div>
+
                         <div className={styles.bt_wrap}>
                             <a onClick={goregist} className={styles.on}>등록</a>
                         </div>

@@ -1,9 +1,12 @@
 package com.example.panda.service;
 
+import com.example.panda.dto.AuctionDTO;
 import com.example.panda.dto.WritingDTO;
 import com.example.panda.dto.WritingResponseDTO;
+import com.example.panda.entity.AuctionEntity;
 import com.example.panda.entity.UserEntity;
 import com.example.panda.entity.WritingEntity;
+import com.example.panda.repository.AuctionRepository;
 import com.example.panda.repository.UserRepository;
 import com.example.panda.repository.WritingDSLRepository;
 import com.example.panda.repository.WritingRepository;
@@ -28,6 +31,7 @@ public class WritingService {
     private final WritingRepository writingRepository;
     private final WritingDSLRepository writingDSLRepository;
     private final UserRepository userRepository;
+    private final AuctionRepository auctionRepository;
 
     public void write(WritingEntity we)
     {
@@ -112,6 +116,12 @@ public class WritingService {
             writingResponseDTOList.add(WritingResponseDTO.toWritingResponseDTO(we, false));
         }
         return writingResponseDTOList;
+    }
+    //경매 등록
+    public void saveAuction(AuctionDTO auctionDTO){
+        AuctionEntity auctionEntity = AuctionEntity.toAuctionEntity(auctionDTO);
+
+        auctionRepository.save(auctionEntity);
     }
 
 }
