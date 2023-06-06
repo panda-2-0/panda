@@ -9,6 +9,7 @@ import FixBar from "./FixBar";
 
 import {Routes,Route,Link,NavLink,useNavigate} from 'react-router-dom';
 import axios from 'axios';
+import profile from "../imgs/logo512_512.png";
 
 function Inquiry_list() {
     const [data, setData] = useState([]);
@@ -55,7 +56,7 @@ function Inquiry_list() {
                             {data.map(item=>(
                                 <CommonTableRow>
                                     {/*<td className={styles.common_check_box}><input type="checkbox"  style={{left:"5%"}} name="likeList" value={item.price}/>{item.writing_Id}</td>*/}
-                                    <td className={styles.common_check_box} onClick={movePage} id={item.writing_Id}><img src=" http://placekitten.com/150/150" alt=""/></td>
+                                    <td className={styles.common_check_box} onClick={movePage} id={item.writing_Id}><img width={150} height={150} src={item.writingImg !=null ? `${atob(item.writingImg)}`:profile} alt=""/></td>
                                     <td className={styles.common_check_box} onClick={movePage} id={item.writing_Id}>{item.writing_name}</td>
                                     <td className={styles.common_check_box} onClick={movePage} id={item.writing_Id}><label name="price">{dividePriceUnit(item.price.toString())}</label></td>
                                     <td className={styles.common_check_box} onClick={movePage} id={item.writing_Id}>{item.regit_date}</td>
