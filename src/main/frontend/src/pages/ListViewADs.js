@@ -5,6 +5,7 @@ import FixBar from "./FixBar";
 import CommonTable from "../Tables/CommonTable";
 import CommonTableRow from "../Tables/CommonTableRow";
 import {Link, useLocation, useNavigate} from "react-router-dom";
+import profile from "../imgs/logo512_512.png";
 
 function ListViewADs() {
 
@@ -38,15 +39,16 @@ function ListViewADs() {
         <div className={styles.advertise_box}>
 
             <div className={styles.container}>
-            {advertise.map(item => (
-                <div className={styles.resultMap} onClick={movePage} name="spam" id={item.writingId}>
-                    <img width={200} height={200} className={styles.content_picture} src={"data:image/png;base64," + item.writingImg} alt='No Data'></img>
-                    <div> <b>{item.writingName}</b></div>
-                    <div>  [판매자위치]: {item.addr} </div>
-                    <div>    가격: {dividePriceUnit(item.price.toString())} </div>
-                    <div>    판매자 평점:{item.userPoint}</div>
-                </div>
-            ))}
+                {advertise.map(item => (
+                    <div className={styles.resultMap} onClick={movePage} name="spam" id={item.writingId}>
+                        {/*<img width={200} height={200} className={styles.content_picture} src={"data:image/png;base64," + item.writingImg} alt='No Data'></img>*/}
+                        <img width={200} height={200} className={styles.content_picture} src={item.writingImg !=null ? `${atob(item.writingImg)}`:profile} alt='No Data'></img>
+                        <div> <b>{item.writingName}</b></div>
+                        <div>  [판매자위치]: {item.addr} </div>
+                        <div>    가격: {dividePriceUnit(item.price.toString())} </div>
+                        <div>    판매자 평점:{item.userPoint}</div>
+                    </div>
+                ))}
             </div>
         </div>
     );

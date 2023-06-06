@@ -9,6 +9,7 @@ import axios from 'axios';
 import styles from "../Css_dir/SearchResult.module.css";
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
+import profile from "../imgs/logo512_512.png";
 dayjs.locale('ko');
 
 
@@ -49,7 +50,7 @@ function BoughtList() {
                     <CommonTable headersName={['사진', '상품명','가격', '구매완료일', '판매자']}>
                         {data.map(item=>(
                             <CommonTableRow>
-                                <td className={styles.common_check_box}><img src=" http://placekitten.com/150/150" alt=""/></td>
+                                <td className={styles.common_check_box}><img width={150} height={150} src={item.writingCompleteDTO.writing_photo !=null ? `${atob(item.writingCompleteDTO.writing_photo)}`:profile} alt=""/></td>
                                 <td className={styles.common_check_box}>{item.writingCompleteDTO.writing_name}</td>
                                 <td className={styles.common_check_box}><label name="price">{dividePriceUnit(item.writingCompleteDTO.price.toString())}</label></td>
                                 <td className={styles.common_check_box}>{dayjs(item.purchase_date).format("YYYY-MM-DD")}</td>

@@ -87,7 +87,7 @@ public class MyPageController {
         UserDetails userDetails = (UserDetails)authentication.getPrincipal();
         List<PurchaseHistoryDTO> list=purchaseHistoryService.findbyEmail(userDetails.getUsername());
 
-        System.out.println(list);
+//        System.out.println(list);
         return list;
     }
 

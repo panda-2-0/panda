@@ -9,6 +9,7 @@ import FixBar from "./FixBar";
 
 import {Routes,Route,Link,NavLink,useNavigate} from 'react-router-dom';
 import axios from 'axios';
+import profile from "../imgs/logo512_512.png";
 
 function OtherPage() {
     const [data, setData] = useState([]);
@@ -101,49 +102,49 @@ function OtherPage() {
     return (
         <div className={styles.wraper}>
             <div className={styles.wrapBox}>
-            <FixBar></FixBar>
-            <br/>
-            <div id='root'>
+                <FixBar></FixBar>
                 <br/>
-                <div className={styles.headTitle}>
-                    <h1 className={styles.title}>찜 목록
-                        <span>사용자가 선택한 찜 목록입니다..</span>
-                    </h1>
-                </div>
-                <br/><br/>
-                <div className="card" >
-                    <div className="card-header">
-                        찜 목록
+                <div id='root'>
+                    <br/>
+                    <div className={styles.headTitle}>
+                        <h1 className={styles.title}>찜 목록
+                            <span>사용자가 선택한 찜 목록입니다..</span>
+                        </h1>
                     </div>
-                    <ul className="list-group list-group-flush">
+                    <br/><br/>
+                    <div className="card" >
+                        <div className="card-header">
+                            찜 목록
+                        </div>
+                        <ul className="list-group list-group-flush">
 
-                        <li className="list-group-item">선택된 제품 수: <span id="selectCount"></span></li>
-                        <li className="list-group-item">목록 내 모든 상품 가격: <span id="totalPrice">{dividePriceUnit(price.toString())}  </span></li>  {/*나중에 백엔드에서 가져오기*/}
-                        <li className="list-group-item">선택한 상품 가격: <span id="selectPrice"></span></li>
-                    </ul>
+                            <li className="list-group-item">선택된 제품 수: <span id="selectCount"></span></li>
+                            <li className="list-group-item">목록 내 모든 상품 가격: <span id="totalPrice">{dividePriceUnit(price.toString())}  </span></li>  {/*나중에 백엔드에서 가져오기*/}
+                            <li className="list-group-item">선택한 상품 가격: <span id="selectPrice"></span></li>
+                        </ul>
+                    </div>
+                    <br/><br/>
+                    <CommonTable headersName={['선택/제품id','사진', '상품명', '가격', '상품등록일']}>
+                        {data.map(item=>(
+                            <CommonTableRow>
+                                <td className={styles.common_check_box}><input type="checkbox" onClick={getCheckCnt} style={{left:"5%"}} name="likeList" value={item.price}/>{item.writing_id}</td>
+                                <td className={styles.common_check_box} onClick={movePage} id={item.writing_id}><img width={150} height={150} src={item.writingDTO.writingImg !=null ? `${atob(item.writingDTO.writingImg)}`:profile}alt=""/></td>
+                                <td className={styles.common_check_box} onClick={movePage} id={item.writing_id}>{item.writing_name}</td>
+                                <td className={styles.common_check_box} onClick={movePage} id={item.writing_id}><label name="price">{dividePriceUnit(item.price.toString())}</label></td>
+                                <td className={styles.common_check_box} onClick={movePage} id={item.writing_id}>{item.regit_date}</td>
+                            </CommonTableRow>
+                        ))}
+                    </CommonTable>
+
+
+                    <br/><br/><br/>
+                    <button className={styles.changePage} onClick={ Btn_del }>선택 삭제</button>
+                    <br/><br/><br/>
+
+                    <br/><br/><br/>
                 </div>
-                <br/><br/>
-                <CommonTable headersName={['선택/제품id','사진', '상품명', '가격', '상품등록일']}>
-                    {data.map(item=>(
-                        <CommonTableRow>
-                            <td className={styles.common_check_box}><input type="checkbox" onClick={getCheckCnt} style={{left:"5%"}} name="likeList" value={item.price}/>{item.writing_id}</td>
-                            <td className={styles.common_check_box} onClick={movePage} id={item.writing_id}><img src=" http://placekitten.com/150/150" alt=""/></td>
-                            <td className={styles.common_check_box} onClick={movePage} id={item.writing_id}>{item.writing_name}</td>
-                            <td className={styles.common_check_box} onClick={movePage} id={item.writing_id}><label name="price">{dividePriceUnit(item.price.toString())}</label></td>
-                            <td className={styles.common_check_box} onClick={movePage} id={item.writing_id}>{item.regit_date}</td>
-                        </CommonTableRow>
-                    ))}
-                </CommonTable>
 
-
-                <br/><br/><br/>
-                <button className={styles.changePage} onClick={ Btn_del }>선택 삭제</button>
-                <br/><br/><br/>
-
-                <br/><br/><br/>
             </div>
-
-        </div>
             <footer className={styles.footer_div}>
 
             </footer>
