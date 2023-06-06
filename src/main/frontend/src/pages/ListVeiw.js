@@ -107,7 +107,8 @@ class ListVeiw extends React.Component {
                                 <Link to={'/pages/noticeConfirm?search='+item.writingId} state={{ word:item.writingId }} style={{ textDecoration: "none" }} id={item.writingId}>
                                     <div className={styles.list_container}>
                                         <div className={styles.item_img}>
-                                            <img width={200} height={200} src={"data:image/png;base64," + item.writingImg} className={styles.list_img} alt={"게시글 이미지."}/>
+                                            {/*<img width={200} height={200} src={"data:image/png;base64," + item.writingImg} className={styles.list_img} alt={"게시글 이미지."}/>*/}
+                                            <img width={200} height={200} src={atob(item.writingImg)} className={styles.list_img} alt={"게시글 이미지."}/>
                                         </div>
                                         <div className={styles.item_desc}>
                                             <h2 className={styles.item_name}>{item.ad ? "[광고]" + item.writingName : item.writingName}</h2>
