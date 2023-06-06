@@ -2,10 +2,11 @@
 
 .chat_page {
     box-sizing:border-box;
-    position:sticky;
+    position: fixed;
     height:100%;
-    width:1020px;
+    /*width:1020px;*/
     margin: 0 auto;
+    z-index: 22;
 }
 
 body::-webkit-scrollbar {
@@ -165,7 +166,8 @@ body::-webkit-scrollbar {
 }
 
 .chat_header {
-    width:650px;
+    /*width:650px;*/
+    width:calc(100vw - 360px);
     padding: 15px 29.5px;
     background: whitesmoke;
     height:50px;
@@ -176,7 +178,8 @@ body::-webkit-scrollbar {
     position:fixed;
     top:151px;
     bottom:180px;
-    width:650px;
+    /*width:650px;*/
+    width:calc(100vw - 360px);
     padding: 10px 30px 20px;
     overflow-y: scroll;
     background:whitesmoke;
@@ -254,7 +257,7 @@ body::-webkit-scrollbar {
     min-height:26px;
     /*font-weight: bold;*/
     word-wrap: break-word;
-    left:590px;
+    left:calc(100vw - 450px);
     transform: translateX(-100%);
     font-family: "NanumGothicOTF";
 }
@@ -276,7 +279,8 @@ body::-webkit-scrollbar {
 .chat_message {
     position:fixed;
     bottom:0;
-    width:650px;
+    /*width:650px;*/
+    width:calc(100vw - 360px);
     padding:30px;
     background:whitesmoke;
     height:120px;
@@ -284,7 +288,7 @@ body::-webkit-scrollbar {
 }
 
 .chat_message textarea {
-    width: 80%;
+    width:calc(100vw - 480px);
     border: none;
     padding: 12.5px 20px;
     font-family: "NanumGothicOTF";
@@ -379,6 +383,7 @@ body::-webkit-scrollbar {
     width:800px;
     height:400px;
     position:absolute;
+    z-index: 51;
 }
 
 .error_message {
@@ -414,7 +419,7 @@ body::-webkit-scrollbar {
     font-weight: bold;
     text-align: center;
     font-family: "NanumGothicOTF";
-    margin-bottom: 50px;
+    margin-bottom: 20px;
 }
 
 .eval_img {
@@ -431,14 +436,15 @@ body::-webkit-scrollbar {
 }
 
 .eval_button {
-    margin-top:50px;
+    margin-top:10px;
     text-align: center;
 }
 
 .eval_button > button {
     color: whitesmoke;
-    margin-right: 50px;
-    margin-left: 50px;
+    margin-right: 20px;
+    margin-left: 20px;
+    margin-top: 20px;
     font-size: 24px;
     font-family: "NanumGothicOTF";
     border: none;
@@ -465,6 +471,7 @@ body::-webkit-scrollbar {
     height:90px;
     /*border:1px solid green;*/
     transition: 0.5s;
+    z-index: 50;
 }
 
 .chat_menu_img {
@@ -478,11 +485,12 @@ body::-webkit-scrollbar {
 .chat_detail_menu {
     position: absolute;
     border-left:1px solid white;
-    left:30px;
+    left:-220px;
     top:-36px;
     font-weight: bold;
     font-size:20px;
     cursor:pointer;
+    z-index: 50;
 }
 
 .chat_detail_menu > ul {
@@ -501,4 +509,72 @@ body::-webkit-scrollbar {
 
 .chat_detail_menu li:hover {
     color:forestgreen;
+}
+.menuL{
+    display: none;
+    z-index: 32;
+    cursor: pointer;
+}
+.menuL .plist{
+    transition: 0.5s;
+}
+.menuL > img{
+    position: absolute;
+    width: 35px;
+    height: 35px;
+    left: 18px;
+    top: 18px;
+}
+.emenuL{
+    display: none;
+    z-index: 32;
+    cursor: pointer;
+}
+.emenuL .plist{
+    transition: 0.5s;
+}
+.emenuL > img{
+    content: url("../imgs/left_btn.png");
+    position: absolute;
+    width: 35px;
+    height: 35px;
+    left: 18px;
+    top: 18px;
+}
+@media screen and (max-width: 600px){
+    .plist {
+        left: -300px;
+        transition: 0.5s;
+    }
+    .menuL{display: block;}
+    .menuL .plist{
+        left: -300px;
+        z-index: 31;
+        transition: 0.5s;
+    }
+    .emenuL{display: block;}
+    .emenuL .plist{
+        left: 0px;
+        z-index: 31;
+        transition: 0.5s;
+    }
+    .chat_container{
+        left:0px;
+    }
+    .chat_header {
+        width:calc(100vw - 60px);
+    }
+    .chat_history {
+        width:calc(100vw - 60px);
+    }
+    .my_message {
+        left:calc(100vw - 150px);
+    }
+    .chat_message {
+        width:calc(100vw - 60px);
+    }
+
+    .chat_message textarea {
+        width:calc(100vw - 180px);
+    }
 }

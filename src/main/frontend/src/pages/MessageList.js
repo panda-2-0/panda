@@ -160,14 +160,19 @@ const MessageList = React.memo(({ messages, toMessageList, socket}) => {
                 ariaHideApp={false}
                 style={{
                     content: {
-                        width: '700px',
+                        width: '80vw',
                         margin: '0 auto',
-                        marginTop:'50px',
-                        height: '400px',
+                        marginTop:'10px',
+                        height: '80vh',
                         backgroundColor: 'whitesmoke',
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
                     },
                     overlay: {
                         backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                        zIndex: 30,
+                        textAlign: 'center',
                     },
                 }}>
                 <div>
@@ -195,14 +200,19 @@ const MessageList = React.memo(({ messages, toMessageList, socket}) => {
                 ariaHideApp={false}
                 style={{
                     content: {
-                        width: '500px',
+                        width: '80vw',
                         margin: '0 auto',
-                        marginTop:'50px',
-                        height: '180px',
+                        marginTop:'10px',
+                        height: '80vh',
                         backgroundColor: 'whitesmoke',
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
                     },
                     overlay: {
                         backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                        zIndex: 30,
+                        textAlign: 'center',
                     },
                 }}>
                 <div>

@@ -11,6 +11,7 @@ import {useNavigate} from "react-router-dom";
 //import { GoogleMap, LoadScript } from '@react-google-maps/api';
 
 function Chat() {
+    const [isOpen, setIsOpen] = useState(false);
     const movePage = useNavigate();
     const mapStyles = {
         height: '400px',
@@ -333,8 +334,30 @@ function Chat() {
         imageInput.current.click();
     }
 
+    const menuLClick = () =>{
+        setIsOpen(!isOpen);
+    }
+
     return (
         <div className={styles.chat_page}>
+            <div className={(!isOpen ? `${styles.menuL}` : `${styles.emenuL}`)} onClick={menuLClick}>
+                <img src={'/imgs/right_btn.png'}/>
+                <div className={styles.plist}>
+                    <ul>
+                        <li className={styles.profile_First}>
+                            <div className={styles.p_profile}>
+                                <img src={userImg == null ? profile : atob(userImg)} width="100%" height="100%"></img>
+                            </div>
+                            <div className={styles.p_info}>
+                                <div className={`${styles.p_name} ${styles.whitesmoke_color}`}>나</div>
+                                <div className={`${styles.p_time} ${styles.whitesmoke_color}`}></div>
+                                <div className={`${styles.p_last_message} ${styles.whitesmoke_color}`}/>
+                            </div>
+                        </li>
+                    </ul>
+                    <ChatList chatRooms={chatRooms} onClick={chatListClick} toChatList={toChatList}/>
+                </div>
+            </div>
             <div className={styles.plist}>
                 <ul>
                 <li className={styles.profile_First}>

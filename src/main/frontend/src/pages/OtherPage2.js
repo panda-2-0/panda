@@ -209,7 +209,7 @@ function OtherPage() {
     }, []);
 
     return (
-        <div>
+        <div className={styles.wraper}>
             <FixBar></FixBar>
             <Modal
                 isOpen={isPwOpen}
@@ -252,59 +252,64 @@ function OtherPage() {
                     <button className={styles.form_button} onClick={closeOpenPw}>취소</button>
                 </div>
             </Modal>
-        <div className={inputStyles.login_page}>
-            <br/>
-            <div className={styles.headTitle}>
-                <h1 className={styles.title}>회원 정보
-                    <span>사용자의 회원 정보입니다.</span>
-                </h1>
-            </div>
-
-            <div className={inputStyles.login_wrap}>
-                <div id='root'>
-                    <div className={styles.form_profile}>
-                        <label className={styles.form_label}>프로필 사진</label>
-                        <img src={previewImage == null ? profile : previewImage} className={styles.form_profile_img}/>
-                        <div className={styles.selectImg}>
-                            <div className={styles.img_button} onClick={baseProfileImage}>기본 이미지</div>
-                            <div className={styles.img_button} onClick={imageSelectClick}>이미지 선택</div>
-                            <input type="file" ref={imageInput} onChange={handleFileChange} key={fileInputKey} hidden={true} />
-                        </div>
-                    </div>
-                    <div className={styles.form_item}>
-                        <label className={styles.form_label}>이메일</label>
-                        <input type='text' className={inputStyles.input} value={userInfo.email}></input>
-                    </div>
-
-                    <div className={styles.form_item}>
-                        <label className={styles.form_label}>비밀번호</label>
-                        <input type='password' className={inputStyles.input} value={"00000000"}></input> <br/>
-                        <button className={styles.change_pw} onClick={openPw}>변경</button>
-                    </div>
-
-                    <div className={styles.form_item}>
-                        <label className={styles.form_label}>닉네임</label>
-                        <input type='text' className={inputStyles.input} value={nickname} onChange={changeNickname}></input> <br/>
-                    </div>
-
-                    <div className={styles.form_item}>
-                        <label className={styles.form_label}>전화번호</label>
-                        <input type='text' className={inputStyles.input} value={phone} onChange={changePhone}></input> <br/>
-                    </div>
-
-                    <div className={styles.form_item}>
-                        <label className={styles.form_label}>주소</label>
-                        <input type='text' className={inputStyles.input} value={addr} onChange={changeAddr}></input> <br/>
-                    </div>
-                    {nickname === '' ? <div className={inputStyles.error_message}>{pwch_error}</div>:<div className={inputStyles.error_message}></div>}
-                    <button className={styles.form_button} onClick={modifyInfo}>수정하기</button>
+            <div className={inputStyles.login_page}>
+                <br/>
+                <div className={styles.headTitle}>
+                    <h1 className={styles.title}>회원 정보
+                        <span>사용자의 회원 정보입니다.</span>
+                    </h1>
                 </div>
-            </div>
-            <br/>
-            <footer className={styles.footer_div}>
 
+                <div className={inputStyles.login_wrap}>
+                    <div id='root'>
+                        <div className={styles.form_profile}>
+                            <label className={styles.form_label}>프로필 사진</label>
+                            <img src={previewImage == null ? profile : previewImage} className={styles.form_profile_img}/>
+                            <div className={styles.selectImg}>
+                                <div className={styles.img_button} onClick={baseProfileImage}>기본 이미지</div>
+                                <div className={styles.img_button} onClick={imageSelectClick}>이미지 선택</div>
+                                <input type="file" ref={imageInput} onChange={handleFileChange} key={fileInputKey} hidden={true} />
+                            </div>
+                        </div>
+                        <div className={styles.form_item}>
+                            <label className={styles.form_label}>이메일</label>
+                            <input type='text' className={inputStyles.input} value={userInfo.email}></input>
+                        </div>
+
+                        <div className={styles.form_item}>
+                            <label className={styles.form_label}>비밀번호</label>
+                            <input type='password' className={inputStyles.input} value={"00000000"}></input> <br/>
+                            <button className={styles.change_pw} onClick={openPw}>변경</button>
+                        </div>
+
+                        <div className={styles.form_item}>
+                            <label className={styles.form_label}>닉네임</label>
+                            <input type='text' className={inputStyles.input} value={nickname} onChange={changeNickname}></input> <br/>
+                        </div>
+
+                        <div className={styles.form_item}>
+                            <label className={styles.form_label}>전화번호</label>
+                            <input type='text' className={inputStyles.input} value={phone} onChange={changePhone}></input> <br/>
+                        </div>
+
+                        <div className={styles.form_item}>
+                            <label className={styles.form_label}>주소</label>
+                            <input type='text' className={inputStyles.input} value={addr} onChange={changeAddr}></input> <br/>
+                        </div>
+                        {nickname === '' ? <div className={inputStyles.error_message}>{pwch_error}</div>:<div className={inputStyles.error_message}></div>}
+                        <button className={styles.form_button} onClick={modifyInfo}>수정하기</button>
+                    </div>
+                </div>
+                <br/>
+            </div>
+            <footer className={styles.footer_div}>
+                <div>ⒸPANDA</div>
+                <div>주소지 : 경상북도 경산시 대학로 280</div>
+                <div>광고 문의 : a1234567@email.com</div>
+                <div>고객 문의(email) : b1234567@email.com</div>
+                <div>고객 문의(call) : 000-0000-0000</div>
+                <div> -오전 9:30 ~ 오후 5:30(주말,공휴일 제외)</div>
             </footer>
-        </div>
         </div>
     );
 }
