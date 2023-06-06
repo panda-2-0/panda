@@ -128,6 +128,10 @@ public class WritingController {
     @PostMapping("/api/noticeAuctions")
     public void auctionStart(@RequestBody AuctionDTO auctionDTO)
     {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetails = (UserDetails)authentication.getPrincipal();
+
         writingService.saveAuction(auctionDTO);
     }
 

@@ -159,8 +159,8 @@ function NoticeConfirm()
                             <dd>2023.05.05</dd>
                         </dl>
                         <dl>
-                            <dt>조회</dt>
-                            <dd>5조5억회</dd>
+                            <dt>사진</dt>
+                            <dd><img alt ="불러오는중" src={data.writing_photo} style={{maxWidth : "200px"}}/></dd>
                         </dl>
                     </div>
                     <div className={styles.cont}>
