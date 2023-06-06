@@ -56,17 +56,15 @@ function OtherPage() {
             arr.push(wid);
         })
 
-        // axios.post('/api/del_item',{
-        //     params:{
-        //         id: 12,
-        //         writing_name: "1234",
-        //         list: arr.join(",")
-        //     }
-        // })
         const listdata=new FormData();
         listdata.append('id', 12);
         listdata.append('writing_name', "1234");
         listdata.append('list', arr.join(","));
+
+        if(selectedElements.length===0){
+            alert('선택한 제품이 없습니다!');
+            return;
+        }
 
         axios.post('/api/del_item', listdata,{     //post방식
             headers: {
@@ -77,14 +75,8 @@ function OtherPage() {
         }).catch(error=>{
             console.error(error);
         })
-        // axios.delete('/api/del_item', {         //delete방식
-        //     data:arr.join(",")
-        // }).then((response)=>{
-        //     console.log('성공');
-        // }).catch(error=>{
-        //     console.error(error);
-        // })
-        document.location.href="/pages/OtherPage";
+        window.location.reload();
+        //document.location.href="/pages/OtherPage";
     }
 
     useEffect(() => {    //일단 글목록 가져옴 (나중에 찜 목록 가져와야함)
@@ -119,7 +111,7 @@ function OtherPage() {
                         <ul className="list-group list-group-flush">
 
                             <li className="list-group-item">선택된 제품 수: <span id="selectCount"></span></li>
-                            <li className="list-group-item">목록 내 모든 상품 가격: <span id="totalPrice">{dividePriceUnit(price.toString())}  </span></li>  {/*나중에 백엔드에서 가져오기*/}
+                            <li className="list-group-item">목록 내 모든 상품 가격: <span id="totalPrice">{dividePriceUnit(price.toString())}  </span></li>
                             <li className="list-group-item">선택한 상품 가격: <span id="selectPrice"></span></li>
                         </ul>
                     </div>

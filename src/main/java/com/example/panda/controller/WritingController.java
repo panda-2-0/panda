@@ -1,5 +1,6 @@
 package com.example.panda.controller;
 
+import com.example.panda.dto.AuctionDTO;
 import com.example.panda.dto.UserDTO;
 import com.example.panda.dto.WritingDTO;
 
@@ -30,7 +31,7 @@ public class WritingController {
     private final WritingService writingService;
 
     private final UserService userService;
-    
+
 //    @PostMapping("/api/noticeRegister")
 //    public void boardwritepro(@RequestParam("writing_name") String writingName,
 //                              @RequestParam("writing_photo") MultipartFile writingPhoto,
@@ -122,6 +123,16 @@ public class WritingController {
     public void deletePost(@PathVariable Integer postId) throws ChangeSetPersister.NotFoundException {
         writingService.deletePost(postId);
 
+    }
+
+    @PostMapping("/api/noticeAuctions")
+    public void auctionStart(@RequestBody AuctionDTO auctionDTO)
+    {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetails = (UserDetails)authentication.getPrincipal();
+
+        writingService.saveAuction(auctionDTO);
     }
 
 

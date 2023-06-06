@@ -26,7 +26,7 @@ public class AuctionEntity {
     @JoinColumn(name = "email")
     private UserEntity userEntity;
 
-    public static AuctionEntity toAuctionEntity(AuctionDTO auctionDTO){  //글 저장용
+    public static AuctionEntity toAuctionEntity(AuctionDTO auctionDTO){
         AuctionEntity auctionEntity=new AuctionEntity();
 
         auctionEntity.setAuction_date(auctionDTO.getAuction_date());
