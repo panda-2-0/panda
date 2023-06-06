@@ -2,10 +2,21 @@
     margin: 0;
     padding: 0;
 }
+.board_wrapr *{
+    margin: 0 auto;
+    padding: 0;
+}
 .board_wrap ul, .board_wrap li{
     list-style:none;
 }
+.board_wrapr ul, .board_wrapr li{
+    list-style:none;
+}
 .board_wrap a{
+    text-decoration: none;
+    color :inherit;
+}
+.board_wrapr a{
     text-decoration: none;
     color :inherit;
 }
@@ -21,7 +32,17 @@
     min-height: 100%;
     box-sizing: border-box;
 }
-
+.board_wrapr
+{
+    font-size:10px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    padding-bottom: 80px;
+    height: auto;
+    min-height: 100%;
+    box-sizing: border-box;
+}
 .board_title
 {
     margin-top:150px;
@@ -70,7 +91,13 @@
     background:#000;
     color:#fff;
 }
-
+.regist_btn_r{
+    min-width: 80px;
+    padding: 10px;
+    border: 1px solid #000;
+    border-radius: 2px;
+    font-size: 1.4rem;
+}
 .board_list
 {
     margin-top:30px;
@@ -168,12 +195,14 @@
 
 .board_write{
     border-top:2px solid #000;
+    width: calc(100vw - 60px);
 }
 
 .board_write .title,
 .board_write .info
 {
     padding:15px;
+    width: calc(100vw - 90px);
 }
 .board_write .info
 {
@@ -198,7 +227,12 @@
     resize:vertical;
     border_bottom:1px solid #000;
 }
-
+.info_table, .info_table tr, .info_table tr td dl{
+    width: calc(100vw - 90px);
+}
+.info_table td{
+    width: 50%;
+}
 .board_write .title dt,
 .board_write .title dd,
 .board_write .info dt,
@@ -211,15 +245,12 @@
 }
 .board_write .title dl
 {
-
     font-size:0;
-
 }
 .board_write .title dt,
 .board_write .info dt
 {
-
-    width:100px;
+    width:150px;
 }
 
 .board_write .title dd
@@ -229,8 +260,34 @@
 
 .board_write .info dl{
     display:inline-block;
-    width:50%;
     vertical-align: middle;
+}
+.board_write .info table dl{
+    text-align: left;
+    margin-left: 30px;
+    width: 100%;
+}
+#writing_photo {
+    width: 150px;
+}
+#photo_regist_dd{
+    overflow: hidden;
+}
+@media screen and (max-width: 865px){
+    .board_write .info dt
+    {
+        width:100%;
+    }
+}
+@media screen and (max-width: 600px){
+    .board_write .info table dl{
+        margin-left: 0px;
+    }
+}
+@media screen and (max-width: 520px){
+    .board_write .info td{
+        width: 100px;
+    }
 }
 
 .board_write .title input[type="text"]
