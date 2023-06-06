@@ -16,6 +16,7 @@ function NoticeConfirm()
     listdata.append('wid', writingInfo.word);  //이전 페이지에서 받아온 글id
     const writingdata = new FormData();
     writingdata.append('wid',writingInfo.word);
+    const [writing_photo, setWriting_photo] = useState(""); // Initialize with an empty string
 
     //게시글 상세 조회
     //const {id} = useParams();
@@ -80,7 +81,14 @@ function NoticeConfirm()
                 'Content-Type' : 'multipart/form-data'
             }
         })
-            .then(response => setData(response.data))
+            .then(response => {
+                setData(response.data);
+                const base64String = atob(
+                    new Uint8Array(response.data.writing_photo)
+                        .reduce((data, byte) => data + String.fromCharCode(byte), '')
+                );
+                setWriting_photo(`data:image/jpeg;base64,${base64String}`);
+            })
             .catch(error => console.log(error))
     }, []);
 
@@ -124,6 +132,7 @@ function NoticeConfirm()
     };
 
 
+
     const handleDelete = () => {
         deletePost(writingInfo.word);
     };
@@ -162,7 +171,7 @@ function NoticeConfirm()
                         </dl>
                         <dl>
                             <dt>사진</dt>
-                            <dd><img alt ="불러오는중" src={data.writing_photo} style={{maxWidth : "200px"}}/></dd>
+                            <dd><img alt ="불러오는중" src={writing_photo} style={{maxWidth : "200px"}}/></dd>
                         </dl>
                     </div>
                     <div className={styles.cont}>
