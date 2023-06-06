@@ -14,8 +14,8 @@ const NoticeRegist = () => {
         alert("등록 실패 !..");
     }
 
-    function gohome() {
-        movePage('/');
+    function gonoticeAuction() {
+        movePage('/pages/noticeAuction');
     }
 
     function gonoticepage() {
@@ -31,8 +31,15 @@ const NoticeRegist = () => {
     const [content, setContent] = useState('');
     const imageInput = useRef();
 
+    //경매 정보
+    const [auction_date, setAuctiondate] = useState('');
+    const [highest_value, setHighestvalue] = useState('');
+    const [buy_now, setBuynow] = useState(0);
+    const [lowest_value, setLowestvalue] = useState(0);
+    const [visiable, setVisiable] = useState(false);
+
     const handleFileChange = (event) => {    //이미지 업로드
-        if(event.target.files[0] == null) {
+        if (event.target.files[0] == null) {
             return;
         }
 
@@ -46,7 +53,7 @@ const NoticeRegist = () => {
             return;
         }
 
-        if(file) {
+        if (file) {
             const reader = new FileReader();
             reader.onload = () => {
                 const imageUrl = reader.result;
@@ -103,115 +110,227 @@ const NoticeRegist = () => {
     //     setWriting_photo('');
     // };
 
-    const registerInfo=()=>{
-        if(writing_name===''){
-            alert('글 제목을 입력해주세요!');
-            return;
-        }
-        if(category===''){
-            alert('카테고리를 입력해주세요!');
-            return;
-        }
-        if(detail_category===''){
-            alert('세부 카테고리를 입력해주세요!');
-            return;
-        }
-        if(count===0){
-            alert('수량 입력해주세요!');
-            return;
-        }
-        if(price===0){
-            alert('금액을 0원으로 책정할 수 없습니다!');
-            return;
-        }
-        if(content===''){
-            alert('글 내용을 입력해주세요!');
-            return;
-        }
-        const writing={
-            writing_name: writing_name,
-            category: category,
-            detail_category: detail_category,
-            count: count,
-            price: price,
-            content: content,
-            writingImg: btoa(writing_photo)
-        }
+    const registerInfo = () => {
 
-        axios.post('/api/noticeRegister', writing, {
-            headers: {
-                "Content-Type": `application/json`,
-                "Access-Control-Allow-Origin": `http://localhost:8000`,
-                'Access-Control-Allow_Credentials':"true",
-            },
-        }).then((response) => {
-            alert('등록 성공!');
-        }).catch(error => {
-            alert('등록 실패!');
-        });
+        if (visiable) {
+            // if(writing_name===''){
+            //     alert('글 제목을 입력해주세요!');
+            //     return;
+            // }
+            // if(category===''){
+            //     alert('카테고리를 입력해주세요!');
+            //     return;
+            // }
+            // if(detail_category===''){
+            //     alert('세부 카테고리를 입력해주세요!');
+            //     return;
+            // }
+            // if(count===0){
+            //     alert('수량 입력해주세요!');
+            //     return;
+            // }
+            // if(price===0){
+            //     alert('금액을 0원으로 책정할 수 없습니다!');
+            //     return;
+            // }
+            // if(content===''){
+            //     alert('글 내용을 입력해주세요!');
+            //     return;
+            // }
+            const writing = {
+                writing_name: writing_name,
+                category: category,
+                detail_category: detail_category,
+                count: count,
+                price: price,
+                content: content,
+                writingImg: btoa(writing_photo)
+            }
+            const auction = {
+                auction_date: auction_date,
+                highest_value: highest_value,
+                buy_now: buy_now,
+            }
 
-        gonoticepage();
-    }
+            axios.post('/api/noticeRegister', writing, {
+                headers: {
+                    "Content-Type": "application/json",
+                    "Access-Control-Allow-Origin": "http://localhost:8000",
+                    "Access-Control-Allow-Credentials": "true",
+                },
+            })
+                .then((response) => {
+                    axios.post("/api/noticeAuctions", auction, {
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Access-Control-Allow-Origin": "http://localhost:8000",
+                            "Access-Control-Allow-Credentials": "true",
+                        },
+                    })
+                        .then((response) => {
+                            alert("경매 등록 성공!!");
+                        })
+                        .catch(error => {
+                            alert("경매 등록 실패!");
+                        });
+                })
+                .catch(error => {
+                    nagative_alertmessage();
+                });
+            gonoticepage();
+        }
+        else {
+            // if(writing_name===''){
+            //     alert('글 제목을 입력해주세요!');
+            //     return;
+            // }
+            // if(category===''){
+            //     alert('카테고리를 입력해주세요!');
+            //     return;
+            // }
+            // if(detail_category===''){
+            //     alert('세부 카테고리를 입력해주세요!');
+            //     return;
+            // }
+            // if(count===0){
+            //     alert('수량 입력해주세요!');
+            //     return;
+            // }
+            // if(price===0){
+            //     alert('금액을 0원으로 책정할 수 없습니다!');
+            //     return;
+            // }
+            // if(content===''){
+            //     alert('글 내용을 입력해주세요!');
+            //     return;
+            // }
+            const writing = {
+                writing_name: writing_name,
+                category: category,
+                detail_category: detail_category,
+                count: count,
+                price: price,
+                content: content,
+                writingImg: btoa(writing_photo)
+            };
 
-    return (
-        <div>
-            <div className={styles.board_wrap}>
-                <div className={styles.board_title}>
-                    <strong>게시글 작성</strong>
-                    <p>판매자는 하단 등록 버튼을 눌러 판매 등록을 할 수 있습니다.</p>
-                </div>
-                <form onSubmit={registerInfo} encType={"multipart/form-data"}>
-                    <div className={styles.board_write_wrap}>
-                        <div className={styles.board_write}>
-                            <div className={styles.title}>
-                                <dl>
-                                    <dt>{/*<label htmlFor={writing_name}></label>*/}제목</dt>
-                                    <dd><input type="text" id="writing_name" value={writing_name} placeholder="제목 입력" onChange={(e) => setTitle(e.target.value)} /></dd>
-                                </dl>
-                            </div>
-                            <div className={styles.info}>
-                                <dl>
-                                    <dt>카테고리</dt>
-                                    <dd><input type="text" id="category" value={category} placeholder="카테고리를 입력하시오" onChange={(e) => setCategory(e.target.value)} /></dd>
-                                </dl>
-                                <dl>
-                                    <dt>카테고리(세부)</dt>
-                                    <dd><input type="text" id="detail_category" value={detail_category} placeholder="세부 카테고리 입력" onChange={(e) => setDetail_category(e.target.value)} /></dd>
-                                </dl>
-                                <dl>
-                                    <dt>수량</dt>
-                                    <dd><input type="text" id="count" value={count} onChange={(e) => setCount(e.target.value)} /></dd>
-                                </dl>
-                                <dl>
-                                    <dt>가격</dt>
-                                    <dd><input type="text" id="price" value={price} onChange={(e) => setPrice(e.target.value)} /></dd>
-                                </dl>
-                                <dl>
-                                    <dt>사진 등록</dt>
-                                    <dd>
-                                        <input type="file" ref={imageInput} name="writing_photo" id="writing_photo" onChange={handleFileChange} />
-                                    </dd>
-                                </dl>
-                                <dl>
-                                    <dt>대표 이미지 설정</dt>
-                                    <dd>
-                                        <img alt="미리보기" src={writing_photo} style={{ maxWidth: "100px" }} />
-                                    </dd>
-                                </dl>
-                            </div>
-                            <div className={styles.cont}>
-                                <textarea id="content" value={content} placeholder="제품 상세 설명을 입력하시오" onChange={(e) => setContent(e.target.value)}></textarea>
-                            </div>
-                        </div>
-                        <div className={styles.bt_wrap}>
-                            <button type="submit" className={styles.on}>등록</button>
-                            <a onClick={gonoticepage}>취소</a>
-                        </div>
+            axios.post('/api/noticeRegister', writing, {
+                headers: {
+                    "Content-Type": "application/json",
+                    "Access-Control-Allow-Origin": "http://localhost:8000",
+                    "Access-Control-Allow-Credentials": "true",
+                },
+                })
+                .then((response) => {
+                    alertmessage();
+                })
+                .catch(error => {
+                    alert("경매 등록 실패!");
+                });
+            gonoticepage();
+        }
+    };
+
+        return (
+            <div>
+                <div className={styles.board_wrap}>
+                    <div className={styles.board_title}>
+                        <strong>게시글 작성</strong>
+                        <p>판매자는 하단 등록 버튼을 눌러 판매 등록을 할 수 있습니다.</p>
                     </div>
-                </form>
+                    <form onSubmit={registerInfo} encType={"multipart/form-data"}>
+                        <div className={styles.board_write_wrap}>
+                            <div className={styles.board_write}>
+                                <div className={styles.title}>
+                                    <dl>
+                                        <dt>{/*<label htmlFor={writing_name}></label>*/}제목</dt>
+                                        <dd><input type="text" id="writing_name" value={writing_name}
+                                                   placeholder="제목 입력" onChange={(e) => setTitle(e.target.value)}/></dd>
+                                    </dl>
+                                </div>
+                                <div className={styles.info}>
+                                    <dl>
+                                        <dt>카테고리</dt>
+                                        <dd><input type="text" id="category" value={category} placeholder="카테고리를 입력하시오"
+                                                   onChange={(e) => setCategory(e.target.value)}/></dd>
+                                    </dl>
+                                    <dl>
+                                        <dt>카테고리(세부)</dt>
+                                        <dd><input type="text" id="detail_category" value={detail_category}
+                                                   placeholder="세부 카테고리 입력"
+                                                   onChange={(e) => setDetail_category(e.target.value)}/></dd>
+                                    </dl>
+                                    <dl>
+                                        <dt>수량</dt>
+                                        <dd><input type="text" id="count" value={count}
+                                                   onChange={(e) => setCount(e.target.value)}/></dd>
+                                    </dl>
+                                    <dl>
+                                        <dt>가격</dt>
+                                        <dd><input type="text" id="price" value={price}
+                                                   onChange={(e) => setPrice(e.target.value)}/></dd>
+                                    </dl>
+                                    <dl>
+                                        <dt>사진 등록</dt>
+                                        <dd>
+                                            <input type="file" ref={imageInput} name="writing_photo" id="writing_photo"
+                                                   onChange={handleFileChange}/>
+                                        </dd>
+                                    </dl>
+                                    <dl>
+                                        <dt>대표 이미지 설정</dt>
+                                        <dd>
+                                            <img alt="미리보기" src={writing_photo} style={{maxWidth: "100px"}}/>
+                                        </dd>
+                                    </dl>
+                                    <dl>
+
+
+                                        <dd><a className={styles.on} onClick={() => {
+                                            setVisiable(!visiable);
+                                        }}> {visiable ? "닫기" : "경매등록"}</a></dd>
+
+                                    </dl>
+                                    <hr/>
+                                    {visiable && (
+                                        <dl>
+                                            <dt>경매 종료 시간 등록</dt>
+                                            <dd><input type="text" id="auction_date" value={auction_date}
+                                                       placeholder="(yyyy-MM-dd HH:mm:ss)"
+                                                       onChange={(e) => setAuctiondate(e.target.value)}/></dd>
+                                        </dl>)}
+
+                                    {visiable && (<dl>
+                                        <dt>경매 시작 가격</dt>
+                                        <dd><input type="text" id="lowest_value" value={lowest_value}
+                                                   placeholder="경매 시작가를 입력하시오"
+                                                   onChange={(e) => setLowestvalue(e.target.value)}/></dd>
+                                    </dl>)}
+                                    {visiable && (<dl>
+                                            <dt>즉시 구매 가격</dt>
+                                            <dd><input type="text" id="buy_now" value={buy_now}
+                                                       placeholder="즉시 구매가를 입력하시오"
+                                                       onChange={(e) => setBuynow(e.target.value)}/></dd>
+                                        </dl>
+                                    )}
+                                </div>
+                                <div className={styles.cont}>
+                                    <textarea id="content" value={content} placeholder="제품 상세 설명을 입력하시오"
+                                              onChange={(e) => setContent(e.target.value)}></textarea>
+                                </div>
+
+                            </div>
+                            <div className={styles.bt_wrap}>
+                                <button type="submit" className={styles.on}>등록</button>
+                                <a onClick={gonoticepage}>취소</a>
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </div>
-    );
-};
+        );
+
+}
 
 export default NoticeRegist;
