@@ -27,7 +27,7 @@ public class ChatDTO {
     private String content;
     private boolean isFromBuyer;
     private Date chatDate;
-    private String photo = null;
+    private byte[] photo = null;
     private int index;
     // 웹 소켓 용도, DB와 관련 X
     private int count;
@@ -42,7 +42,7 @@ public class ChatDTO {
         chatDTO.setFromBuyer(chatEntity.getIsFromBuyer());
         chatDTO.setChatDate(chatEntity.getChatDate());
         if(chatEntity.getPhoto() != null) {
-            chatDTO.setPhoto(new String(chatEntity.getPhoto()));
+            chatDTO.setPhoto(chatEntity.getPhoto());
         }
         return chatDTO;
     }

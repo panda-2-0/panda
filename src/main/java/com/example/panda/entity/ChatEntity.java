@@ -30,7 +30,7 @@ public class ChatEntity {
         chatEntity.setIsFromBuyer(chatDTO.isFromBuyer());
         chatEntity.setChatDate(chatDTO.getChatDate());
         if(chatDTO.getPhoto() != null) {
-            chatEntity.setPhoto(chatDTO.getPhoto().getBytes());
+            chatEntity.setPhoto(chatDTO.getPhoto());
         }
         return chatEntity;
     }

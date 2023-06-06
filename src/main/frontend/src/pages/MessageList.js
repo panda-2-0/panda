@@ -265,7 +265,7 @@ const MessageList = React.memo(({ messages, toMessageList, socket}) => {
                                         </div>
                                         :
                                         <div className={`${styles.message_img} ${styles.align_right}`}>
-                                            <img src={message.photo} alt="이미지" onClick={() => openImageModal(message.photo)} />
+                                            <img src={atob(message.photo)} alt="이미지" onClick={() => openImageModal(atob(message.photo))} />
                                         </div>
                                 }
                             </div>
@@ -283,7 +283,7 @@ const MessageList = React.memo(({ messages, toMessageList, socket}) => {
                                         </div>
                                         :
                                         <div className={`${styles.message_img} ${styles.align_left}`}>
-                                            <img src={message.photo} alt="이미지" onClick={() => openImageModal(message.photo)} />
+                                            <img src={atob(message.photo)} alt="이미지" onClick={() => openImageModal(atob(message.photo))} />
                                         </div>
                                 }
                             </div>

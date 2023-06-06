@@ -302,7 +302,7 @@ function Chat() {
                 fromBuyer:toMessageList.amIBuyer,
                 content: null,
                 chatDate: null,
-                photo: previewImage,
+                photo: btoa(previewImage),
                 type: "send",
             };  // photo
         } else {

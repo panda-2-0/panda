@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -122,6 +123,7 @@ public class MessageHandler extends TextWebSocketHandler {
                     System.out.println("응답 : " + responseBody);
 
                     StringBuilder sb = new StringBuilder();
+                    DecimalFormat df = new DecimalFormat("#,###");
 
                     if(responseBody.equals("인기")) { // 인기 상품 10개 조회
                         List<WritingResponseDTO> writingResponseDTOList = writingService.findPopular();
@@ -140,7 +142,7 @@ public class MessageHandler extends TextWebSocketHandler {
                         List<WritingResponseDTO> writingResponseDTOList = writingService.findExpensive();
 
                         for (WritingResponseDTO writingResponseDTO : writingResponseDTOList)
-                            sb.append(writingResponseDTO.getWritingName()).append('\n');
+                            sb.append(writingResponseDTO.getWritingName()).append(" : ").append(df.format(writingResponseDTO.getPrice())).append("원\n");
 
                         if(sb.length() == 0)
                             responseMessage = "현재 상품이 없습니다.";
@@ -153,7 +155,7 @@ public class MessageHandler extends TextWebSocketHandler {
                         List<WritingResponseDTO> writingResponseDTOList = writingService.findCheap();
 
                         for (WritingResponseDTO writingResponseDTO : writingResponseDTOList)
-                            sb.append(writingResponseDTO.getWritingName()).append("\n");
+                            sb.append(writingResponseDTO.getWritingName()).append(" : ").append(df.format(writingResponseDTO.getPrice())).append("원\n");
 
                         if(sb.length() == 0)
                             responseMessage = "현재 상품이 없습니다.";
