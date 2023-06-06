@@ -19,12 +19,12 @@ const MessageList = React.memo(({ messages, toMessageList, socket}) => {
     const messageRef = useRef();
 
     useEffect(() => {
-        // console.log(messages.length);
         if(messages.length < 1) return;
         // 시작할 때 messages 배열이 빈채로 하위 컴포넌트가 시작되어 오류 메시지가 출력되는 것을 방지
-
         else {
+            console.log(messages[0]);
             let type = messages[messages.length - 1].type;
+
             // 스크롤을 내려야 하는가?
 
             if(type === 'true' && chatContainerRef.current) {// 스크롤을 내려야 함
@@ -49,13 +49,14 @@ const MessageList = React.memo(({ messages, toMessageList, socket}) => {
     }, [messages])
 
     const handleScroll = () => {
-        if(chatContainerRef.current.scrollTop === 0 && messages[0].type !== 'full') {
-            socket.send(JSON.stringify({
-                roomId:messages[0].roomId,
-                count: messages.length,
-                type: "scroll",
-            }));
-        };
+        if(messages[0] != null)
+            if(chatContainerRef.current.scrollTop === 0 && messages[0].type !== 'full') {
+                socket.send(JSON.stringify({
+                    roomId:messages[0].roomId,
+                    count: messages.length,
+                    type: "scroll",
+                }));
+            };
     };
 
     const openImageModal = (imageUrl) => {
