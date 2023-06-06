@@ -67,6 +67,7 @@
 .my_page {
     margin-top: 64px;
     width: 100%;
+    overflow-x: hidden;
 }
 
 .profile_background {
@@ -85,7 +86,7 @@
 }
 
 .profile_content {
-    min-width:50%;
+    min-width:40%;
     max-width:70%;
     height:200px;
     float:left;
@@ -134,7 +135,8 @@
     display: flex;
     width: 100%;
     height:50px;
-    margin-left: -32px; /* 탭 좌우 위치 조정 */
+    padding: 0;
+    /*margin-left: -32px; !* 탭 좌우 위치 조정 *!*/
 }
 
 .my_page_tab ul li{
@@ -142,6 +144,7 @@
     position: relative;
     text-align:center;
     width:200px;
+
 }
 
 .my_page_tab ul li a {
@@ -157,11 +160,25 @@
     content: "";
     display: block;
     position: absolute;
-    background: skyblue;
+    background: #51996b;
     transition: 0.2s all ease;
 }
 
-.my_page_tab ul li a:hover { color:white; font-weight: bold;}
+.my_page_tab ul li a:hover { color:#51996b; font-weight: bold;}
 .my_page_tab li a:before {width: 0%; height: 3px;}
 .my_page_tab ul li a:before { bottom: -5px;}
 .my_page_tab li a:hover:before {width: 100%;}
+@media screen and (max-width: 700px){
+    .my_page_tab ul li a{font-size: 20px;}
+}
+@media screen and (max-width: 550px){
+    .p_point{font-size: 20px;margin-top: 120px;}
+}
+@media screen and (max-width: 505px){
+    .my_page_tab ul li a{font-size: 16px;}
+    .p_point{font-size: 16px;margin-top: 120px;}
+}
+@media screen and (max-width: 415px){
+    .my_page_tab ul li a{font-size: 14px;}
+    .p_point{font-size: 16px;margin-top: 120px;}
+}

@@ -147,3 +147,15 @@
     opacity: 0;
     transition: opacity 0.3s ease;
 }
+@media screen and (max-width: 505px){
+    .right_btn{width: 50px;}
+    .right_btn img{
+        width: 50px;
+    }
+    .right_btn_hidden{width: 50px}
+    .left_btn{width: 50px}
+    .left_btn img{
+        width: 50px;
+    }
+    .left_btn_hidden{width: 50px}
+}

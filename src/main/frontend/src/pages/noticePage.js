@@ -105,7 +105,6 @@ function NoticePage(){
                         </div>
                     </div>
                 </div>
-                <footer className={styles.footer}/>
             </div>
 
 

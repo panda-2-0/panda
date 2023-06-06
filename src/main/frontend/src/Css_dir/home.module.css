@@ -57,6 +57,11 @@
 .footer_div div:first-child{
     padding-top: 30px;
 }
+@media screen and (max-width: 400px){
+    .footer_div div{
+        padding-left: 20px;
+    }
+}
 .list_wrap{
     width: 100%;
     overflow: hidden;

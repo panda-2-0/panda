@@ -56,17 +56,15 @@ function OtherPage() {
             arr.push(wid);
         })
 
-        // axios.post('/api/del_item',{
-        //     params:{
-        //         id: 12,
-        //         writing_name: "1234",
-        //         list: arr.join(",")
-        //     }
-        // })
         const listdata=new FormData();
         listdata.append('id', 12);
         listdata.append('writing_name', "1234");
         listdata.append('list', arr.join(","));
+
+        if(selectedElements.length===0){
+            alert('선택한 제품이 없습니다!');
+            return;
+        }
 
         axios.post('/api/del_item', listdata,{     //post방식
             headers: {
@@ -77,14 +75,8 @@ function OtherPage() {
         }).catch(error=>{
             console.error(error);
         })
-        // axios.delete('/api/del_item', {         //delete방식
-        //     data:arr.join(",")
-        // }).then((response)=>{
-        //     console.log('성공');
-        // }).catch(error=>{
-        //     console.error(error);
-        // })
-        document.location.href="/pages/OtherPage";
+        window.location.reload();
+        //document.location.href="/pages/OtherPage";
     }
 
     useEffect(() => {    //일단 글목록 가져옴 (나중에 찜 목록 가져와야함)
@@ -119,7 +111,7 @@ function OtherPage() {
                         <ul className="list-group list-group-flush">
 
                             <li className="list-group-item">선택된 제품 수: <span id="selectCount"></span></li>
-                            <li className="list-group-item">목록 내 모든 상품 가격: <span id="totalPrice">{dividePriceUnit(price.toString())}  </span></li>  {/*나중에 백엔드에서 가져오기*/}
+                            <li className="list-group-item">목록 내 모든 상품 가격: <span id="totalPrice">{dividePriceUnit(price.toString())}  </span></li>
                             <li className="list-group-item">선택한 상품 가격: <span id="selectPrice"></span></li>
                         </ul>
                     </div>
@@ -146,7 +138,12 @@ function OtherPage() {
 
             </div>
             <footer className={styles.footer_div}>
-
+                <div>ⒸPANDA</div>
+                <div>주소지 : 경상북도 경산시 대학로 280</div>
+                <div>광고 문의 : a1234567@email.com</div>
+                <div>고객 문의(email) : b1234567@email.com</div>
+                <div>고객 문의(call) : 000-0000-0000</div>
+                <div> -오전 9:30 ~ 오후 5:30(주말,공휴일 제외)</div>
             </footer>
         </div>
     );
