@@ -3,6 +3,7 @@ import { useLocation, useNavigate} from 'react-router-dom';
 import styles from '../Css_dir/SearchResult.module.css'
 import axios from 'axios';
 import ListViewADs from "./ListViewADs";
+import profile from '../imgs/logo512_512.png'
 
 
 function SearchResult() {
@@ -28,7 +29,7 @@ function SearchResult() {
         let getId=event.currentTarget.id
 
         navigate('/pages/noticeConfirm?search='+getId, {state:{
-            word:getId
+                word:getId
             }});
     }
     const dividePriceUnit=(price)=>{
@@ -62,7 +63,8 @@ function SearchResult() {
                 <div className={styles.resultMap} onClick={movePage} name="spam" id={contents[j].writing_Id}>
                     {/*<img className={styles.content_picture} src="http://placekitten.com/150/150"></img>*/}
                     {/*<img className={styles.content_picture} src={"data:image/png;base64," + contents[j].writingImg} alt='No Data'></img>*/}
-                    <img className={styles.content_picture} src={contents[j].writingImg} alt='No Data'></img>
+                    {/*<img className={styles.content_picture} src={contents[j].writingImg} alt='No Data'></img>*/
+                        <img className={styles.content_picture} src={contents[j].writingImg !=null ? `${atob(contents[j].writingImg)}`:profile} alt='No Data'></img>}
                     <div> <b>{contents[j].writing_name}</b></div>
                     <div>  [판매자]: {contents[j].user_name} </div>
                     <div>  [판매자위치]: {contents[j].userDTO.address} </div>

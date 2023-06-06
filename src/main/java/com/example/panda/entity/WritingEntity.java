@@ -48,7 +48,7 @@ public class WritingEntity {
 
         writingEntity.setWriting_name(writingDTO.getWriting_name());
         if(writingDTO.getWritingImg()!=null){
-            writingEntity.setWriting_photo(writingDTO.getWritingImg().getBytes());
+            writingEntity.setWriting_photo(writingDTO.getWritingImg());
         }
         writingEntity.setContent(writingDTO.getContent());
         writingEntity.setCategory(writingDTO.getCategory());

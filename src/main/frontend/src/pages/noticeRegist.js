@@ -135,7 +135,7 @@ const NoticeRegist = () => {
             count: count,
             price: price,
             content: content,
-            writingImg:writing_photo
+            writingImg: btoa(writing_photo)
         }
         axios.post('/api/noticeRegister', writing, {
             headers: {
