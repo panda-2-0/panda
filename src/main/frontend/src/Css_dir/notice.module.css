@@ -233,6 +233,10 @@
 .info_table, .info_table tr, .info_table tr td dl{
     width: calc(100vw - 90px);
 }
+.info_table {
+    border-collapse: separate;
+    border-spacing: 0 10px;
+}
 .info_table td{
     width: 50%;
 }
@@ -244,7 +248,11 @@
     display:inline-block;
     vertical-align:middle;
     font-size:1.4rem;
-
+    line-height: 1.4rem;
+}
+.board_write .info dd select{
+    vertical-align: top;
+    height: 22px;
 }
 .board_write .title dl
 {
