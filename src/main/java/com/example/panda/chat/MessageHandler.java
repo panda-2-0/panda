@@ -299,7 +299,7 @@ public class MessageHandler extends TextWebSocketHandler {
 
         } else {
             // 메시지를 불러와야 하는 상황일 경우 (스크롤 or 채팅방 클릭)
-            Long time = System.currentTimeMillis();
+//            Long time = System.currentTimeMillis();
 
             Map<String, Object> map = new HashMap<>();
             map.put("type", "chatList");
@@ -310,7 +310,7 @@ public class MessageHandler extends TextWebSocketHandler {
             map.put("currentRoom", chatRoomDTO);
             map.put("messages", chatDTOList);
 
-            System.out.println("1 " + (System.currentTimeMillis() - time));
+//            System.out.println("1 " + (System.currentTimeMillis() - time));
 
             if (chatDTO.getType().equals("scroll")) {    // 스크롤을 위로 올려서 메시지를 받는 경우
                 map.put("messageType", "false"); // 스크롤을 내려야 하는가?
@@ -329,7 +329,7 @@ public class MessageHandler extends TextWebSocketHandler {
 //                    chatRoomDTO.setIsNoRead(false);
 //                    map.put("currentRoom", chatRoomDTO);
                     sendMessage(session, map);
-                    System.out.println("2 " + (System.currentTimeMillis() - time));
+//                    System.out.println("2 " + (System.currentTimeMillis() - time));
 
                     chatRoomService.setNoReadCountByRoomId(chatRoomDTO.getRoomId(), false);
                 } else {
