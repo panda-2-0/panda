@@ -196,14 +196,14 @@ body::-webkit-scrollbar {
 
 .message_time {
     color: gray;
-    font-family: "NanumGothic";
+    font-family: "NanumGothicOTF";
     padding-left: 6px;
     padding-right: 6px;
 }
 
 .message_name {
     color: gray;
-    font-family: "NanumGothic";
+    font-family: "NanumGothicOTF";
 }
 
 .op_message {
