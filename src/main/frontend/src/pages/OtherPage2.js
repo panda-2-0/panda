@@ -20,6 +20,7 @@ function OtherPage() {
     let [nickname, setNickname] = useState('');
     let [phone, setPhone] = useState('');
     let [addr, setAddr] = useState('');
+    const [fileInputKey, setFileInputKey] = useState(Date.now());
     const imageInput = useRef();
 
     const pw_error = '***비밀번호는 영어, 숫자 포함 8자리 이상이어야 합니다.***';
@@ -49,6 +50,11 @@ function OtherPage() {
             };
             reader.readAsDataURL(file);
         }
+    }
+
+    const baseProfileImage = () => {
+        setPreviewImage(profile);
+        setFileInputKey(Date.now());
     }
 
     const openPw = () => {
@@ -260,8 +266,9 @@ function OtherPage() {
                         <label className={styles.form_label}>프로필 사진</label>
                         <img src={previewImage == null ? profile : previewImage} className={styles.form_profile_img}/>
                         <div className={styles.selectImg}>
+                            <div className={styles.img_button} onClick={baseProfileImage}>기본 이미지</div>
                             <div className={styles.img_button} onClick={imageSelectClick}>이미지 선택</div>
-                            <input type="file" ref={imageInput} onChange={handleFileChange} hidden={true} />
+                            <input type="file" ref={imageInput} onChange={handleFileChange} key={fileInputKey} hidden={true} />
                         </div>
                     </div>
                     <div className={styles.form_item}>
