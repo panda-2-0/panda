@@ -43,11 +43,12 @@ public class WritingEntity {
 
 
 
+
     public static WritingEntity toWritingEntity(WritingDTO writingDTO){  //글 저장용
         WritingEntity writingEntity=new WritingEntity();
 
         writingEntity.setWriting_name(writingDTO.getWriting_name());
-        if(writingDTO.getWritingImg()!=null){
+        if(writingDTO.getWritingImg()!=null) {
             writingEntity.setWriting_photo(writingDTO.getWritingImg());
         }
         writingEntity.setContent(writingDTO.getContent());
