@@ -309,6 +309,8 @@ button.num:hover{
     background: black;
     font-weight: bold;
     font-family: NanumGothicOTF;
+    border: none;
+    outline: none;
     color:white;
     width: 100%;
     height: 45px;
@@ -361,6 +363,8 @@ button.num:hover{
     position:absolute;
     margin-left:705px;
     margin-bottom: 10px;
+    outline: none;
+    border: none;
     font-family: NanumGothicOTF;
     background: black;
     border-radius: 7%;
