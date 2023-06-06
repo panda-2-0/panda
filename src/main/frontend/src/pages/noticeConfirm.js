@@ -5,6 +5,7 @@ import axios from "axios";
 
 function NoticeConfirm()
 {
+    const writing_image=null;
     const movePage = useNavigate();
     const location=useLocation();
     const navigate = useNavigate();
@@ -84,6 +85,7 @@ function NoticeConfirm()
     }, []);
 
 
+
     //상세 게시글 조회 useEffect
      useEffect(() => {
 
@@ -155,8 +157,8 @@ function NoticeConfirm()
                             <dd>{data.user_name}</dd>
                         </dl>
                         <dl>
-                            <dt>작성일</dt>
-                            <dd>2023.05.05</dd>
+                            <dt>가격</dt>
+                            <dd>{data.price}</dd>
                         </dl>
                         <dl>
                             <dt>사진</dt>
