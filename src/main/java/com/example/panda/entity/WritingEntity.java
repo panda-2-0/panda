@@ -2,6 +2,7 @@ package com.example.panda.entity;
 
 import com.example.panda.dto.WritingDTO;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,8 +19,9 @@ public class WritingEntity {
     @Column(length = 64)
     private String writing_name;
     @Lob
-    private String writing_photo;
-//    private byte[] writing_photo;
+//    private String writing_photo;
+    @Builder.Default
+    private byte[] writing_photo=null;
     @Column(length = 32)
     private String category;
     @Column(length = 32)
@@ -39,11 +41,15 @@ public class WritingEntity {
     @Column(length = 1024)
     private String content;
 
+
+
     public static WritingEntity toWritingEntity(WritingDTO writingDTO){  //글 저장용
         WritingEntity writingEntity=new WritingEntity();
 
         writingEntity.setWriting_name(writingDTO.getWriting_name());
-        writingEntity.setWriting_photo(writingDTO.getWritingImg());
+        if(writingDTO.getWritingImg()!=null){
+            writingEntity.setWriting_photo(writingDTO.getWritingImg().getBytes());
+        }
         writingEntity.setContent(writingDTO.getContent());
         writingEntity.setCategory(writingDTO.getCategory());
         writingEntity.setDetail_category(writingDTO.getDetail_category());

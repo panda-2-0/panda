@@ -25,7 +25,9 @@ public class WritingCompleteDTO {
         writingCompleteDTO.setCategory(writingCompleteEntity.getCategory());
         writingCompleteDTO.setDetail_category(writingCompleteEntity.getDetail_category());
         writingCompleteDTO.setUserDTO(UserDTO.toUserDTO(writingCompleteEntity.getUserEntity()));
-        writingCompleteDTO.setWriting_photo(writingCompleteEntity.getWriting_photo());
+        if(writingCompleteEntity.getWriting_photo()!=null){
+            writingCompleteDTO.setWriting_photo(new String(writingCompleteEntity.getWriting_photo()));
+        }
         writingCompleteDTO.setPrice(writingCompleteEntity.getPrice());
 
         return writingCompleteDTO;

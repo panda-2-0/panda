@@ -25,8 +25,8 @@ public class WritingCompleteEntity {
     @JoinColumn(name="email")
     private UserEntity userEntity; // 글 작성자
     @Lob
-    private String writing_photo;
-//    private byte[] writing_photo;
+//    private String writing_photo;
+    private byte[] writing_photo;
 
     public static WritingCompleteEntity writingToComplete (WritingEntity writingEntity) {
         WritingCompleteEntity writingCompleteEntity = new WritingCompleteEntity();
@@ -36,6 +36,9 @@ public class WritingCompleteEntity {
         writingCompleteEntity.setCategory(writingEntity.getCategory());
         writingCompleteEntity.setDetail_category(writingEntity.getDetail_category());
         writingCompleteEntity.setPrice(writingEntity.getPrice());
+        if(writingEntity.getWriting_photo()!=null){
+            writingCompleteEntity.setWriting_photo(writingEntity.getWriting_photo());
+        }
         if(writingEntity.getUserEntity() != null)
             writingCompleteEntity.setUserEntity(writingEntity.getUserEntity());
         if(writingEntity.getWriting_photo() != null)
