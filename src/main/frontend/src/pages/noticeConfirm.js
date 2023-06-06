@@ -1,144 +1,101 @@
-import React, {useEffect, useState} from 'react'
-import {useLocation, useNavigate, useParams} from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { useLocation, useNavigate } from 'react-router-dom';
 import styles from "../Css_dir/notice.module.css";
-import axios from "axios";
 
-function NoticeConfirm()
-{
-    const writing_image=null;
+function NoticeConfirm() {
     const movePage = useNavigate();
-    const location=useLocation();
-    const navigate = useNavigate();
+    const location = useLocation();
     const writingInfo = { ...location.state };
-    const listdata=new FormData();
-   // const writingdata = new FormData();
-    const [data, setData] = useState([])  //해당 게시글에 찜등록한 사람 수
-    listdata.append('wid', writingInfo.word);  //이전 페이지에서 받아온 글id
+    const listdata = new FormData();
+    listdata.append('wid', writingInfo.word);
     const writingdata = new FormData();
-    writingdata.append('wid',writingInfo.word);
-    const [writing_photo, setWriting_photo] = useState(""); // Initialize with an empty string
+    writingdata.append('wid', writingInfo.word);
+    const [data, setData] = useState({}); // 해당 게시글에 찜등록한 사람 수
+    const [imagedata, setImagedata] = useState(null); // 이미지 데이터
 
-    //게시글 상세 조회
-    //const {id} = useParams();
-    const [post , setPost] = useState(null); //게시글 내용을 가져오는 변수
-    // const {postId} = match.params;
-    function gonoticepage()
-    {
+    const goNoticePage = () => {
         movePage('/pages/noticePage');
-    }
+    };
 
-    function gomodify()
-    {
+    const goModify = () => {
         movePage('/pages/noticeModify');
-    }
-    const Btn_register=()=>{    //찜등록하는 동작
+    };
 
-        const favorite_regit=new FormData();
-
+    const registerFavorite = () => {
+        const favorite_regit = new FormData();
         favorite_regit.append('wid', writingInfo.word);
-
-        axios.post('/api/favorite_register', favorite_regit,{     //post방식
-            headers: {
-                'Content-Type' : 'multipart/form-data'
-            }
-        }).then(response => {
-            if(response.data ===1)alert('이미 등록한 제품입니다!');
-            else if(response.data ===2) alert('자신의 제품을 찜 등록 할 수 없습니다!');
-            else {
-                alert('정상 등록 되었습니다.');
-                window.location.reload();
-            }
-        })
-            .catch(error=>{
-            console.error(error);
-        })
-    }
-
-    const goChat = () => {
-        axios.post('/joinChat', {writing_Id: writingInfo.word}, {
-            headers: {
-                "Content-Type" : `application/json`
-            },
-        })
-            .then(response => {
-                if(response.data != '') {
-                    console.log("채팅 페이지 이동");
-                    window.open('/pages/Chat', '_blank');
-                }
+        axios
+            .post('/api/favorite_register', favorite_regit, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            })
+            .then((response) => {
+                if (response.data === 1) alert('이미 등록한 제품입니다!');
+                else if (response.data === 2) alert('자신의 제품을 찜 등록 할 수 없습니다!');
                 else {
-                    alert('당신의 글입니다');
+                    alert('정상 등록 되었습니다.');
+                    window.location.reload();
                 }
             })
-            .catch(error => {
-                console.log(error);
-            });
-    }
-
-    useEffect(() => {
-
-        axios.post('/api/favorite_writing',listdata,{  //해당 게시글을 찜등록한 사람의 수를 카운팅해서 가져옴
-            headers: {
-                'Content-Type' : 'multipart/form-data'
-            }
-        })
-            .then(response => {
-                setData(response.data);
-                const base64String = atob(
-                    new Uint8Array(response.data.writing_photo)
-                        .reduce((data, byte) => data + String.fromCharCode(byte), '')
-                );
-                setWriting_photo(`data:image/jpeg;base64,${base64String}`);
-            })
-            .catch(error => console.log(error))
-    }, []);
-
-
-
-    //상세 게시글 조회 useEffect
-     useEffect(() => {
-
-         axios.post('/api/noticeConfirm',listdata,{
-             headers: {
-                 'Content-Type' : 'multipart/form-data'
-            }
-         })
-            .then(response => setPost(response.data))
-             .catch(error => console.log(error))
-     } , []);
-
-
-    //사용자 게시글 조회목록 등록 useEffect
-    useEffect(() => {
-
-        axios.post('/api/saveInquiry',writingdata,{
-            headers: {
-                'Content-Type' : 'multipart/form-data'
-            }
-        })
-            .then(response => console.log(response))
-            .catch(error => console.log(error))
-    } , []);
-
-     //게시글 삭제기능 구현
-    const deletePost = (postId) => {
-        axios.delete(`/api/posts/${postId}`)
-            .then(response => {
-                alert("게시글 삭제가 완료되었습니다!!");
-                movePage("/pages/noticePage");
-            })
-            .catch(error => {
-                alert("게시글이 존재하지 않거나 오류가 발생 하여 삭제 할 수 없습니다")
+            .catch((error) => {
+                console.error(error);
             });
     };
 
+    const goChat = () => {
+        axios
+            .post('/joinChat', { writing_Id: writingInfo.word }, {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+            .then((response) => {
+                if (response.data !== '') {
+                    console.log('채팅 페이지 이동');
+                    window.open('/pages/Chat', '_blank');
+                } else {
+                    alert('당신의 글입니다');
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
 
+    useEffect(() => {
+        axios
+            .post('/api/favorite_writing', listdata, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            })
+            .then((response) => {
+                setData(response.data);
+
+
+            })
+            .catch((error) => console.log(error));
+    }, []);
+
+    const deletePost = (postId) => {
+        axios
+            .delete(`/api/posts/${postId}`)
+            .then((response) => {
+                alert('게시글 삭제가 완료되었습니다!!');
+                movePage('/pages/noticePage');
+            })
+            .catch((error) => {
+                alert('게시글이 존재하지 않거나 오류가 발생하여 삭제 할 수 없습니다');
+            });
+    };
 
     const handleDelete = () => {
         deletePost(writingInfo.word);
     };
-    
-    
-    return(
+
+    return (
         <div>
             <div className={styles.board_wrap}>
                 <div className={styles.board_title}>
@@ -149,16 +106,17 @@ function NoticeConfirm()
             <div className={styles.board_view_wrap}>
                 <div className={styles.board_view}>
                     <div className={styles.title}>
-                        {/*{data =>*/}
-                        {/*    <div>글 제목이 들어갑니다.&nbsp;&nbsp; <span className={styles.favorite_count}>찜:{data.favorite_count}회</span></div>*/}
-                        {/*}*/}
-                        <div>{data.writing_name}&nbsp;&nbsp; <span className={styles.favorite_count}>찜:{data.favorite_count}회</span></div>
-                        <button className={styles.favorite_btn} onClick={Btn_register}>찜등록</button>
+                        <div>
+                            {data.writing_name}&nbsp;&nbsp;
+                            <span className={styles.favorite_count}>찜: {data.favorite_count}회</span>
+                        </div>
+                        <button className={styles.favorite_btn} onClick={registerFavorite}>
+                            찜등록
+                        </button>
                     </div>
                     <div className={styles.info}>
                         <dl>
                             <dt>번호</dt>
-                            {/*{location.search.toString().split("=").at(1)}*/}
                             <dd>{writingInfo.word}</dd>
                         </dl>
                         <dl>
@@ -171,17 +129,23 @@ function NoticeConfirm()
                         </dl>
                         <dl>
                             <dt>사진</dt>
-                            <dd><img alt ="불러오는중" src={writing_photo} style={{maxWidth : "200px"}}/></dd>
+                            <dd>
+
+                                <img alt="불러오는중" src={`data:image/jpeg;base64,${btoa(data.writing_photo)}`} style={{ maxWidth: '200px' }} />
+
+                            </dd>
                         </dl>
                     </div>
-                    <div className={styles.cont}>
-                        {data.content}
-                    </div>
+                    <div className={styles.cont}>{data.content}</div>
                     <div className={styles.bt_wrap}>
-                        <a onClick={gonoticepage} className={styles.on}>목록</a>
-                        <a onClick={gomodify} >수정</a>
+                        <a onClick={goNoticePage} className={styles.on}>
+                            목록
+                        </a>
+                        <a onClick={goModify}>수정</a>
                         <a onClick={handleDelete}>삭제</a>
-                        <a onClick={goChat} className={styles.on}>채팅</a>
+                        <a onClick={goChat} className={styles.on}>
+                            채팅
+                        </a>
                     </div>
                 </div>
             </div>
