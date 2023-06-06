@@ -158,7 +158,8 @@ function Chat() {
 
                             setToMessageList(prevState => ({...prevState,
                                 evaluateBuyer: currentRoom.evaluateBuyer,
-                                evaluateSeller: currentRoom.evaluateSeller}));
+                                evaluateSeller: currentRoom.evaluateSeller,
+                                isChatbot:currentRoom.seller.email === 'chatbot'}));
 
                             setMessages(chatList);
                         }

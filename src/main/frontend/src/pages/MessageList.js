@@ -43,7 +43,7 @@ const MessageList = React.memo(({ messages, toMessageList, socket}) => {
             else if (type === 'false'){
                 // 위로 올려서 이전 데이터를 가져온 상황.
                 // 스크롤을 이전 메시지까지만 두어야함.
-                chatContainerRef.current.scrollTop = 2560;
+                chatContainerRef.current.scrollTop = 128 * (messages.length % 20 === 0 ? 20 : messages.length % 20);
             }
         }
     }, [messages])
@@ -222,11 +222,17 @@ const MessageList = React.memo(({ messages, toMessageList, socket}) => {
                 <div className={styles.chat_info}>
                     <div className={styles.chat_name}>{toMessageList.op_Id}</div>
                 </div>
-                <div className={styles.chat_menu} onMouseLeave={handleMouseLeave}>
-                    <img src={menu} className={styles.chat_menu_img}
-                         onMouseEnter={handleMouseEnter}/>
-                    {isMenuVisible && <Menu />}
-                </div>
+                {
+                    toMessageList.isChatbot ?
+                        <></>
+                        :
+                        <div className={styles.chat_menu} onMouseLeave={handleMouseLeave}>
+                            <img src={menu} className={styles.chat_menu_img}
+                                 onMouseEnter={handleMouseEnter}/>
+                            {isMenuVisible && <Menu />}
+                        </div>
+
+                }
             </div>
             <div className={styles.chat_history} ref={chatContainerRef} onScroll={handleScroll}>
         <ul>

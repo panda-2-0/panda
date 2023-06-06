@@ -299,6 +299,7 @@ public class MessageHandler extends TextWebSocketHandler {
 
         } else {
             // 메시지를 불러와야 하는 상황일 경우 (스크롤 or 채팅방 클릭)
+            Long time = System.currentTimeMillis();
 
             Map<String, Object> map = new HashMap<>();
             map.put("type", "chatList");
@@ -306,27 +307,35 @@ public class MessageHandler extends TextWebSocketHandler {
             List<ChatDTO> chatDTOList = chatService.findNByRoomId(chatDTO.getRoomId(), chatDTO.getCount() + 20);
             // 메시지 불러오기
             // 최근 20개의 메시지를 가져옴
+            map.put("currentRoom", chatRoomDTO);
+            map.put("messages", chatDTOList);
+
+            System.out.println("1 " + (System.currentTimeMillis() - time));
 
             if (chatDTO.getType().equals("scroll")) {    // 스크롤을 위로 올려서 메시지를 받는 경우
                 map.put("messageType", "false"); // 스크롤을 내려야 하는가?
+
+                if (chatDTOList.size() == chatDTO.getCount()) {// 사용자가 이미 스크롤을 끝까지 올려 더 이상 불러올 메시지가 없음을 의미
+                    map.put("messageType", "full");
+                }
+
+                sendMessage(session, map);
+
             } else if (chatDTO.getType().equals("click")) {    // 채팅방 클릭으로 메시지를 받는 경우
                 map.put("messageType", "true");  // 스크롤을 내려야 하는가?
 
-                if (chatRoomDTO.getIsNoRead() && !(chatRoomDTO.getNoReadBuyer() ^ chatRoomDTO.getBuyer().getEmail().equals(email))) {
+                if (chatRoomDTO.getIsNoRead() && (chatRoomDTO.getNoReadBuyer() == chatRoomDTO.getBuyer().getEmail().equals(email))) {
                     // 만약 채팅방에 읽지 않음 표시가 되어있고, 안읽은 사람이 사용자일 경우 이번에 채팅방을 클릭했으므로 읽음.
+//                    chatRoomDTO.setIsNoRead(false);
+//                    map.put("currentRoom", chatRoomDTO);
+                    sendMessage(session, map);
+                    System.out.println("2 " + (System.currentTimeMillis() - time));
+
                     chatRoomService.setNoReadCountByRoomId(chatRoomDTO.getRoomId(), false);
-                    List<ChatRoomDTO> chatRoomDTOList = chatRoomService.findByUserEmail(email);
-                    map.put("myRooms", chatRoomDTOList);
+                } else {
+                    sendMessage(session, map);
                 }
             }
-
-            if (chatDTOList.size() == chatDTO.getCount()) {// 사용자가 이미 스크롤을 끝까지 올려 더 이상 불러올 메시지가 없음을 의미
-                map.put("messageType", "full");
-            }
-
-            map.put("currentRoom", chatRoomDTO);
-            map.put("messages", chatDTOList);
-            sendMessage(session, map);
         }
     }
 
