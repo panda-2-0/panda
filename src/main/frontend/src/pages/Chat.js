@@ -339,7 +339,7 @@ function Chat() {
                 <ul>
                 <li className={styles.profile_First}>
                         <div className={styles.p_profile}>
-                            <img src={userImg.length === 0 ? profile : atob(userImg)} width="100%" height="100%"></img>
+                            <img src={userImg == null ? profile : atob(userImg)} width="100%" height="100%"></img>
                         </div>
                         <div className={styles.p_info}>
                             <div className={`${styles.p_name} ${styles.whitesmoke_color}`}>나</div>
