@@ -70,22 +70,34 @@ const DetailedSideCategory = () =>{
                     <div>
                         <ul>
                             <li className={style.sideCategory_list_item_d}>
-                                <form name='search_manBeauty' id='search_manBeauty' method='get'>
-                                    <input name='search_manBeauty' id='search_manBeauty' placeholder='  검색'defaultValue="남자화장품" style={{ display: 'none' }}></input>
+                                <form name='search_makeup' id='search_makeup' method='get'>
+                                    <input name='search_makeup' id='search_makeup' placeholder='  검색'defaultValue="메이크업" style={{ display: 'none' }}></input>
                                 </form>
-                                <button type="submit" form="search_manBeauty" onClick={goCategorySearch} className={styles.side_category_btn}>남자화장품</button>
+                                <button type="submit" form="search_makeup" onClick={goCategorySearch} className={styles.side_category_btn}>메이크업</button>
                             </li>
                             <li className={style.sideCategory_list_item_d}>
-                                <form name='search_womanBeauty' id='search_womanBeauty' method='get'>
-                                    <input name='search_womanBeauty' id='search_womanBeauty' placeholder='  검색'defaultValue="여자화장품" style={{ display: 'none' }}></input>
+                                <form name='search_skincare' id='search_skincare' method='get'>
+                                    <input name='search_skincare' id='search_skincare' placeholder='  검색'defaultValue="스킨케어" style={{ display: 'none' }}></input>
                                 </form>
-                                <button type="submit" form="search_womanBeauty" onClick={goCategorySearch} className={styles.side_category_btn}>여자화장품</button>
+                                <button type="submit" form="search_skincare" onClick={goCategorySearch} className={styles.side_category_btn}>스킨케어</button>
                             </li>
                             <li className={style.sideCategory_list_item_d}>
-                                <form name='search_commonBeauty' id='search_commonBeauty' method='get'>
-                                    <input name='search_commonBeauty' id='search_commonBeauty' placeholder='  검색'defaultValue="공용화장품" style={{ display: 'none' }}></input>
+                                <form name='search_cleansing' id='search_cleansing' method='get'>
+                                    <input name='search_cleansing' id='search_cleansing' placeholder='  검색'defaultValue="클렌징" style={{ display: 'none' }}></input>
                                 </form>
-                                <button type="submit" form="search_commonBeauty" onClick={goCategorySearch} className={styles.side_category_btn}>공용화장품</button>
+                                <button type="submit" form="search_cleansing" onClick={goCategorySearch} className={styles.side_category_btn}>클렌징</button>
+                            </li>
+                            <li className={style.sideCategory_list_item_d}>
+                                <form name='search_hairP' id='search_hairP' method='get'>
+                                    <input name='search_hairP' id='search_hairP' placeholder='  검색'defaultValue="헤어용품" style={{ display: 'none' }}></input>
+                                </form>
+                                <button type="submit" form="search_hairP" onClick={goCategorySearch} className={styles.side_category_btn}>헤어용품</button>
+                            </li>
+                            <li className={style.sideCategory_list_item_d}>
+                                <form name='search_beautyElse' id='search_beautyElse' method='get'>
+                                    <input name='search_beautyElse' id='search_beautyElse' placeholder='  검색'defaultValue="뷰티기타" style={{ display: 'none' }}></input>
+                                </form>
+                                <button type="submit" form="search_beautyElse" onClick={goCategorySearch} className={styles.side_category_btn}>뷰티기타</button>
                             </li>
                         </ul>
                     </div>
@@ -220,22 +232,22 @@ const DetailedSideCategory = () =>{
                     <div>
                         <ul>
                             <li className={style.sideCategory_list_item_d}>
-                                <form name='search_dailyLife' id='search_dailyLife' method='get'>
-                                    <input name='search_dailyLife' id='search_dailyLife' placeholder='  검색'defaultValue="생필용품" style={{ display: 'none' }}></input>
+                                <form name='search_clean' id='search_clean' method='get'>
+                                    <input name='search_clean' id='search_clean' placeholder='  검색'defaultValue="청소" style={{ display: 'none' }}></input>
                                 </form>
-                                <button type="submit" form="search_dailyLife" onClick={goCategorySearch} className={styles.side_category_btn}>생필용품</button>
+                                <button type="submit" form="search_clean" onClick={goCategorySearch} className={styles.side_category_btn}>청소</button>
                             </li>
                             <li className={style.sideCategory_list_item_d}>
-                                <form name='search_bathLife' id='search_bathLife' method='get'>
-                                    <input name='search_bathLife' id='search_bathLife' placeholder='  검색'defaultValue="욕실용품" style={{ display: 'none' }}></input>
+                                <form name='search_kitchen' id='search_kitchen' method='get'>
+                                    <input name='search_kitchen' id='search_kitchen' placeholder='  검색'defaultValue="주방" style={{ display: 'none' }}></input>
                                 </form>
-                                <button type="submit" form="search_bathLife" onClick={goCategorySearch} className={styles.side_category_btn}>욕실용품</button>
+                                <button type="submit" form="search_kitchen" onClick={goCategorySearch} className={styles.side_category_btn}>주방</button>
                             </li>
                             <li className={style.sideCategory_list_item_d}>
-                                <form name='search_kitchenLife' id='search_kitchenLife' method='get'>
-                                    <input name='search_kitchenLife' id='search_kitchenLife' placeholder='  검색'defaultValue="주방용품" style={{ display: 'none' }}></input>
+                                <form name='search_bath' id='search_bath' method='get'>
+                                    <input name='search_bath' id='search_bath' placeholder='  검색'defaultValue="욕실" style={{ display: 'none' }}></input>
                                 </form>
-                                <button type="submit" form="search_kitchenLife" onClick={goCategorySearch} className={styles.side_category_btn}>주방용품</button>
+                                <button type="submit" form="search_bath" onClick={goCategorySearch} className={styles.side_category_btn}>욕실</button>
                             </li>
                             <li className={style.sideCategory_list_item_d}>
                                 <form name='search_lifeElse' id='search_lifeElse' method='get'>

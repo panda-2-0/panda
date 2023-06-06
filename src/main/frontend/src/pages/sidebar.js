@@ -138,12 +138,6 @@ const Sidebar = () => {
     const handleInputChange=(e)=>{
         setInputText(e.target.value);
     }
-    // function goCategorySearch(event){    //카테고리 검색
-    //     console.log(event.currentTarget.id);
-    //     const searchdata=new FormData();
-    //     searchdata.append('word', event.currentTarget.id);
-    //     movePage('/pages/SearchResult?search='+event.currentTarget.id, {state:{word:event.currentTarget.id}});
-    // }
     const link_style = {
         textDecoration: "none",
         color: "white"
