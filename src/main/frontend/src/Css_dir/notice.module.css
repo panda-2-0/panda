@@ -91,6 +91,9 @@
     background:#000;
     color:#fff;
 }
+.needtop_margin{
+    margin-top: 30px;
+}
 .regist_btn_r{
     min-width: 80px;
     padding: 10px;

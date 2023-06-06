@@ -540,9 +540,7 @@ const NoticeRegist = () => {
                                             </td>
                                         </tr>
                                     </table>}
-                                <dl>
-
-
+                                <dl className={styles.needtop_margin}>
                                     <dd><a className={styles.on} onClick={() => {
                                         setVisiable(!visiable);
                                     }}> {visiable ? "닫기" : "경매등록▼"}</a></dd>
