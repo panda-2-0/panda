@@ -121,6 +121,7 @@ public class WritingController {
     @DeleteMapping("/api/posts/{postId}")
     public void deletePost(@PathVariable Integer postId) throws ChangeSetPersister.NotFoundException {
         writingService.deletePost(postId);
+
     }
 
 

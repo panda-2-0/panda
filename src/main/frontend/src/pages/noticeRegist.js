@@ -137,6 +137,7 @@ const NoticeRegist = () => {
             content: content,
             writingImg:writing_photo
         }
+
         axios.post('/api/noticeRegister', writing, {
             headers: {
                 "Content-Type": `application/json`,
@@ -144,15 +145,12 @@ const NoticeRegist = () => {
                 'Access-Control-Allow_Credentials':"true",
             },
         }).then((response) => {
-            if(response.status === 200) {
-                alert('회원정보 변경 성공');
-                //window.location.reload();
-            } else {
-                alert('요청이 이상함');
-            }
+            alert('등록 성공!');
         }).catch(error => {
-            alert('알 수 없는 오류?');
+            alert('등록 실패!');
         });
+
+        gonoticepage();
     }
 
     return (
