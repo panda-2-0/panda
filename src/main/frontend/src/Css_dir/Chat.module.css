@@ -466,8 +466,8 @@ body::-webkit-scrollbar {
 
 .chat_menu{
     position:absolute;
-    right:-180px;
-    width:250px;
+    right:-100px;
+    width:260px;
     height:90px;
     /*border:1px solid green;*/
     transition: 0.5s;
@@ -476,6 +476,7 @@ body::-webkit-scrollbar {
 
 .chat_menu_img {
     position:absolute;
+    left:80px;
     width:40px;
     height:40px;
     top:2px;
@@ -484,27 +485,35 @@ body::-webkit-scrollbar {
 
 .chat_detail_menu {
     position: absolute;
-    border-left:1px solid white;
-    left:-220px;
-    top:-36px;
+    /*border-left:1px solid green;*/
+    left:-145px;
+    top:-35px;
     font-weight: bold;
     font-size:20px;
     cursor:pointer;
-    z-index: 50;
+    /*box-shadow: 1px 0px 2px rgba(0, 0, 0, 0.2);*/
+    z-index: 10;
+
 }
 
 .chat_detail_menu > ul {
+    position: absolute;
     list-style: none;
+    left:-10px;
     width:180px;
-    position:absolute;
-    box-shadow: 3px 0px 4px rgba(0, 0, 0, 0.2);
+    /*border:1px solid green;*/
 }
 
 .chat_detail_menu li {
+    width:164px;
+    height:27px;
+    text-align: center;
     /*border: 1px solid green;*/
     border-top: 1px solid gray;
     background-color:whitesmoke;
     padding:6px 8px;
+    box-shadow: 0px 6px 4px rgba(0, 0, 0, 50%);
+    z-index: 50;
 }
 
 .chat_detail_menu li:hover {
