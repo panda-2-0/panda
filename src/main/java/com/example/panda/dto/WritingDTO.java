@@ -13,8 +13,8 @@ import java.time.LocalDateTime;
 public class WritingDTO {
     private int writing_Id;
     private String writing_name;
-    //    private byte[] writingImg;
-    private String writingImg;
+    private byte[] writingImg;
+    //    private String writingImg;
     private String category;
     private String detail_category;
     private int count;
@@ -31,7 +31,7 @@ public class WritingDTO {
         writingDTO.setWriting_Id(writingEntity.getWid());
         writingDTO.setWriting_name(writingEntity.getWriting_name());
         if(writingEntity.getWriting_photo()!=null){
-            writingDTO.setWritingImg(new String(writingEntity.getWriting_photo()));
+            writingDTO.setWritingImg(writingEntity.getWriting_photo());
         }
         writingDTO.setCategory(writingEntity.getCategory());
         writingDTO.setDetail_category(writingEntity.getDetail_category());

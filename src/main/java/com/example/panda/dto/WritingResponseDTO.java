@@ -10,8 +10,8 @@ import lombok.*;
 @Builder
 public class WritingResponseDTO {
     private int writingId;
-    //    private byte[] writingImg;
-    private String writingImg;
+    private byte[] writingImg;
+    //private String writingImg;
     private String writingName;
     private int price;
     private String addr;
@@ -22,7 +22,7 @@ public class WritingResponseDTO {
         if(writingEntity.getWriting_photo()!=null){
             return WritingResponseDTO.builder()
                     .writingId(writingEntity.getWid())
-                    .writingImg(new String(writingEntity.getWriting_photo()))
+                    .writingImg(writingEntity.getWriting_photo())
                     .writingName(writingEntity.getWriting_name())
                     .price(writingEntity.getPrice())
                     .addr(writingEntity.getUserEntity().getAddress())
