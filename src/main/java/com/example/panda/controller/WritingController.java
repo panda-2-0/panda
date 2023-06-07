@@ -142,15 +142,16 @@ public class WritingController {
 
     }
 
-//    @PostMapping("/api/noticeAuctions")
-//    public void auctionStart(@RequestBody AuctionDTO auctionDTO)
-//    {
-//
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        UserDetails userDetails = (UserDetails)authentication.getPrincipal();
-//
-//        writingService.saveAuction(auctionDTO);
-//    }
+    //경매 기능
+    @GetMapping("/api/Auctions/{postId}")
+    public AuctionDTO getAuctionInfo(@PathVariable int postId)
+    {
+        AuctionDTO auctionDTO = writingService.findByauctionId(postId);
+        return auctionDTO;
+    }
+
+
+
 
 
 }

@@ -157,12 +157,16 @@ function NoticeConfirm() {
                                 <dd>{data.price}</dd>
                             </dl>}
                     </div>
+                        </div>
                         <img alt="불러오는중" src={data.writingImg!=null ? `${atob(data.writingImg)}`: profile} style={{width:'70%'}} />
                         <div
                             className={styles.cont} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>{data.content}
 
                         </div>
                         <div className={styles.bt_wrap}>
+                            <img alt="불러오는중" src={data.writingImg1!=null ? `${atob(data.writingImg1)}`: profile} style={{width:'30%'}} />
+                            <img alt="불러오는중" src={data.writingImg2!=null ? `${atob(data.writingImg2)}`: profile} style={{width:'30%'}} />
+                            <img alt="불러오는중" src={data.writingImg3!=null ? `${atob(data.writingImg3)}`: profile} style={{width:'30%'}} />
                             <a onClick={goNoticePage} className={styles.on}>
                                 목록
                             </a>

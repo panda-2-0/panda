@@ -22,4 +22,7 @@ public class WritingRegisterDTO {
     private int lowest_value;
     private int auction_flag;
     private int auction_date;
+    private byte[] writingImg1;
+    private byte[] writingImg2;
+    private byte[] writingImg3;
 }
