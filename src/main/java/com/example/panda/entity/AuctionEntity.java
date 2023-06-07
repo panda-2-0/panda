@@ -36,7 +36,7 @@ public class AuctionEntity {
         AuctionEntity auctionEntity=new AuctionEntity();
 
         auctionEntity.setWid(auctionDTO.getWid());
-        auctionEntity.setAuction_date(LocalDateTime.now().plusDays(auction_date));  //현재일로부터 임의로 정한 일뒤에 마감
+        auctionEntity.setAuction_date(LocalDateTime.now().plusDays(auction_date).withHour(23).withMinute(59).withSecond(59));  //현재일로부터 임의로 정한 일뒤에 마감
         auctionEntity.setBuy_now(auctionDTO.getBuy_now());
         auctionEntity.setHighest_value(auctionDTO.getHighest_value());
         auctionEntity.setLowest_value(auctionDTO.getLowest_value());
