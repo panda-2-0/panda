@@ -104,7 +104,7 @@ public class WritingController {
     }
 
     //게시글 내용 목록 조회를 위한 부분
-    @RequestMapping("/api/noticePage")
+    @RequestMapping("/notice/noticePage")
     public List<WritingDTO> boardList()
     {
         List<WritingDTO> writingDTOList = writingService.findAll();
@@ -119,7 +119,7 @@ public class WritingController {
         WritingDTO writingDTO = writingService.findById(postId);
         return writingDTO;
     }
-    @GetMapping("/api/isAuction")
+    @GetMapping("/notice/isAuction")
     public AuctionEntity isAuction(@RequestParam("wid")int wid){
         log.info("start isAuction");
         return writingService.isAuction(wid);
@@ -142,13 +142,13 @@ public class WritingController {
 
     }
 
-    //경매 기능
-    @GetMapping("/api/Auctions/{postId}")
-    public AuctionDTO getAuctionInfo(@PathVariable int postId)
-    {
-        AuctionDTO auctionDTO = writingService.findByauctionId(postId);
-        return auctionDTO;
-    }
+//    //경매 기능
+//    @GetMapping("/api/Auctions/{postId}")
+//    public AuctionDTO getAuctionInfo(@PathVariable int postId)
+//    {
+//        AuctionDTO auctionDTO = writingService.findByauctionId(postId);
+//        return auctionDTO;
+//    }
 
 
 

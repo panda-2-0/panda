@@ -16,6 +16,16 @@ function Home() {
                 console.log(response.data)
                 if(response.data){
                     console.log('now login');
+                    useEffect(() => {
+
+                        axios.post('/api/saveInquiry',writingdata,{
+                            headers: {
+                                'Content-Type' : 'multipart/form-data'
+                            }
+                        })
+                            .then(response => console.log(response))
+                            .catch(error => console.log(error))
+                    } , []);
                     return true;
                 }
                 else{

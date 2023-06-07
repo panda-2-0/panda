@@ -36,7 +36,7 @@ function NoticeConfirm() {
         const favorite_regit = new FormData();
         favorite_regit.append('wid', writingInfo.word);
         axios
-            .post('/api/favorite_register', favorite_regit, {
+            .post('/notice/favorite_register', favorite_regit, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
@@ -76,7 +76,7 @@ function NoticeConfirm() {
 
     useEffect(() => {
         axios
-            .post('/api/favorite_writing', listdata, {
+            .post('/notice/favorite_writing', listdata, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
@@ -85,7 +85,7 @@ function NoticeConfirm() {
                 setData(response.data);
                 console.log(response.data);
                 axios
-                    .get('/api/isAuction?wid=' + response.data.writing_Id)
+                    .get('/notice/isAuction?wid=' + response.data.writing_Id)
                     .then((r) => {
                         console.log(r.data);
                         if (r.data === "") {
@@ -127,6 +127,40 @@ function NoticeConfirm() {
                 console.log(error);
             })
     }, [])
+
+
+    // //home.js 복붙
+    // axios.get('/check')
+    //     .then((response)=>{
+    //         console.log(response.data)
+    //         if(response.data){
+    //             console.log('now login');
+    //             useEffect(() => {
+    //
+    //                 axios.post('/api/saveInquiry',writingdata,{
+    //                     headers: {
+    //                         'Content-Type' : 'multipart/form-data'
+    //                     }
+    //                 })
+    //                     .then(response => console.log(response))
+    //                     .catch(error => console.log(error))
+    //             } , []);
+    //             return true;
+    //         }
+    //         else{
+    //             console.log('need login');
+    //             document.cookie = "isLogin=false; path=/; expires=Thu, 01 JAN 1999 00:00:10 GMT";
+    //             sessionStorage.clear();
+    //             alert('로그인이 필요합니다.');
+    //             movePage('/pages/loginPage');
+    //         }
+    //     }).catch(error=>{
+    //     console.error(error);
+    //     console.log('need login');
+    //     document.cookie = "isLogin=false; path=/; expires=Thu, 01 JAN 1999 00:00:10 GMT";
+    //     sessionStorage.clear();
+    //     alert('로그인이 필요합니다.');
+    //     movePage('/pages/loginPage');
 
     const deletePost = (postId) => {
         axios
@@ -277,7 +311,7 @@ function NoticeConfirm() {
             </div>
         </div>
 )
-    ;
-}
+
+};
 
 export default NoticeConfirm;

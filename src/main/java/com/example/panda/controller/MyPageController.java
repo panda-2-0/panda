@@ -64,7 +64,7 @@ public class MyPageController {
 
         return favoriteDTOList;
     }
-    @PostMapping("/api/favorite_writing")
+    @PostMapping("/notice/favorite_writing")
     public WritingDTO favoriteWriting(@RequestParam("wid") int wid){  //해당 게시글 찜 등록한 사람 수 리턴
         List<WritingDTO> writingDTOList=new ArrayList<>();
 
@@ -75,7 +75,7 @@ public class MyPageController {
 
         return writingDTO;
     }
-    @PostMapping("/api/favorite_register")
+    @PostMapping("/notice/favorite_register")
     public int favoriteRegit(@RequestParam("wid") int wid){        //찜 등록
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetails userDetails = (UserDetails)authentication.getPrincipal();
@@ -91,14 +91,14 @@ public class MyPageController {
         return list;
     }
 
-    @PostMapping("/api/saveInquiry")
+    @PostMapping("/notice/saveInquiry")
     public void saveInquiry(@RequestParam("wid") int wid){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetails userDetails = (UserDetails)authentication.getPrincipal();
 
         inquiryHistoryService.save(userDetails.getUsername(),wid);
     }
-    @GetMapping("/api/inquiryList")
+    @GetMapping("/notice/inquiryList")
     public List<WritingDTO> myInquiryList(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetails userDetails = (UserDetails)authentication.getPrincipal();
