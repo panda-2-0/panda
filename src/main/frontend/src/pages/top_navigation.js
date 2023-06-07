@@ -452,9 +452,9 @@ function TopNav() {
                                         <li className={styles.category_d}>
                                             <div className={styles.line}></div>
                                             <form name='search_dogClothes' id='search_dogClothes' method='get'>
-                                                <input name='search_dogClothes' id='search_dogClothes' placeholder='  검색'defaultValue="애견의류" style={{ display: 'none' }}></input>
+                                                <input name='search_dogClothes' id='search_dogClothes' placeholder='  검색'defaultValue="반려동물의류" style={{ display: 'none' }}></input>
                                             </form>
-                                            <button type="submit" form="search_dogClothes" onClick={goCategorySearch} className={styles.category_btn}>애견의류</button>
+                                            <button type="submit" form="search_dogClothes" onClick={goCategorySearch} className={styles.category_btn}>반려동물의류</button>
                                         </li>
                                         <li className={styles.category_d}>
                                             <div className={styles.line}></div>
@@ -541,9 +541,9 @@ function TopNav() {
                                         <li className={styles.category_d}>
                                             <div className={styles.line}></div>
                                             <form name='search_weight' id='search_weight' method='get'>
-                                                <input name='search_weight' id='search_weight' placeholder='  검색'defaultValue="웨이트" style={{ display: 'none' }}></input>
+                                                <input name='search_weight' id='search_weight' placeholder='  검색'defaultValue="헬스" style={{ display: 'none' }}></input>
                                             </form>
-                                            <button type="submit" form="search_weight" onClick={goCategorySearch} className={styles.category_btn}>웨이트</button>
+                                            <button type="submit" form="search_weight" onClick={goCategorySearch} className={styles.category_btn}>헬스</button>
                                         </li>
                                         <li className={styles.category_d}>
                                             <div className={styles.line}></div>

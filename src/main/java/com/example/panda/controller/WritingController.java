@@ -15,6 +15,8 @@ import com.example.panda.service.WritingService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -95,4 +97,17 @@ public class WritingController {
         List<WritingDTO> myPosts = writingService.findByUserId(user_email);
         return myPosts;
     }
+
+    @PutMapping("/api/auction/{writing_id}")
+    public ResponseEntity<String> updateAuction(@PathVariable ("writing_id") Long writing_id , @RequestBody AuctionDTO updateAuction)
+    {
+        try{
+            writingService.updateAuction(writing_id , updateAuction);
+            return ResponseEntity.ok("경매 최고가 업데이트 완료");
+        } catch (Exception e)
+        {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("경매 최고가 업데이트 실패: " + e.getMessage());
+        }
+    }
+
 }

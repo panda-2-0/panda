@@ -187,6 +187,15 @@ public class WritingService {
 
         return writingDTO;
     }
+
+    public void updateAuction(Long writingId, AuctionDTO updateAuction) {
+        AuctionEntity auction = auctionRepository.findById(Math.toIntExact(writingId))
+                .orElseThrow(() -> new RuntimeException("경매 정보를 찾을 수 없습니다."));
+
+        auction.setHighest_value(updateAuction.getHighest_value());
+        auctionRepository.save(auction);
+    }
+
     //경매 등록
 //    public void saveAuction(AuctionDTO auctionDTO){
 //        AuctionEntity auctionEntity = AuctionEntity.toAuctionEntity(auctionDTO);
