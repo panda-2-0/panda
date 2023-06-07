@@ -141,28 +141,7 @@ function NoticeConfirm() {
                                 <dt>가격</dt>
                                 <dd>{data.price}</dd>
                             </dl>
-                        {!(loginUser && data.user_name === loginUser.nickname) && (
-                            <button className={styles.favorite_btn} onClick={registerFavorite}>
-                                찜등록
-                            </button>
-                        )}
-
                     </div>
-                    <div className={styles.info}>
-                        <dl>
-                            <dt>번호</dt>
-                            <dd>{writingInfo.word}</dd>
-                        </dl>
-                        <dl>
-                            <dt>글쓴이</dt>
-                            <dd>{data.user_name}</dd>
-                        </dl>
-                        <dl>
-                            <dt>가격</dt>
-                            <dd>{data.price}</dd>
-                        </dl>
-
-                        </div>
                         <img alt="불러오는중" src={data.writingImg!=null ? `${atob(data.writingImg)}`: profile} style={{width:'70%'}} />
                         <div
                             className={styles.cont} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>{data.content}
