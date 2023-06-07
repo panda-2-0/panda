@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import axios from 'axios';
-import { useLocation, useNavigate } from 'react-router-dom';
+import {useLocation, useNavigate} from 'react-router-dom';
 import styles from "../Css_dir/notice.module.css";
 import profile from "../imgs/logo512_512.png";
 
 function NoticeConfirm() {
     const movePage = useNavigate();
     const location = useLocation();
-    const writingInfo = { ...location.state };
+    const writingInfo = {...location.state};
     const listdata = new FormData();
     listdata.append('wid', writingInfo.word);
     const writingdata = new FormData();
@@ -47,7 +47,7 @@ function NoticeConfirm() {
 
     const goChat = () => {
         axios
-            .post('/joinChat', { writing_Id: writingInfo.word }, {
+            .post('/joinChat', {writing_Id: writingInfo.word}, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -76,22 +76,23 @@ function NoticeConfirm() {
                 setData(response.data);
                 console.log(response.data);
                 axios
-                    .get('/api/isAuction?wid='+response.data.writing_Id)
+                    .get('/api/isAuction?wid=' + response.data.writing_Id)
                     .then((r) => {
-                        if (r.data === null){
-                            setIsAuction({"writing_Id":-1});
-                        }
-                        else {
+                        console.log(r.data);
+                        if (r.data === "") {
+                            console.log("non auction");
+                            setIsAuction({"writing_Id": -1});
+                            console.log({"writing_Id": -1});
+                        } else {
                             setIsAuction(r.data);
                         }
-                        console.log(r.data);
                     })
                     .catch((error) => console.log(error));
             })
             .catch((error) => console.log(error));
     }, []);
 
-    const [loginUser , setLoginUser] = useState(null)
+    const [loginUser, setLoginUser] = useState(null)
 
     useEffect(() => {
         axios.get('/api/UserInfo')
@@ -101,7 +102,7 @@ function NoticeConfirm() {
             .catch(error => {
                 console.log(error);
             })
-    } , [])
+    }, [])
 
     const deletePost = (postId) => {
         axios
@@ -152,42 +153,45 @@ function NoticeConfirm() {
                                 <dt>가격</dt>
                                 <dd>{data.price}</dd>
                             </dl>
-                            {isAuction.writing_Id !== -1&&<dl>
+                            {isAuction.writing_Id !== -1 && <dl>
                                 <dt>즉시구매가</dt>
                                 <dd>{data.price}</dd>
                             </dl>}
+                        </div>
                     </div>
-                        </div>
-                        <img alt="불러오는중" src={data.writingImg!=null ? `${atob(data.writingImg)}`: profile} style={{width:'70%'}} />
-                        <div
-                            className={styles.cont} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>{data.content}
-
-                        </div>
-                        <div className={styles.bt_wrap}>
-                            <img alt="불러오는중" src={data.writingImg1!=null ? `${atob(data.writingImg1)}`: profile} style={{width:'30%'}} />
-                            <img alt="불러오는중" src={data.writingImg2!=null ? `${atob(data.writingImg2)}`: profile} style={{width:'30%'}} />
-                            <img alt="불러오는중" src={data.writingImg3!=null ? `${atob(data.writingImg3)}`: profile} style={{width:'30%'}} />
-                            <a onClick={goNoticePage} className={styles.on}>
-                                목록
+                    <img alt="불러오는중" src={data.writingImg != null ? `${atob(data.writingImg)}` : profile}
+                         style={{width: '70%'}}/>
+                    <div
+                        className={styles.cont}
+                        style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>{data.content}
+                    </div>
+                    <div className={styles.bt_wrap}>
+                        <img alt="불러오는중" src={data.writingImg1 != null ? `${atob(data.writingImg1)}` : profile}
+                             style={{width: '30%'}}/>
+                        <img alt="불러오는중" src={data.writingImg2 != null ? `${atob(data.writingImg2)}` : profile}
+                             style={{width: '30%'}}/>
+                        <img alt="불러오는중" src={data.writingImg3 != null ? `${atob(data.writingImg3)}` : profile}
+                             style={{width: '30%'}}/>
+                        <a onClick={goNoticePage} className={styles.on}>
+                            목록
+                        </a>
+                        {loginUser && data.user_name === loginUser.nickname && (
+                            <a onClick={goModify}>수정</a>
+                        )}
+                        {loginUser && data.user_name === loginUser.nickname && (
+                            <a onClick={handleDelete}>삭제</a>
+                        )}
+                        {!(loginUser && data.user_name === loginUser.nickname) && (
+                            <a onClick={goChat} className={styles.on}>
+                                채팅
                             </a>
-                            {loginUser && data.user_name === loginUser.nickname && (
-                                <a onClick={goModify}>수정</a>
-                            )}
-                            {loginUser && data.user_name === loginUser.nickname && (
-                                <a onClick={handleDelete}>삭제</a>
-                            )}
-                            {!(loginUser && data.user_name === loginUser.nickname) && (
-                                <a onClick={goChat} className={styles.on}>
-                                    채팅
-                                </a>
-                            )}
-                        </div>
+                        )}
                     </div>
                 </div>
             </div>
-
         </div>
-    );
+)
+    ;
 }
 
 export default NoticeConfirm;
