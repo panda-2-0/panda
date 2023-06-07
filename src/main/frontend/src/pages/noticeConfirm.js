@@ -13,7 +13,7 @@ function NoticeConfirm() {
     const writingdata = new FormData();
     writingdata.append('wid', writingInfo.word);
     const [data, setData] = useState({}); // 해당 게시글에 찜등록한 사람 수
-    const [auctions , setAuctions] = useState({});
+
 
     const goNoticePage = () => {
         movePage('/pages/noticePage');
@@ -92,17 +92,6 @@ function NoticeConfirm() {
             })
     } , [])
 
-    //경매 정보 가져오기
-    useEffect(() => {
-        axios.get('/api/Auctions/${writingInfo.word}')
-            .then(response => {
-                setAuctions(response.data);
-            })
-            .catch(error => {
-                console.log(error);
-            })
-    } , [])
-
     const deletePost = (postId) => {
         axios
             .delete(`/api/posts/${postId}`)
@@ -126,69 +115,61 @@ function NoticeConfirm() {
                     <strong>게시글 확인</strong>
                     <p>판매자가 등록한 물품정보를 확인 할 수 있습니다</p>
                 </div>
-            </div>
-            <div className={styles.board_view_wrap}>
-                <div className={styles.board_view}>
-                    <div className={styles.title}>
-                        <div>
-                            {data.writing_name}&nbsp;&nbsp;
-                            <span className={styles.favorite_count}>찜: {data.favorite_count}회</span>
+                <div className={styles.board_view_wrap}>
+                    <div className={styles.board_view}>
+                        <div className={styles.title}>
+                            <div>
+                                {data.writing_name}&nbsp;&nbsp;
+                                <span className={styles.favorite_count}>찜: {data.favorite_count}회</span>
+                            </div>
+                            {loginUser && data.user_name !== loginUser.nickname && (
+                                <button className={styles.favorite_btn} onClick={registerFavorite}>
+                                    찜등록
+                                </button>
+                            )}
                         </div>
-                        {!(loginUser && data.user_name === loginUser.nickname) && (
-                            <button className={styles.favorite_btn} onClick={registerFavorite}>
-                                찜등록
-                            </button>
-                        )}
+                        <div className={styles.info}>
+                            <dl>
+                                <dt>번호</dt>
+                                <dd>{writingInfo.word}</dd>
+                            </dl>
+                            <dl>
+                                <dt>글쓴이</dt>
+                                <dd>{data.user_name}</dd>
+                            </dl>
+                            <dl>
+                                <dt>가격</dt>
+                                <dd>{data.price}</dd>
+                            </dl>
+                        </div>
+                        <img alt="불러오는중" src={data.writingImg!=null ? `${atob(data.writingImg)}`: profile} style={{width:'70%'}} />
+                        <div
+                            className={styles.cont} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>{data.content}
 
-                    </div>
-                    <div className={styles.info}>
-                        <dl>
-                            <dt>번호</dt>
-                            <dd>{writingInfo.word}</dd>
-                        </dl>
-                        <dl>
-                            <dt>글쓴이</dt>
-                            <dd>{data.user_name}</dd>
-                        </dl>
-                        <dl>
-                            <dt>가격</dt>
-                            <dd>{data.price}</dd>
-                        </dl>
-                        {(data.auction_flags) &&(
-                        <dl>
-                            <dt>경매 등록 물품입니다</dt>
-
-                        </dl>
-                        )}
-                    </div>
-                    <div
-                        className={styles.cont} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>{data.content}
-                        <img alt="불러오는중" src={data.writingImg!=null ? `${atob(data.writingImg)}`: profile} style={{width:'5%'}} />
-                        <img alt="불러오는중" src={data.writingImg1!=null ? `${atob(data.writingImg1)}`: profile} style={{width:'5%'}} />
-                        <img alt="불러오는중" src={data.writingImg2!=null ? `${atob(data.writingImg2)}`: profile} style={{width:'5%'}} />
-                        <img alt="불러오는중" src={data.writingImg3!=null ? `${atob(data.writingImg3)}`: profile} style={{width:'5%'}} />
-                    </div>
-                    <div className={styles.bt_wrap}>
-                        <a onClick={goNoticePage} className={styles.on}>
-                            목록
-                        </a>
-                        {loginUser && data.user_name === loginUser.nickname && (
-                            <a onClick={goModify}>수정</a>
-                        )}
-                        {loginUser && data.user_name === loginUser.nickname && (
-                            <a onClick={handleDelete}>삭제</a>
-                        )}
-                        {!(loginUser && data.user_name === loginUser.nickname) && (
-                            <a onClick={goChat} className={styles.on}>
-                                채팅
+                        </div>
+                        <div className={styles.bt_wrap}>
+                            <img alt="불러오는중" src={data.writingImg1!=null ? `${atob(data.writingImg1)}`: profile} style={{width:'30%'}} />
+                            <img alt="불러오는중" src={data.writingImg2!=null ? `${atob(data.writingImg2)}`: profile} style={{width:'30%'}} />
+                            <img alt="불러오는중" src={data.writingImg3!=null ? `${atob(data.writingImg3)}`: profile} style={{width:'30%'}} />
+                            <a onClick={goNoticePage} className={styles.on}>
+                                목록
                             </a>
-                        )}
-
-
+                            {loginUser && data.user_name === loginUser.nickname && (
+                                <a onClick={goModify}>수정</a>
+                            )}
+                            {loginUser && data.user_name === loginUser.nickname && (
+                                <a onClick={handleDelete}>삭제</a>
+                            )}
+                            {!(loginUser && data.user_name === loginUser.nickname) && (
+                                <a onClick={goChat} className={styles.on}>
+                                    채팅
+                                </a>
+                            )}
+                        </div>
                     </div>
-
                 </div>
             </div>
+
         </div>
     );
 }

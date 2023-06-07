@@ -29,7 +29,7 @@ const NoticeRegist = () => {
     const [count, setCount] = useState(0);
     const [price, setPrice] = useState(0);
     const [content, setContent] = useState('');
-    const [windowSize, setWindowSize] = useState(0);
+    const [windowSize, setWindowSize] = useState(window.innerWidth);
     const imageInput = useRef();
     const imageInput1 = useRef();
     const imageInput2 = useRef();
@@ -127,7 +127,7 @@ const NoticeRegist = () => {
         const allowedExtensions = ['jpg', 'jpeg', 'png'];
 
         if (!allowedExtensions.includes(fileExtension)) {
-            alert('지원하는 이미지 파일이 아닙니다.');
+            alert('지원하는 이미지 파일이 아닙니다.s');
             return;
         }
 
@@ -805,7 +805,54 @@ const NoticeRegist = () => {
                                                 </dl>
                                             </td>
                                         </tr>
+                                        <tr>
+                                            <td>
+                                                <dl>
+                                                    <dt>세부 사진1</dt>
+                                                    <dd id="photo_regist_dd1">
+                                                        <input type="file" ref={imageInput1} name="writing_photo1"
+                                                               id="writing_photo1"
+                                                               onChange={handleFileChange1}/>
+                                                    </dd>
+                                                </dl>
+                                            </td>
+                                        </tr>
 
+                                        <tr>
+                                            <td>
+                                                <dl>
+                                                    <dt>세부 사진2</dt>
+                                                    <dd id="photo_regist_dd2">
+                                                        <input type="file" ref={imageInput2} name="writing_photo2"
+                                                               id="writing_photo2"
+                                                               onChange={handleFileChange2}/>
+                                                    </dd>
+                                                </dl>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <dl>
+                                                    <dt>세부 사진3</dt>
+                                                    <dd id="photo_regist_dd3">
+                                                        <input type="file" ref={imageInput3} name="writing_photo3"
+                                                               id="writing_photo3"
+                                                               onChange={handleFileChange3}/>
+                                                    </dd>
+                                                </dl>
+                                            </td>
+                                        </tr>
+                                        <td>
+                                            <dl>
+                                                <dt>세부 이미지 목록</dt>
+                                                <dd>
+                                                    <img alt="미리보기" src={writing_photo1} style={{maxWidth: "100px"}}/>
+                                                    <img alt="미리보기" src={writing_photo2} style={{maxWidth: "100px"}}/>
+                                                    <img alt="미리보기" src={writing_photo3} style={{maxWidth: "100px"}}/>
+                                                </dd>
+                                            </dl>
+                                        </td>
                                     </table>
 
                                 }
