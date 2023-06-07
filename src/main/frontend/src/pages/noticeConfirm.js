@@ -197,6 +197,7 @@ function NoticeConfirm() {
                 .put(`/api/auction/${isAuction.wid}` , updateAuction)
                 .then((response)=>{
                     alert("경매 최고가 업데이트 알림!!");
+                    window.location.reload();
                 })
                 .catch((error) => {
                     alert("오류 체크 하세요");
