@@ -185,10 +185,22 @@ function NoticeConfirm() {
         {
             alert(`최고가(${isAuction.highest_value}원) 이상의 가격을 입력 해주세요.`);
             setMaxPrice(isAuction.highest_value);
-            setIsMaxOpen(true);
+            setIsMaxOpen(false);
         }
         else
         {
+            const updateAuction = {
+                highest_value: maxPrice,
+
+            };
+            axios
+                .put(`/api/auction/${isAuction.wid}` , updateAuction)
+                .then((response)=>{
+                    alert("경매 최고가 업데이트 알림!!");
+                })
+                .catch((error) => {
+                    alert("오류 체크 하세요");
+                });
             setIsMaxOpen(false);
         }
     };
