@@ -470,7 +470,7 @@ function TopNav() {
                                 <a onClick={goCategorySearch} id="문구_도서">
                                     <div className={styles.line}></div>
                                     <form name='search_stationery' id='search_stationery' method='get'>
-                                        <input name='search_stationery' id='search_stationery' placeholder='  검색'defaultValue="문구_도서" style={{ display: 'none' }}></input>
+                                        <input name='search_stationery' id='search_stationery' placeholder='  검색'defaultValue="문구/도서" style={{ display: 'none' }}></input>
                                     </form>
                                     <button type="submit" form="search_stationery" onClick={goCategorySearch} className={styles.category_btn}>문구/도서</button>
                                 </a>
@@ -493,7 +493,7 @@ function TopNav() {
                                         <li className={styles.category_d}>
                                             <div className={styles.line}></div>
                                             <form name='search_sharpPen' id='search_sharpPen' method='get'>
-                                                <input name='search_sharpPen' id='search_sharpPen' placeholder='  검색'defaultValue="샤프_연필" style={{ display: 'none' }}></input>
+                                                <input name='search_sharpPen' id='search_sharpPen' placeholder='  검색'defaultValue="샤프/연필" style={{ display: 'none' }}></input>
                                             </form>
                                             <button type="submit" form="search_sharpPen" onClick={goCategorySearch} className={styles.category_btn}>샤프/연필</button>
                                         </li>
@@ -657,9 +657,9 @@ function TopNav() {
                     </div>
                     <Link to={"/pages/Chat"} className={styles.tlist_item_a} target={`_top`}>
                         <li className={styles.tlist_item} >
-                                <a className={styles.tlist_item_a}>
-                                    <span className={styles.tlist_text}>채팅</span>
-                                </a>
+                            <a className={styles.tlist_item_a}>
+                                <span className={styles.tlist_text}>채팅</span>
+                            </a>
                         </li>
                     </Link>
 

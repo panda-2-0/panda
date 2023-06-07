@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
-import {useLocation, useNavigate} from 'react-router-dom';
+import {useLocation, useNavigate } from 'react-router-dom';
 import styles from "../Css_dir/notice.module.css";
 import profile from "../imgs/logo512_512.png";
 import Modal from 'react-modal';
@@ -17,9 +17,17 @@ function NoticeConfirm() {
     const [isAuction, setIsAuction] = useState({"writing_Id": -1});
     const [auctionDate, setAuctionDate] = useState([]);
     const [isMaxOpen, setIsMaxOpen] = useState(false);
+    const [maxPrice , setMaxPrice] = useState(""); //최고가 입력
+
+
     const closeMaxModal = () => {
         setIsMaxOpen(false);
     }
+
+    const handleMaxPriceChange = (event) => {
+        setMaxPrice(event.target.value);
+
+    };
     const goMax = () => {
         setIsMaxOpen(true);
     }
@@ -172,7 +180,19 @@ function NoticeConfirm() {
             deletePost(writingInfo.word);
         };
 
-        return (
+    const submitMaxPrice = () => {
+        if(maxPrice < isAuction.highest_value)
+        {
+            alert(`최고가(${isAuction.highest_value}원) 이상의 가격을 입력 해주세요.`);
+            setMaxPrice(isAuction.highest_value);
+            setIsMaxOpen(true);
+        }
+        else
+        {
+            setIsMaxOpen(false);
+        }
+    };
+    return (
             <div>
                 <div className={styles.board_wrap}>
                     <div className={styles.board_title}>
@@ -305,9 +325,9 @@ function NoticeConfirm() {
 
                                     <div className={styles.MaxBtn}>
                                         <form>
-                                            <input type={"number"}/>
+                                            <input type={"number"} value={maxPrice} onChange={handleMaxPriceChange}/>
                                             <br/>
-                                            <button onClick={closeMaxModal}>제시</button>
+                                            <button onClick={submitMaxPrice}>제시</button>
                                             <button onClick={closeMaxModal}>취소</button>
                                         </form>
                                     </div>
