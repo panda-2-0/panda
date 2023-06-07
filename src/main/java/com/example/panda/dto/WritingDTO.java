@@ -27,6 +27,10 @@ public class WritingDTO {
     private int favorite_count;
     private String content;
 
+    private byte[] writingImg1;
+    private byte[] writingImg2;
+    private byte[] writingImg3;
+
     public static WritingDTO toWritingDTO(WritingEntity writingEntity) {
         WritingDTO writingDTO = new WritingDTO();
         writingDTO.setWriting_Id(writingEntity.getWid());
@@ -45,6 +49,19 @@ public class WritingDTO {
         writingDTO.setUserDTO(UserDTO.toUserDTO(writingEntity.getUserEntity()));
         writingDTO.setUser_name(writingDTO.getUserDTO().getNickname());
         writingDTO.setUser_point(writingDTO.getUserDTO().getPoint());
+
+
+        if(writingEntity.getWriting_photo1()!=null){
+            writingDTO.setWritingImg1(writingEntity.getWriting_photo1());
+        }
+
+        if(writingEntity.getWriting_photo2()!=null){
+            writingDTO.setWritingImg2(writingEntity.getWriting_photo2());
+        }
+
+        if(writingEntity.getWriting_photo3()!=null){
+            writingDTO.setWritingImg3(writingEntity.getWriting_photo3());
+        }
 
         return writingDTO;
     }

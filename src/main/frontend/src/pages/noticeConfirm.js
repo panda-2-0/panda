@@ -13,7 +13,7 @@ function NoticeConfirm() {
     const writingdata = new FormData();
     writingdata.append('wid', writingInfo.word);
     const [data, setData] = useState({}); // 해당 게시글에 찜등록한 사람 수
-
+    const [auctions , setAuctions] = useState({});
 
     const goNoticePage = () => {
         movePage('/pages/noticePage');
@@ -92,6 +92,17 @@ function NoticeConfirm() {
             })
     } , [])
 
+    //경매 정보 가져오기
+    useEffect(() => {
+        axios.get('/api/Auctions/${writingInfo.word}')
+            .then(response => {
+                setAuctions(response.data);
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    } , [])
+
     const deletePost = (postId) => {
         axios
             .delete(`/api/posts/${postId}`)
@@ -143,11 +154,19 @@ function NoticeConfirm() {
                             <dt>가격</dt>
                             <dd>{data.price}</dd>
                         </dl>
+                        {(data.auction_flags) &&(
+                        <dl>
+                            <dt>경매 등록 물품입니다</dt>
 
+                        </dl>
+                        )}
                     </div>
                     <div
                         className={styles.cont} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>{data.content}
-                        <img alt="불러오는중" src={data.writingImg!=null ? `${atob(data.writingImg)}`: profile} style={{width:'20%'}} />
+                        <img alt="불러오는중" src={data.writingImg!=null ? `${atob(data.writingImg)}`: profile} style={{width:'5%'}} />
+                        <img alt="불러오는중" src={data.writingImg1!=null ? `${atob(data.writingImg1)}`: profile} style={{width:'5%'}} />
+                        <img alt="불러오는중" src={data.writingImg2!=null ? `${atob(data.writingImg2)}`: profile} style={{width:'5%'}} />
+                        <img alt="불러오는중" src={data.writingImg3!=null ? `${atob(data.writingImg3)}`: profile} style={{width:'5%'}} />
                     </div>
                     <div className={styles.bt_wrap}>
                         <a onClick={goNoticePage} className={styles.on}>
@@ -167,6 +186,7 @@ function NoticeConfirm() {
 
 
                     </div>
+
                 </div>
             </div>
         </div>

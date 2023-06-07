@@ -64,6 +64,12 @@ public class WritingService {
         return writingDTO;
     }
 
+    public AuctionDTO findByauctionId(int wid){
+        Optional<AuctionEntity> auctionEntity = auctionRepository.findById(wid);
+        AuctionDTO auctionDTO=AuctionDTO.toAuctionDTO(auctionEntity.get());
+        return auctionDTO;
+    }
+
     public List<WritingResponseDTO> findResponseById(List<Integer> widList){
         List<WritingEntity> writingEntityList = writingDSLRepository.findByIdList(widList);
         List<WritingResponseDTO> writingResponseDTOList = new LinkedList<WritingResponseDTO>();
@@ -102,6 +108,15 @@ public class WritingService {
         writingDTO.setCategory(writingRegisterDTO.getCategory());
         if(writingRegisterDTO.getWritingImg()!=null){
             writingDTO.setWritingImg(writingRegisterDTO.getWritingImg());
+        }
+        if(writingRegisterDTO.getWritingImg1()!=null){
+            writingDTO.setWritingImg1(writingRegisterDTO.getWritingImg1());
+        }
+        if(writingRegisterDTO.getWritingImg2()!=null){
+            writingDTO.setWritingImg2(writingRegisterDTO.getWritingImg2());
+        }
+        if(writingRegisterDTO.getWritingImg3()!=null){
+            writingDTO.setWritingImg3(writingRegisterDTO.getWritingImg3());
         }
         writingDTO.setDetail_category(writingRegisterDTO.getDetail_category());
         writingDTO.setCount(writingRegisterDTO.getCount());

@@ -44,6 +44,12 @@ public class QWritingEntity extends EntityPathBase<WritingEntity> {
 
     public final ArrayPath<byte[], Byte> writing_photo = createArray("writing_photo", byte[].class);
 
+    public final ArrayPath<byte[], Byte> writing_photo1 = createArray("writing_photo1", byte[].class);
+
+    public final ArrayPath<byte[], Byte> writing_photo2 = createArray("writing_photo2", byte[].class);
+
+    public final ArrayPath<byte[], Byte> writing_photo3 = createArray("writing_photo3", byte[].class);
+
     public QWritingEntity(String variable) {
         this(WritingEntity.class, forVariable(variable), INITS);
     }

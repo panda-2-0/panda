@@ -1,10 +1,12 @@
 package com.example.panda.controller;
 
 //import com.example.panda.dto.AuctionDTO;
+import com.example.panda.dto.AuctionDTO;
 import com.example.panda.dto.UserDTO;
 import com.example.panda.dto.WritingDTO;
 
 import com.example.panda.dto.WritingRegisterDTO;
+import com.example.panda.entity.AuctionEntity;
 import com.example.panda.entity.UserEntity;
 import com.example.panda.entity.WritingEntity;
 
@@ -133,15 +135,16 @@ public class WritingController {
 
     }
 
-//    @PostMapping("/api/noticeAuctions")
-//    public void auctionStart(@RequestBody AuctionDTO auctionDTO)
-//    {
-//
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        UserDetails userDetails = (UserDetails)authentication.getPrincipal();
-//
-//        writingService.saveAuction(auctionDTO);
-//    }
+    //경매 기능
+    @GetMapping("/api/Auctions/{postId}")
+    public AuctionDTO getAuctionInfo(@PathVariable int postId)
+    {
+        AuctionDTO auctionDTO = writingService.findByauctionId(postId);
+        return auctionDTO;
+    }
+
+
+
 
 
 }

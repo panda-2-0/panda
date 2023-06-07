@@ -31,6 +31,13 @@ const NoticeRegist = () => {
     const [content, setContent] = useState('');
     const [windowSize, setWindowSize] = useState(0);
     const imageInput = useRef();
+    const imageInput1 = useRef();
+    const imageInput2 = useRef();
+    const imageInput3 = useRef();
+
+    const [writing_photo1, setWriting_photo1] = useState(null); // Initialize with an empty string
+    const [writing_photo2, setWriting_photo2] = useState(null); // Initialize with an empty string
+    const [writing_photo3, setWriting_photo3] = useState(null); // Initialize with an empty string
 
     //경매 정보
     const [auction_date, setAuctiondate] = useState('');
@@ -64,7 +71,112 @@ const NoticeRegist = () => {
         }
 
 
-        //
+
+        // const reader = new FileReader();
+        // reader.onload = function (e) {
+        //     setWriting_photo(e.target.result);
+        // };
+        // if (event.target.files.length > 0) { // Check if an image is selected
+        //     reader.readAsDataURL(event.target.files[0]);
+        // }
+    };
+
+    const handleFileChange1 = (event) => {    //이미지 업로드
+        if (event.target.files[0] == null) {
+            return;
+        }
+
+        const file = event.target.files[0];
+
+        const fileExtension = file.name.split('.').pop().toLowerCase();
+        const allowedExtensions = ['jpg', 'jpeg', 'png'];
+
+        if (!allowedExtensions.includes(fileExtension)) {
+            alert('지원하는 이미지 파일이 아닙니다.');
+            return;
+        }
+
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = () => {
+                const imageUrl = reader.result;
+                setWriting_photo1(imageUrl);
+            };
+            reader.readAsDataURL(file);
+        }
+
+
+
+        // const reader = new FileReader();
+        // reader.onload = function (e) {
+        //     setWriting_photo(e.target.result);
+        // };
+        // if (event.target.files.length > 0) { // Check if an image is selected
+        //     reader.readAsDataURL(event.target.files[0]);
+        // }
+    };
+
+    const handleFileChange2 = (event) => {    //이미지 업로드
+        if (event.target.files[0] == null) {
+            return;
+        }
+
+        const file = event.target.files[0];
+
+        const fileExtension = file.name.split('.').pop().toLowerCase();
+        const allowedExtensions = ['jpg', 'jpeg', 'png'];
+
+        if (!allowedExtensions.includes(fileExtension)) {
+            alert('지원하는 이미지 파일이 아닙니다.');
+            return;
+        }
+
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = () => {
+                const imageUrl = reader.result;
+                setWriting_photo2(imageUrl);
+            };
+            reader.readAsDataURL(file);
+        }
+
+
+
+        // const reader = new FileReader();
+        // reader.onload = function (e) {
+        //     setWriting_photo(e.target.result);
+        // };
+        // if (event.target.files.length > 0) { // Check if an image is selected
+        //     reader.readAsDataURL(event.target.files[0]);
+        // }
+    };
+
+    const handleFileChange3 = (event) => {    //이미지 업로드
+        if (event.target.files[0] == null) {
+            return;
+        }
+
+        const file = event.target.files[0];
+
+        const fileExtension = file.name.split('.').pop().toLowerCase();
+        const allowedExtensions = ['jpg', 'jpeg', 'png'];
+
+        if (!allowedExtensions.includes(fileExtension)) {
+            alert('지원하는 이미지 파일이 아닙니다.');
+            return;
+        }
+
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = () => {
+                const imageUrl = reader.result;
+                setWriting_photo3(imageUrl);
+            };
+            reader.readAsDataURL(file);
+        }
+
+
+
         // const reader = new FileReader();
         // reader.onload = function (e) {
         //     setWriting_photo(e.target.result);
@@ -164,7 +276,10 @@ const NoticeRegist = () => {
             highest_value: highest_value,
             buy_now: buy_now,
             lowest_value: lowest_value,
-            auction_flag:auction_flag
+            auction_flag:auction_flag,
+            writingImg1: btoa(writing_photo1),
+            writingImg2: btoa(writing_photo2),
+            writingImg3: btoa(writing_photo3),
         }
 
         axios.post('/api/noticeRegister', writing, {
@@ -505,6 +620,55 @@ const NoticeRegist = () => {
                                                 {/*</dl>*/}
                                             </td>
                                         </tr>
+
+                                        <tr>
+                                            <td>
+                                                <dl>
+                                                    <dt>세부 사진1</dt>
+                                                    <dd id="photo_regist_dd1">
+                                                        <input type="file" ref={imageInput1} name="writing_photo1"
+                                                               id="writing_photo1"
+                                                               onChange={handleFileChange1}/>
+                                                    </dd>
+                                                </dl>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <dl>
+                                                    <dt>세부 사진2</dt>
+                                                    <dd id="photo_regist_dd2">
+                                                        <input type="file" ref={imageInput2} name="writing_photo2"
+                                                               id="writing_photo2"
+                                                               onChange={handleFileChange2}/>
+                                                    </dd>
+                                                </dl>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <dl>
+                                                    <dt>세부 사진3</dt>
+                                                    <dd id="photo_regist_dd3">
+                                                        <input type="file" ref={imageInput3} name="writing_photo3"
+                                                               id="writing_photo3"
+                                                               onChange={handleFileChange3}/>
+                                                    </dd>
+                                                </dl>
+                                            </td>
+                                        </tr>
+                                        <td>
+                                            <dl>
+                                                <dt>세부 이미지 목록</dt>
+                                                <dd>
+                                                    <img alt="미리보기" src={writing_photo1} style={{maxWidth: "100px"}}/>
+                                                    <img alt="미리보기" src={writing_photo2} style={{maxWidth: "100px"}}/>
+                                                    <img alt="미리보기" src={writing_photo3} style={{maxWidth: "100px"}}/>
+                                                </dd>
+                                            </dl>
+                                        </td>
                                     </table> :
                                     <table className={styles.info_table}>
                                         <tr>
@@ -641,7 +805,10 @@ const NoticeRegist = () => {
                                                 </dl>
                                             </td>
                                         </tr>
-                                    </table>}
+
+                                    </table>
+
+                                }
                                 <dl className={styles.needtop_margin}>
                                     <dd><a className={styles.on} onClick={() => {
                                         setVisiable(!visiable);
