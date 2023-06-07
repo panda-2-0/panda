@@ -3,6 +3,7 @@ import axios from 'axios';
 import {useLocation, useNavigate} from 'react-router-dom';
 import styles from "../Css_dir/notice.module.css";
 import profile from "../imgs/logo512_512.png";
+import Modal from 'react-modal';
 
 function NoticeConfirm() {
     const movePage = useNavigate();
@@ -15,6 +16,13 @@ function NoticeConfirm() {
     const [data, setData] = useState({});
     const [isAuction, setIsAuction] = useState({"writing_Id": -1});
     const [auctionDate, setAuctionDate] = useState([]);
+    const [isMaxOpen, setIsMaxOpen] = useState(false);
+    const closeMaxModal = () => {
+        setIsMaxOpen(false);
+    }
+    const goMax = () => {
+        setIsMaxOpen(true);
+    }
 
     const goNoticePage = () => {
         movePage('/pages/noticePage');
@@ -225,10 +233,45 @@ function NoticeConfirm() {
                             </a>
                         )}
                         {!(loginUser && data.user_name === loginUser.nickname) && isAuction.writing_Id !== -1 && (
-                            <a onClick={goChat} className={styles.on}>
+                            <a onClick={goMax} className={styles.on}>
                                 최고가 제시
                             </a>
                         )}
+                        <Modal
+                            isOpen={isMaxOpen}
+                            onRequestClose={closeMaxModal}
+                            ariaHideApp={false}
+                            style={{
+                                content: {
+                                    width: '80vw',
+                                    margin: '0 auto',
+                                    marginTop:'10px',
+                                    height: '80vh',
+                                    backgroundColor: 'whitesmoke',
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                },
+                                overlay: {
+                                    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                                    zIndex: 30,
+                                    textAlign: 'center',
+                                },
+                            }}>
+                            <div>
+                                <div className={styles.eval_header}>
+                                    제시할 가격을 입력해 주세요
+                                </div>
+
+                                <div className={styles.eval_button}>
+                                    <form>
+                                        <input type={"number"}/>
+                                        <button onClick={closeMaxModal}>제시</button>
+                                        <button onClick={closeMaxModal}>취소</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </Modal>
                     </div>
                 </div>
             </div>
