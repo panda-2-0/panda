@@ -160,7 +160,6 @@ const MessageList = React.memo(({ messages, toMessageList, socket}) => {
                 ariaHideApp={false}
                 style={{
                     content: {
-                        width: '80vw',
                         margin: '0 auto',
                         marginTop:'10px',
                         height: '80vh',
@@ -200,7 +199,6 @@ const MessageList = React.memo(({ messages, toMessageList, socket}) => {
                 ariaHideApp={false}
                 style={{
                     content: {
-                        width: '80vw',
                         margin: '0 auto',
                         marginTop:'10px',
                         height: '80vh',

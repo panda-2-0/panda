@@ -279,7 +279,6 @@ function NoticeConfirm() {
                                 ariaHideApp={false}
                                 style={{
                                     content: {
-                                        width: '80vw',
                                         margin: '0 auto',
                                         marginTop: '10px',
                                         height: '80vh',
@@ -295,13 +294,14 @@ function NoticeConfirm() {
                                     },
                                 }}>
                                 <div>
-                                    <div className={styles.eval_header}>
-                                        제시할 가격을 입력해 주세요
+                                    <div className={styles.MaxHeader}>
+                                        {"제시할 가격을 입력해 주세요\n(" + isAuction.highest_value + "원 이상)"}
                                     </div>
 
-                                    <div className={styles.eval_button}>
+                                    <div className={styles.MaxBtn}>
                                         <form>
                                             <input type={"number"}/>
+                                            <br/>
                                             <button onClick={closeMaxModal}>제시</button>
                                             <button onClick={closeMaxModal}>취소</button>
                                         </form>

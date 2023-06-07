@@ -6,7 +6,7 @@
     height:100%;
     /*width:1020px;*/
     margin: 0 auto;
-    z-index: 22;
+    /*z-index: 22;*/
 }
 
 body::-webkit-scrollbar {
@@ -551,6 +551,9 @@ body::-webkit-scrollbar {
     top: 18px;
 }
 @media screen and (max-width: 600px){
+    .chat_page {
+        z-index: 22;
+    }
     .plist {
         left: -300px;
         transition: 0.5s;
