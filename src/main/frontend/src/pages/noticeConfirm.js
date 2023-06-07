@@ -27,6 +27,9 @@ function NoticeConfirm() {
     const goNoticePage = () => {
         movePage('/pages/noticePage');
     };
+    const goLogin = () => {
+        movePage('/pages/loginPage');
+    }
 
     const goModify = () => {
         movePage('/pages/noticeModify');
@@ -248,21 +251,24 @@ function NoticeConfirm() {
                         <img alt="불러오는중" src={data.writingImg3 != null ? `${atob(data.writingImg3)}` : profile}
                              style={{width: '30%'}}/>
                         <div className={styles.bt_wrap}>
-                            <a onClick={goNoticePage} className={styles.on}>
+                            {!loginUser && <a onClick={goLogin} className={styles.on}>
+                                로그인하여 중고거래하기
+                            </a>}}
+                            {loginUser && <a onClick={goNoticePage} className={styles.on}>
                                 목록
-                            </a>
+                            </a>}
                             {loginUser && data.user_name === loginUser.nickname && (
                                 <a onClick={goModify}>수정</a>
                             )}
                             {loginUser && data.user_name === loginUser.nickname && (
                                 <a onClick={handleDelete}>삭제</a>
                             )}
-                            {!(loginUser && data.user_name === loginUser.nickname) && (
+                            {loginUser && isAuction.writing_Id !== -1 && (
                                 <a onClick={goChat} className={styles.on}>
                                     즉시구매(채팅)
                                 </a>
                             )}
-                            {!(loginUser && data.user_name === loginUser.nickname) && isAuction.writing_Id !== -1 && (
+                            {loginUser && isAuction.writing_Id !== -1 && (
                                 <a onClick={goMax} className={styles.on}>
                                     최고가 제시
                                 </a>

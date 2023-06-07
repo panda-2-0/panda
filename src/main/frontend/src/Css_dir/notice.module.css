@@ -80,6 +80,7 @@
     border-radius: 2px;
     font-size:1.4rem;
     margin-left:10px;
+    cursor: pointer;
 }
 
 .bt_wrap a:first-child
