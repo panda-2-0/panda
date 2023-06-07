@@ -115,57 +115,61 @@ function NoticeConfirm() {
                     <strong>게시글 확인</strong>
                     <p>판매자가 등록한 물품정보를 확인 할 수 있습니다</p>
                 </div>
-            </div>
-            <div className={styles.board_view_wrap}>
-                <div className={styles.board_view}>
-                    <div className={styles.title}>
-                        <div>
-                            {data.writing_name}&nbsp;&nbsp;
-                            <span className={styles.favorite_count}>찜: {data.favorite_count}회</span>
+                <div className={styles.board_view_wrap}>
+                    <div className={styles.board_view}>
+                        <div className={styles.title}>
+                            <div>
+                                {data.writing_name}&nbsp;&nbsp;
+                                <span className={styles.favorite_count}>찜: {data.favorite_count}회</span>
+                            </div>
+                            {loginUser && data.user_name !== loginUser.nickname && (
+                                <button className={styles.favorite_btn} onClick={registerFavorite}>
+                                    찜등록
+                                </button>
+                            )}
                         </div>
-                        <button className={styles.favorite_btn} onClick={registerFavorite}>
-                            찜등록
-                        </button>
-                    </div>
-                    <div className={styles.info}>
-                        <dl>
-                            <dt>번호</dt>
-                            <dd>{writingInfo.word}</dd>
-                        </dl>
-                        <dl>
-                            <dt>글쓴이</dt>
-                            <dd>{data.user_name}</dd>
-                        </dl>
-                        <dl>
-                            <dt>가격</dt>
-                            <dd>{data.price}</dd>
-                        </dl>
+                        <div className={styles.info}>
+                            <dl>
+                                <dt>번호</dt>
+                                <dd>{writingInfo.word}</dd>
+                            </dl>
+                            <dl>
+                                <dt>글쓴이</dt>
+                                <dd>{data.user_name}</dd>
+                            </dl>
+                            <dl>
+                                <dt>가격</dt>
+                                <dd>{data.price}</dd>
+                            </dl>
 
-                    </div>
-                    <div
-                        className={styles.cont} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>{data.content}
-                        <img alt="불러오는중" src={data.writingImg!=null ? `${atob(data.writingImg)}`: profile} style={{width:'20%'}} />
-                    </div>
-                    <div className={styles.bt_wrap}>
-                        <a onClick={goNoticePage} className={styles.on}>
-                            목록
-                        </a>
-                        {loginUser && data.user_name === loginUser.nickname && (
-                            <a onClick={goModify}>수정</a>
-                        )}
-                        {loginUser && data.user_name === loginUser.nickname && (
-                            <a onClick={handleDelete}>삭제</a>
-                        )}
-                        {!(loginUser && data.user_name === loginUser.nickname) && (
-                            <a onClick={goChat} className={styles.on}>
-                                채팅
+                        </div>
+                        <img alt="불러오는중" src={data.writingImg!=null ? `${atob(data.writingImg)}`: profile} style={{width:'70%'}} />
+                        <div
+                            className={styles.cont} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>{data.content}
+
+                        </div>
+                        <div className={styles.bt_wrap}>
+                            <a onClick={goNoticePage} className={styles.on}>
+                                목록
                             </a>
-                        )}
+                            {loginUser && data.user_name === loginUser.nickname && (
+                                <a onClick={goModify}>수정</a>
+                            )}
+                            {loginUser && data.user_name === loginUser.nickname && (
+                                <a onClick={handleDelete}>삭제</a>
+                            )}
+                            {!(loginUser && data.user_name === loginUser.nickname) && (
+                                <a onClick={goChat} className={styles.on}>
+                                    채팅
+                                </a>
+                            )}
 
 
+                        </div>
                     </div>
                 </div>
             </div>
+
         </div>
     );
 }
