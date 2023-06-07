@@ -17,22 +17,22 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AuctionDTO {
-    private int writing_Id;
+    private int wid;
     private LocalDateTime auction_date;
     private int highest_value;
     private int buy_now;
     private UserDTO userDTO;
-    private String user_name;
+    private int lowest_value;
 
 
     public static AuctionDTO toAuctionDTO(AuctionEntity auctionEntity) {
         AuctionDTO auctionDTO = new AuctionDTO();
-        auctionDTO.setWriting_Id(auctionEntity.getWriting_Id());
+        auctionDTO.setWid(auctionEntity.getWid());
         auctionDTO.setAuction_date(auctionEntity.getAuction_date());
         auctionDTO.setHighest_value(auctionEntity.getHighest_value());
         auctionDTO.setBuy_now(auctionEntity.getBuy_now());
         auctionDTO.setUserDTO(UserDTO.toUserDTO(auctionEntity.getUserEntity()));
-        auctionDTO.setUser_name(auctionDTO.getUserDTO().getNickname());
+        auctionDTO.setLowest_value(auctionEntity.getLowest_value());
         return auctionDTO;
     }
 
