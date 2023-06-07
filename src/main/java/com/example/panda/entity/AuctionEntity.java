@@ -5,6 +5,7 @@ import com.example.panda.dto.WritingDTO;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
@@ -12,6 +13,8 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor
+@Builder
 @Table(name = "Auction")
 public class AuctionEntity {
     @Id
@@ -27,6 +30,8 @@ public class AuctionEntity {
     private UserEntity userEntity;
     @Column
     private int lowest_value;
+
+
     public static AuctionEntity toAuctionEntity(AuctionDTO auctionDTO,int auction_date){
         AuctionEntity auctionEntity=new AuctionEntity();
 
@@ -38,7 +43,15 @@ public class AuctionEntity {
 
         return auctionEntity;
     }
-
+    @Builder
+    public AuctionEntity(int wid, LocalDateTime auction_date, int highest_value, int buy_now, UserEntity userEntity, int lowest_value){
+        this.wid = wid;
+        this.auction_date = auction_date;
+        this.highest_value = highest_value;
+        this.buy_now = buy_now;
+        this.userEntity = userEntity;
+        this.lowest_value = lowest_value;
+    }
 
 
 }

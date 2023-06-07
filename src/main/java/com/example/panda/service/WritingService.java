@@ -7,12 +7,10 @@ import com.example.panda.dto.WritingResponseDTO;
 import com.example.panda.entity.AuctionEntity;
 import com.example.panda.entity.UserEntity;
 import com.example.panda.entity.WritingEntity;
-import com.example.panda.repository.AuctionRepository;
-import com.example.panda.repository.UserRepository;
-import com.example.panda.repository.WritingDSLRepository;
-import com.example.panda.repository.WritingRepository;
+import com.example.panda.repository.*;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -24,15 +22,19 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
+import static com.example.panda.entity.QUserEntity.userEntity;
+
 @Service
 @RequiredArgsConstructor
 @Transactional
+@Slf4j
 public class WritingService {
     //    @Autowired
     private final WritingRepository writingRepository;
     private final WritingDSLRepository writingDSLRepository;
     private final UserRepository userRepository;
     private final AuctionRepository auctionRepository;
+    private final AuctionDSLRepository auctionDSLRepository;
 
     public void write(WritingEntity we)
     {
@@ -93,8 +95,6 @@ public class WritingService {
     }
 
     public void saveWriting(String email, WritingRegisterDTO writingRegisterDTO){  //게시글과 옥션을 저장
-
-
         WritingDTO writingDTO=new WritingDTO();
         AuctionDTO auctionDTO=new AuctionDTO();
 
@@ -114,8 +114,7 @@ public class WritingService {
         writingEntity.setUserEntity(userEntity.get());
         writingRepository.save(writingEntity);
 
-        System.out.println(writingEntity.getWid());
-
+        //System.out.println(writingEntity.getWid());
 
         if(writingRegisterDTO.getAuction_flag()==1){
             auctionDTO.setWid(writingEntity.getWid());
@@ -127,7 +126,11 @@ public class WritingService {
             auctionEntity.setUserEntity(userEntity.get());
             auctionRepository.save(auctionEntity);
        }
-
+    }
+    public AuctionEntity isAuction(int wid){
+        log.info("isAuctioning");
+        Optional<AuctionEntity> optionalAuctionEntity = auctionDSLRepository.existsByWid(wid);
+        return optionalAuctionEntity.orElse(null);
     }
 
     public List<WritingResponseDTO> findCheap() {

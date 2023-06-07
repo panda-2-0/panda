@@ -47,7 +47,7 @@ public class SecurityConfig {
                 .and()
                 .csrf().disable()
                 .authorizeHttpRequests((authz) -> authz
-                        .requestMatchers("ws://localhost:8080/chat","/api/searchResult","/api/todayAds", "/login", "/check","/pages/SearchResult**", "/", "/pages/loginPage", "/pages/joinMemPage", "/sign/joinMem", "/sign/**", "/login/**").permitAll()
+                        .requestMatchers("ws://localhost:8080/chat","/api/searchResult","/api/todayAds", "/login", "/check","/pages/SearchResult**", "/", "/pages/loginPage", "/pages/joinMemPage", "/sign/joinMem", "/sign/**", "/login/**", "/api/isAuction").permitAll()
                         .anyRequest().authenticated());
         http.formLogin()
                 .loginPage("/login").usernameParameter("email").passwordParameter("password")

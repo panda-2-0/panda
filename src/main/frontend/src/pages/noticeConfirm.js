@@ -12,8 +12,8 @@ function NoticeConfirm() {
     listdata.append('wid', writingInfo.word);
     const writingdata = new FormData();
     writingdata.append('wid', writingInfo.word);
-    const [data, setData] = useState({}); // 해당 게시글에 찜등록한 사람 수
-
+    const [data, setData] = useState({});
+    const [isAuction, setIsAuction] = useState({});
 
     const goNoticePage = () => {
         movePage('/pages/noticePage');
@@ -74,8 +74,19 @@ function NoticeConfirm() {
             })
             .then((response) => {
                 setData(response.data);
-
-
+                console.log(response.data);
+                axios
+                    .get('/api/isAuction?wid='+response.data.writing_Id)
+                    .then((r) => {
+                        if (r.data === null){
+                            setIsAuction({"writing_Id":-1});
+                        }
+                        else {
+                            setIsAuction(r.data);
+                        }
+                        console.log(r.data);
+                    })
+                    .catch((error) => console.log(error));
             })
             .catch((error) => console.log(error));
     }, []);
@@ -141,6 +152,10 @@ function NoticeConfirm() {
                                 <dt>가격</dt>
                                 <dd>{data.price}</dd>
                             </dl>
+                            {isAuction.writing_Id !== -1&&<dl>
+                                <dt>즉시구매가</dt>
+                                <dd>{data.price}</dd>
+                            </dl>}
                     </div>
                         <img alt="불러오는중" src={data.writingImg!=null ? `${atob(data.writingImg)}`: profile} style={{width:'70%'}} />
                         <div

@@ -1,16 +1,19 @@
 package com.example.panda.controller;
 
 //import com.example.panda.dto.AuctionDTO;
+import com.example.panda.dto.AuctionDTO;
 import com.example.panda.dto.UserDTO;
 import com.example.panda.dto.WritingDTO;
 
 import com.example.panda.dto.WritingRegisterDTO;
+import com.example.panda.entity.AuctionEntity;
 import com.example.panda.entity.UserEntity;
 import com.example.panda.entity.WritingEntity;
 
 import com.example.panda.service.UserService;
 import com.example.panda.service.WritingService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -26,6 +29,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@Slf4j
 public class WritingController {
 
     //    @Autowired
@@ -114,6 +118,11 @@ public class WritingController {
     {
         WritingDTO writingDTO = writingService.findById(postId);
         return writingDTO;
+    }
+    @GetMapping("/api/isAuction")
+    public AuctionEntity isAuction(@RequestParam("wid")int wid){
+        log.info("start isAuction");
+        return writingService.isAuction(wid);
     }
 
     //게시글 로그인한 사용자 게시글 필터링

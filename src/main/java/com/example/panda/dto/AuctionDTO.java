@@ -7,8 +7,10 @@ import jakarta.persistence.Column;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDateTime;
 
@@ -16,6 +18,7 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class AuctionDTO {
     private int wid;
     private LocalDateTime auction_date;
@@ -35,6 +38,15 @@ public class AuctionDTO {
         auctionDTO.setLowest_value(auctionEntity.getLowest_value());
         return auctionDTO;
     }
+    public AuctionEntity toAuction(int gwid){
 
+        return AuctionEntity.builder()
+                .wid(gwid)
+                .auction_date(auction_date)
+                .highest_value(highest_value)
+                .buy_now(buy_now)
+                .lowest_value(lowest_value)
+                .build();
+    }
 
 }
