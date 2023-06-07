@@ -255,7 +255,7 @@ function NoticeConfirm() {
                         <div className={styles.bt_wrap}>
                             {!loginUser && <button onClick={goLogin} className={styles.on}>
                                 로그인하여 중고거래하기
-                            </button>}}
+                            </button>}
                             {loginUser && <button onClick={goNoticePage} className={styles.on}>
                                 목록
                             </button>}
