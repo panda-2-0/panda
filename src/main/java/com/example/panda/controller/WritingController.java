@@ -4,6 +4,7 @@ import com.example.panda.dto.AuctionDTO;
 import com.example.panda.dto.UserDTO;
 import com.example.panda.dto.WritingDTO;
 
+import com.example.panda.dto.WritingRegisterDTO;
 import com.example.panda.entity.UserEntity;
 import com.example.panda.entity.WritingEntity;
 
@@ -27,7 +28,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class WritingController {
 
-//    @Autowired
+    //    @Autowired
     private final WritingService writingService;
 
     private final UserService userService;
@@ -83,20 +84,27 @@ public class WritingController {
 //
 //    }
 ///api/noticeRegister
+//    @PostMapping("/api/noticeRegister")
+//    public void boardwritepro(@RequestBody WritingDTO writingDTO){
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        UserDetails userDetails = (UserDetails)authentication.getPrincipal();
+//
+//        writingService.saveWriting(userDetails.getUsername(),writingDTO);
+//    }
     @PostMapping("/api/noticeRegister")
-    public void boardwritepro(@RequestBody WritingDTO writingDTO){
+    public void boardwritepro(@RequestBody WritingRegisterDTO writingRegisterDTO){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetails userDetails = (UserDetails)authentication.getPrincipal();
 
-        writingService.saveWriting(userDetails.getUsername(),writingDTO);
+        writingService.saveWriting(userDetails.getUsername(),writingRegisterDTO);
     }
 
     //게시글 내용 목록 조회를 위한 부분
     @RequestMapping("/api/noticePage")
     public List<WritingDTO> boardList()
     {
-         List<WritingDTO> writingDTOList = writingService.findAll();
-         return writingDTOList;
+        List<WritingDTO> writingDTOList = writingService.findAll();
+        return writingDTOList;
     }
 
 
@@ -107,7 +115,7 @@ public class WritingController {
         WritingDTO writingDTO = writingService.findById(postId);
         return writingDTO;
     }
-    
+
     //게시글 로그인한 사용자 게시글 필터링
     @GetMapping("/api/UserInfo")
     public UserEntity getUserInfo()
@@ -117,23 +125,23 @@ public class WritingController {
         UserEntity userEntity =userService.findbyEmail(userDetails.getUsername());
         return userEntity;
     }
-    
-     //게시글 삭제 기능구현
+
+    //게시글 삭제 기능구현
     @DeleteMapping("/api/posts/{postId}")
     public void deletePost(@PathVariable Integer postId) throws ChangeSetPersister.NotFoundException {
         writingService.deletePost(postId);
 
     }
 
-    @PostMapping("/api/noticeAuctions")
-    public void auctionStart(@RequestBody AuctionDTO auctionDTO)
-    {
-
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        UserDetails userDetails = (UserDetails)authentication.getPrincipal();
-
-        writingService.saveAuction(auctionDTO);
-    }
+//    @PostMapping("/api/noticeAuctions")
+//    public void auctionStart(@RequestBody AuctionDTO auctionDTO)
+//    {
+//
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        UserDetails userDetails = (UserDetails)authentication.getPrincipal();
+//
+//        writingService.saveAuction(auctionDTO);
+//    }
 
 
 }

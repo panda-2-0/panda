@@ -2,6 +2,7 @@ package com.example.panda.service;
 
 import com.example.panda.dto.AuctionDTO;
 import com.example.panda.dto.WritingDTO;
+import com.example.panda.dto.WritingRegisterDTO;
 import com.example.panda.dto.WritingResponseDTO;
 import com.example.panda.entity.AuctionEntity;
 import com.example.panda.entity.UserEntity;
@@ -27,7 +28,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Transactional
 public class WritingService {
-//    @Autowired
+    //    @Autowired
     private final WritingRepository writingRepository;
     private final WritingDSLRepository writingDSLRepository;
     private final UserRepository userRepository;
@@ -38,7 +39,7 @@ public class WritingService {
         we.setFavorite_count(0);
         writingRepository.save(we);
     }
-    
+
     public List<WritingDTO> findAll(){
         List<WritingEntity> writingEntityList = writingRepository.findAll();
         List<WritingDTO> writingDTOList = new ArrayList<>();
@@ -80,7 +81,7 @@ public class WritingService {
         }
         return writingResponseDTOList;
     }
-    
+
     //게시글 삭제 로직 구현
     public void deletePost(Integer postId) throws ChangeSetPersister.NotFoundException {
         if(!writingRepository.existsById(postId))
@@ -91,13 +92,42 @@ public class WritingService {
         writingRepository.deleteById(postId);
     }
 
-    public void saveWriting(String email,WritingDTO writingDTO){
+    public void saveWriting(String email, WritingRegisterDTO writingRegisterDTO){  //게시글과 옥션을 저장
+
+
+        WritingDTO writingDTO=new WritingDTO();
+        AuctionDTO auctionDTO=new AuctionDTO();
+
+        writingDTO.setWriting_name(writingRegisterDTO.getWriting_name());
+        writingDTO.setCategory(writingRegisterDTO.getCategory());
+        if(writingRegisterDTO.getWritingImg()!=null){
+            writingDTO.setWritingImg(writingRegisterDTO.getWritingImg());
+        }
+        writingDTO.setDetail_category(writingRegisterDTO.getDetail_category());
+        writingDTO.setCount(writingRegisterDTO.getCount());
+        writingDTO.setPrice(writingRegisterDTO.getPrice());
+        writingDTO.setContent(writingRegisterDTO.getContent());
+
         WritingEntity writingEntity=WritingEntity.toWritingEntity(writingDTO);
-
         Optional<UserEntity> userEntity=userRepository.findByEmail(email);
-        writingEntity.setUserEntity(userEntity.get());
 
+        writingEntity.setUserEntity(userEntity.get());
         writingRepository.save(writingEntity);
+
+        System.out.println(writingEntity.getWid());
+
+
+        if(writingRegisterDTO.getAuction_flag()==1){
+            auctionDTO.setWid(writingEntity.getWid());
+            auctionDTO.setHighest_value(writingRegisterDTO.getHighest_value());
+            auctionDTO.setBuy_now(writingRegisterDTO.getBuy_now());
+            auctionDTO.setLowest_value(writingRegisterDTO.getLowest_value());
+
+            AuctionEntity auctionEntity=AuctionEntity.toAuctionEntity(auctionDTO,writingRegisterDTO.getAuction_date());
+            auctionEntity.setUserEntity(userEntity.get());
+            auctionRepository.save(auctionEntity);
+        }
+
     }
 
     public List<WritingResponseDTO> findCheap() {
@@ -118,10 +148,10 @@ public class WritingService {
         return writingResponseDTOList;
     }
     //경매 등록
-    public void saveAuction(AuctionDTO auctionDTO){
-        AuctionEntity auctionEntity = AuctionEntity.toAuctionEntity(auctionDTO);
-
-        auctionRepository.save(auctionEntity);
-    }
+//    public void saveAuction(AuctionDTO auctionDTO){
+//        AuctionEntity auctionEntity = AuctionEntity.toAuctionEntity(auctionDTO);
+//
+//        auctionRepository.save(auctionEntity);
+//    }
 
 }
