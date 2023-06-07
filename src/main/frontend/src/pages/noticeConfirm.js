@@ -13,7 +13,8 @@ function NoticeConfirm() {
     const writingdata = new FormData();
     writingdata.append('wid', writingInfo.word);
     const [data, setData] = useState({});
-    const [isAuction, setIsAuction] = useState({});
+    const [isAuction, setIsAuction] = useState({"writing_Id": -1});
+    const [auctionDate, setAuctionDate] = useState([]);
 
     const goNoticePage = () => {
         movePage('/pages/noticePage');
@@ -85,6 +86,21 @@ function NoticeConfirm() {
                             console.log({"writing_Id": -1});
                         } else {
                             setIsAuction(r.data);
+                            const l = []
+                            Array.isArray(isAuction.auction_date)&&isAuction.auction_date.map((item,i) =>{
+                                if(i<3) {
+                                    if (i === 0) {
+                                        l.push(item);
+                                    }
+                                    if (i > 0 && item < 10) {
+                                        l.push("0" + item);
+                                    }
+                                    else if(i > 0){
+                                        l.push(item);
+                                    }
+                                }
+                            });
+                            setAuctionDate(l);
                         }
                     })
                     .catch((error) => console.log(error));
@@ -153,25 +169,47 @@ function NoticeConfirm() {
                                 <dt>가격</dt>
                                 <dd>{data.price}</dd>
                             </dl>
-                            {isAuction.writing_Id !== -1 && <dl>
-                                <dt>즉시구매가</dt>
-                                <dd>{data.price}</dd>
-                            </dl>}
+
                         </div>
+                        {isAuction.writing_Id !== -1 &&
+                            <div>
+                                <h1>***경매상품***</h1>
+                            <div className={styles.info}>
+                                <dl>
+                                    <dt>최저경매가</dt>
+                                    <dd>{isAuction.lowest_value}</dd>
+                                </dl>
+                                <dl>
+                                    <dt>현재 최고가</dt>
+                                    <dd>{isAuction.highest_value + "원(" + isAuction.userEntity.nickname + ")"}</dd>
+                                </dl>
+                                <dl>
+                                    <dt>즉시구매가</dt>
+                                    <dd>{isAuction.buy_now}</dd>
+                                </dl>
+                                <dl>
+                                    <dt>경매종료일</dt>
+                                    <dd>{auctionDate[0] + "."
+                                        + auctionDate[1] + "."
+                                        + auctionDate[2]}</dd>
+                                </dl>
+                        </div>
+                            </div>}
+
                     </div>
                     <img alt="불러오는중" src={data.writingImg != null ? `${atob(data.writingImg)}` : profile}
                          style={{width: '70%'}}/>
                     <div
                         className={styles.cont}
-                        style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>{data.content}
+                        style={{display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: 26}}>{data.content}
                     </div>
+                    <img alt="불러오는중" src={data.writingImg1 != null ? `${atob(data.writingImg1)}` : profile}
+                         style={{width: '30%'}}/>
+                    <img alt="불러오는중" src={data.writingImg2 != null ? `${atob(data.writingImg2)}` : profile}
+                         style={{width: '30%'}}/>
+                    <img alt="불러오는중" src={data.writingImg3 != null ? `${atob(data.writingImg3)}` : profile}
+                         style={{width: '30%'}}/>
                     <div className={styles.bt_wrap}>
-                        <img alt="불러오는중" src={data.writingImg1 != null ? `${atob(data.writingImg1)}` : profile}
-                             style={{width: '30%'}}/>
-                        <img alt="불러오는중" src={data.writingImg2 != null ? `${atob(data.writingImg2)}` : profile}
-                             style={{width: '30%'}}/>
-                        <img alt="불러오는중" src={data.writingImg3 != null ? `${atob(data.writingImg3)}` : profile}
-                             style={{width: '30%'}}/>
                         <a onClick={goNoticePage} className={styles.on}>
                             목록
                         </a>
@@ -183,7 +221,12 @@ function NoticeConfirm() {
                         )}
                         {!(loginUser && data.user_name === loginUser.nickname) && (
                             <a onClick={goChat} className={styles.on}>
-                                채팅
+                                즉시구매(채팅)
+                            </a>
+                        )}
+                        {!(loginUser && data.user_name === loginUser.nickname) && isAuction.writing_Id !== -1 && (
+                            <a onClick={goChat} className={styles.on}>
+                                최고가 제시
                             </a>
                         )}
                     </div>
