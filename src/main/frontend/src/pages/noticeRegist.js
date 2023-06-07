@@ -452,7 +452,7 @@ const NoticeRegist = () => {
                                                                 <option value={"축구"}>축구</option>
                                                                 <option value={"야구"}>야구</option>
                                                                 <option value={"농구"}>농구</option>
-                                                                <option value={"웨이트"}>웨이트</option>
+                                                                <option value={"헬스"}>헬스</option>
                                                                 <option value={"스포츠기타"}>기타</option>
                                                             </optgroup>
                                                         ):(
@@ -734,7 +734,7 @@ const NoticeRegist = () => {
                                                                 <option value={"축구"}>축구</option>
                                                                 <option value={"야구"}>야구</option>
                                                                 <option value={"농구"}>농구</option>
-                                                                <option value={"웨이트"}>웨이트</option>
+                                                                <option value={"헬스"}>헬스</option>
                                                                 <option value={"스포츠기타"}>기타</option>
                                                             </optgroup>
                                                         ):(
