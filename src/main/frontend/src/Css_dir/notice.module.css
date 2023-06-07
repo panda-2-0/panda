@@ -85,6 +85,19 @@
     margin-left:10px;
     cursor: pointer;
 }
+.bt_wrap a
+{
+    background-color: black;
+    color: white;
+    margin-top:30px;
+    min-width:80px;
+    padding:10px;
+    border:1px solid #000;
+    border-radius: 2px;
+    font-size:1.4rem;
+    margin-left:10px;
+    cursor: pointer;
+}
 
 .bt_wrap a:first-child
 {
