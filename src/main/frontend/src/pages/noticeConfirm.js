@@ -123,9 +123,12 @@ function NoticeConfirm() {
                             {data.writing_name}&nbsp;&nbsp;
                             <span className={styles.favorite_count}>찜: {data.favorite_count}회</span>
                         </div>
-                        <button className={styles.favorite_btn} onClick={registerFavorite}>
-                            찜등록
-                        </button>
+                        {!(loginUser && data.user_name === loginUser.nickname) && (
+                            <button className={styles.favorite_btn} onClick={registerFavorite}>
+                                찜등록
+                            </button>
+                        )}
+
                     </div>
                     <div className={styles.info}>
                         <dl>
