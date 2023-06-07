@@ -83,4 +83,16 @@ public class WritingController {
         writingService.deletePost(postId);
 
     }
+
+    @GetMapping("/api/myPosts")
+    public List<WritingDTO> getMyPosts()
+    {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetails = (UserDetails)authentication.getPrincipal();
+        UserEntity userEntity =userService.findbyEmail(userDetails.getUsername());
+
+        String user_email = userEntity.getEmail();
+        List<WritingDTO> myPosts = writingService.findByUserId(user_email);
+        return myPosts;
+    }
 }

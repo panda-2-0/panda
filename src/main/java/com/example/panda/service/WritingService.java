@@ -165,6 +165,28 @@ public class WritingService {
         }
         return writingResponseDTOList;
     }
+
+    public List<WritingDTO> findByUserId(String userEmail) {
+        List<WritingEntity> writings = writingDSLRepository.findByUserEmail(userEmail);
+        List<WritingDTO> writingDTOS = new ArrayList<>();
+        for(WritingEntity writing : writings)
+        {
+            WritingDTO writingDTO = convertToDTO(writing);
+            writingDTOS.add(writingDTO);
+        }
+        return writingDTOS;
+    }
+
+    private WritingDTO convertToDTO(WritingEntity writing) {
+        WritingDTO writingDTO = new WritingDTO();
+        writingDTO.setWriting_Id(writing.getWid());
+        writingDTO.setWriting_name(writing.getWriting_name());
+        writingDTO.setFavorite_count(writing.getFavorite_count());
+        writingDTO.setRegit_date(writing.getRegit_date());
+        writingDTO.setUser_name(writing.getUserEntity().getNickname());
+
+        return writingDTO;
+    }
     //경매 등록
 //    public void saveAuction(AuctionDTO auctionDTO){
 //        AuctionEntity auctionEntity = AuctionEntity.toAuctionEntity(auctionDTO);

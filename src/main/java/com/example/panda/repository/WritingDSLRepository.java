@@ -52,4 +52,12 @@ public class WritingDSLRepository {
                 .limit(10)
                 .fetch();
     }
+
+
+    public List<WritingEntity> findByUserEmail(String userEmail) {
+        return queryFactory
+                .selectFrom(writingEntity)
+                .where(writingEntity.userEntity.email.eq(userEmail))
+                .fetch();
+    }
 }

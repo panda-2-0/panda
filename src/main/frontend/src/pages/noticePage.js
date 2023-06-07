@@ -45,7 +45,7 @@ function NoticePage(){
     };
 
     useEffect(() => {
-       axios.get('/api/noticePage')
+       axios.get('/api/myPosts')
             .then(response => {
             setPosts(response.data);
            })
@@ -96,7 +96,7 @@ function NoticePage(){
                                 <div className={styles.count}>찜</div>
                             </div>
                             {posts.map(post => (
-                                loginUser && post.user_name === loginUser.nickname && (
+                                // loginUser && post.user_name === loginUser.nickname && (
                                     <div key={post.writing_Id}>
                                         <div className={styles.num}>{post.writing_Id}</div>
                                         <div className={styles.title} onClick={movePage1} id={post.writing_Id}>{post.writing_name}</div>
@@ -104,7 +104,7 @@ function NoticePage(){
                                         <div className={styles.date}>{formatDate(post.regit_date)}</div>
                                         <div className={styles.count}>{post.favorite_count}</div>
                                     </div>
-                                    )
+                                    // )
                                  ))}
 
                         </div>
