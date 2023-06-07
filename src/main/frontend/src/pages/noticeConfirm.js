@@ -156,11 +156,13 @@ function NoticeConfirm() {
                         {loginUser && data.user_name === loginUser.nickname && (
                             <a onClick={handleDelete}>삭제</a>
                         )}
+                        {!(loginUser && data.user_name === loginUser.nickname) && (
+                            <a onClick={goChat} className={styles.on}>
+                                채팅
+                            </a>
+                        )}
 
 
-                        <a onClick={goChat} className={styles.on}>
-                            채팅
-                        </a>
                     </div>
                 </div>
             </div>
