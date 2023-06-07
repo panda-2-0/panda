@@ -75,6 +75,7 @@ function OtherPage() {
         }).catch(error=>{
             console.error(error);
         })
+        alert('선택하신 제품(들)이 삭제되었습니다.');
         window.location.reload();
         //document.location.href="/pages/OtherPage";
     }

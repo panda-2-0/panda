@@ -23,7 +23,8 @@
 .board_wrap
 {
     font-size:10px;
-    width: 1000px;
+    width: 90vw;
+    max-width: 1000px;
     margin: 0 auto;
     text-align: center;
     position: relative;
@@ -71,8 +72,10 @@
     text-align :center;
     font-size:0;
 }
-.bt_wrap a
+.bt_wrap button
 {
+    background-color: black;
+    color: white;
     margin-top:30px;
     min-width:80px;
     padding:10px;
@@ -418,7 +421,8 @@
 .board_view_wrap
 {
     font-size:10px;
-    width: 1000px;
+    width: 90vw;
+    max-width: 1000px;
     margin:100px auto;
     margin-top: 0px;
 }

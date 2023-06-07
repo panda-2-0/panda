@@ -245,33 +245,38 @@ function NoticeConfirm() {
                             }}>{data.content}
                         </div>
                         <img alt="불러오는중" src={data.writingImg1 != null ? `${atob(data.writingImg1)}` : profile}
-                             style={{width: '30%'}}/>
+                             style={{width: '70%'}}/>
+                        <br/>
                         <img alt="불러오는중" src={data.writingImg2 != null ? `${atob(data.writingImg2)}` : profile}
-                             style={{width: '30%'}}/>
+                             style={{width: '70%'}}/>
+                        <br/>
                         <img alt="불러오는중" src={data.writingImg3 != null ? `${atob(data.writingImg3)}` : profile}
-                             style={{width: '30%'}}/>
+                             style={{width: '70%'}}/>
                         <div className={styles.bt_wrap}>
-                            {!loginUser && <a onClick={goLogin} className={styles.on}>
+                            {!loginUser && <button onClick={goLogin} className={styles.on}>
                                 로그인하여 중고거래하기
-                            </a>}}
-                            {loginUser && <a onClick={goNoticePage} className={styles.on}>
+                            </button>}}
+                            {loginUser && <button onClick={goNoticePage} className={styles.on}>
                                 목록
-                            </a>}
+                            </button>}
+                            {loginUser && data.user_name !== loginUser.nickname && <button onClick={goNoticePage} className={styles.on}>
+                                채팅
+                            </button>}
                             {loginUser && data.user_name === loginUser.nickname && (
-                                <a onClick={goModify}>수정</a>
+                                <button onClick={goModify}>수정</button>
                             )}
                             {loginUser && data.user_name === loginUser.nickname && (
-                                <a onClick={handleDelete}>삭제</a>
+                                <button onClick={handleDelete}>삭제</button>
                             )}
                             {loginUser && isAuction.writing_Id !== -1 && (
-                                <a onClick={goChat} className={styles.on}>
+                                <button onClick={goChat} className={styles.on}>
                                     즉시구매(채팅)
-                                </a>
+                                </button>
                             )}
                             {loginUser && isAuction.writing_Id !== -1 && (
-                                <a onClick={goMax} className={styles.on}>
+                                <button onClick={goMax} className={styles.on}>
                                     최고가 제시
-                                </a>
+                                </button>
                             )}
                             <Modal
                                 isOpen={isMaxOpen}
