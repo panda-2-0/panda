@@ -264,14 +264,17 @@ function NoticeConfirm() {
                                 fontSize: 26
                             }}>{data.content}
                         </div>
-                        <img alt="불러오는중" src={data.writingImg1 != null ? `${atob(data.writingImg1)}` : profile}
-                             style={{width: '70%'}}/>
+                        {data.writingImg1 != null &&
+                        <img alt="불러오는중" src={`${atob(data.writingImg1)}`}
+                             style={{width: '70%'}}/>}
                         <br/>
-                        <img alt="불러오는중" src={data.writingImg2 != null ? `${atob(data.writingImg2)}` : profile}
-                             style={{width: '70%'}}/>
+                        {data.writingImg2 != null &&
+                            <img alt="불러오는중" src={`${atob(data.writingImg2)}`}
+                                 style={{width: '70%'}}/>}
                         <br/>
-                        <img alt="불러오는중" src={data.writingImg3 != null ? `${atob(data.writingImg3)}` : profile}
-                             style={{width: '70%'}}/>
+                        {data.writingImg3 != null &&
+                            <img alt="불러오는중" src={`${atob(data.writingImg3)}`}
+                                 style={{width: '70%'}}/>}
                         <div className={styles.bt_wrap}>
                             {!loginUser && <button onClick={goLogin} className={styles.on}>
                                 로그인하여 중고거래하기
