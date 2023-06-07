@@ -174,54 +174,10 @@ const NoticeRegist = () => {
             };
             reader.readAsDataURL(file);
         }
-
-
-
-        // const reader = new FileReader();
-        // reader.onload = function (e) {
-        //     setWriting_photo(e.target.result);
-        // };
-        // if (event.target.files.length > 0) { // Check if an image is selected
-        //     reader.readAsDataURL(event.target.files[0]);
-        // }
     };
     const imageSelectClick = () => {
         imageInput.current.click();
     };
-
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();
-    //
-    //     const formData = new FormData();
-    //     formData.append('writing_name', writing_name);
-    //     formData.append('writing_photo', writing_photo);
-    //     formData.append('category', category);
-    //     formData.append('detail_category', detail_category);
-    //     formData.append('count', count);
-    //     formData.append('price', price);
-    //     formData.append('content', content);
-    //
-    //     axios.post("/api/noticeRegister", formData, {
-    //         headers: {
-    //             'Content-Type': 'multipart/form-data'
-    //         }
-    //     })
-    //         .then(response => {
-    //             alertmessage();
-    //         })
-    //         .catch(error => {
-    //             console.error(error);
-    //             nagative_alertmessage();
-    //         });
-    //
-    //     setTitle('');
-    //     setCount(0);
-    //     setPrice(0);
-    //     setCategory('');
-    //     setDetail_category('');
-    //     setContent('');
-    //     setWriting_photo('');
-    // };
 
     const registerInfo = () => {
         if(writing_name===''){
@@ -291,103 +247,11 @@ const NoticeRegist = () => {
         })
             .then((response) => {
                 alert('게시글 등록 및 경매 등록이 완료되었습니다.');
+                gonoticepage();
             })
             .catch(error => {
                 nagative_alertmessage();
             });
-        gonoticepage();
-        // if (visiable) {
-        // if(writing_name===''){
-        //     alert('글 제목을 입력해주세요!');
-        //     return;
-        // }
-        // if(category===''){
-        //     alert('카테고리를 입력해주세요!');
-        //     return;
-        // }
-        // if(detail_category===''){
-        //     alert('세부 카테고리를 입력해주세요!');
-        //     return;
-        // }
-        // if(count===0){
-        //     alert('수량 입력해주세요!');
-        //     return;
-        // }
-        // if(price===0){
-        //     alert('금액을 0원으로 책정할 수 없습니다!');
-        //     return;
-        // }
-        // if(content===''){
-        //     alert('글 내용을 입력해주세요!');
-        //     return;
-        // }
-        //     const writing = {
-        //         writing_name: writing_name,
-        //         category: category,
-        //         detail_category: detail_category,
-        //         count: count,
-        //         price: price,
-        //         content: content,
-        //         writingImg: btoa(writing_photo),
-        //         // auction_date: auction_date,
-        //         highest_value: highest_value,
-        //         buy_now: buy_now,
-        //         lowest_value: lowest_value,
-        //         is_Auction:visiable
-        //     }
-        //
-        //     axios.post('/api/noticeRegister', writing, {
-        //         headers: {
-        //             "Content-Type": "application/json",
-        //             "Access-Control-Allow-Origin": "http://localhost:8000",
-        //             "Access-Control-Allow-Credentials": "true",
-        //         },
-        //     })
-        //         .then((response) => {
-        //             // axios.post("/api/noticeAuctions", auction, {
-        //             //     headers: {
-        //             //         "Content-Type": "application/json",
-        //             //         "Access-Control-Allow-Origin": "http://localhost:8000",
-        //             //         "Access-Control-Allow-Credentials": "true",
-        //             //     },
-        //             // })
-        //             //     .then((response) => {
-        //             //         alert("경매 등록 성공!!");
-        //             //     })
-        //             //     .catch(error => {
-        //             //         alert("경매 등록 실패!");
-        //             //     });
-        //         })
-        //         .catch(error => {
-        //             nagative_alertmessage();
-        //         });
-        //     gonoticepage();
-        // } else {
-        //     const writing = {
-        //         writing_name: writing_name,
-        //         category: category,
-        //         detail_category: detail_category,
-        //         count: count,
-        //         price: price,
-        //         content: content,
-        //         writingImg: btoa(writing_photo)
-        //     };
-        //
-        //     axios.post('/api/noticeRegister', writing, {
-        //         headers: {
-        //             "Content-Type": "application/json",
-        //             "Access-Control-Allow-Origin": "http://localhost:8000",
-        //             "Access-Control-Allow-Credentials": "true",
-        //         },
-        //     })
-        //         .then((response) => {
-        //             alertmessage();
-        //         })
-        //         .catch(error => {
-        //             alert("경매 등록 실패!");
-        //         });
-        //     gonoticepage();
-        // }
     };
     useEffect(()=> {
         const windowResize = () => {
