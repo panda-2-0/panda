@@ -110,7 +110,7 @@ function NoticePage(){
                         </div>
 
                         <div className={styles.bt_wrap}>
-                            <a onClick={goregist} className={styles.on}>등록</a>
+                            <button onClick={goregist} className={styles.on}>등록</button>
                         </div>
                     </div>
                 </div>

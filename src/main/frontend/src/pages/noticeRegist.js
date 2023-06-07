@@ -894,7 +894,7 @@ const NoticeRegist = () => {
                         </div>
                         <div className={styles.bt_wrap}>
                             <button type="submit" className={styles.regist_btn_r}>등록</button>
-                            <a onClick={gonoticepage}>취소</a>
+                            <button onClick={gonoticepage}>취소</button>
 
                         </div>
                     </div>
