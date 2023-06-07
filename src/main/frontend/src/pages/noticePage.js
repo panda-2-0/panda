@@ -35,6 +35,15 @@ function NoticePage(){
     const [posts , setPosts] = useState([]);
     const [loginUser , setLoiginUser] = useState(null)
 
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        if (isNaN(date)) return ''; // 유효하지 않은 날짜인 경우 빈 문자열 반환
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    };
+
     useEffect(() => {
        axios.get('/api/noticePage')
             .then(response => {
@@ -92,8 +101,8 @@ function NoticePage(){
                                         <div className={styles.num}>{post.writing_Id}</div>
                                         <div className={styles.title} onClick={movePage1} id={post.writing_Id}>{post.writing_name}</div>
                                         <div className={styles.writer}>{post.user_name}</div>
-                                        <div className={styles.date}>2020.20.20</div>
-                                        <div className={styles.count}>{data.favorite_count}</div>
+                                        <div className={styles.date}>{post.regit_date}</div>
+                                        <div className={styles.count}>{post.favorite_count}</div>
                                     </div>
                                     )
                                  ))}
