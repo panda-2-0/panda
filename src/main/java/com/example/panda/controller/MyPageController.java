@@ -75,7 +75,7 @@ public class MyPageController {
 
         return writingDTO;
     }
-    @PostMapping("/notice/favorite_register")
+    @PostMapping("/api/favorite_register")
     public int favoriteRegit(@RequestParam("wid") int wid){        //찜 등록
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetails userDetails = (UserDetails)authentication.getPrincipal();
@@ -91,14 +91,14 @@ public class MyPageController {
         return list;
     }
 
-    @PostMapping("/notice/saveInquiry")
+    @PostMapping("/api/saveInquiry")
     public void saveInquiry(@RequestParam("wid") int wid){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetails userDetails = (UserDetails)authentication.getPrincipal();
 
         inquiryHistoryService.save(userDetails.getUsername(),wid);
     }
-    @GetMapping("/notice/inquiryList")
+    @GetMapping("/api/inquiryList")
     public List<WritingDTO> myInquiryList(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetails userDetails = (UserDetails)authentication.getPrincipal();

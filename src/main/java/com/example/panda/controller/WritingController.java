@@ -37,64 +37,6 @@ public class WritingController {
 
     private final UserService userService;
 
-//    @PostMapping("/api/noticeRegister")
-//    public void boardwritepro(@RequestParam("writing_name") String writingName,
-//                              @RequestParam("writing_photo") MultipartFile writingPhoto,
-//                              @RequestParam("category") String category,
-//                              @RequestParam("detail_category") String detailCategory,
-//                              @RequestParam("count") int count,
-//                              @RequestParam("price") int price,
-//                              @RequestParam("content") String content) throws IOException {
-//
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        UserDetails userDetails = (UserDetails)authentication.getPrincipal();
-//        UserEntity userEntity =userService.findbyEmail(userDetails.getUsername());
-//        WritingEntity writingentity = new WritingEntity();
-//
-//        writingentity.setUserEntity(userEntity);
-//        writingentity.setWriting_name(writingName);
-//        writingentity.setCategory(category);
-//        writingentity.setDetail_category(detailCategory);
-//        writingentity.setCount(count);
-//        writingentity.setPrice(price);
-//        writingentity.setContent(content);
-//
-//
-////        if (!writingPhoto.isEmpty()) {
-////            byte[] imageData = writingPhoto.getBytes();
-////            String base64Image = Base64.getEncoder().encodeToString(imageData);
-////            writingentity.setWriting_photo(imageData);
-////        }
-//
-//        System.out.println("이 부분 실행이 되고있니?");
-//        writingService.write(writingentity);
-//
-//
-//    }
-
-    //게시글 내용 데이터베이스에 저장 이미지는 계속 작업중
-//    @PostMapping("http://localhost:8080/noticeRegist")
-//    public void boardwritepro(WritingEntity writingentity , @RequestParam("writing_photo") MultipartFile image) throws IOException {
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        UserDetails userDetails = (UserDetails)authentication.getPrincipal();
-//        UserEntity userEntity =userService.findbyEmail(userDetails.getUsername());
-//        byte[] imageData = image.getBytes();
-//
-//        writingentity.setUserEntity(userEntity);
-//        //writingentity.setWriting_photo(imageData);
-//        //writingService.saveImage(image , writingentity);
-//        writingService.write(writingentity);
-//
-//
-//    }
-///api/noticeRegister
-//    @PostMapping("/api/noticeRegister")
-//    public void boardwritepro(@RequestBody WritingDTO writingDTO){
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        UserDetails userDetails = (UserDetails)authentication.getPrincipal();
-//
-//        writingService.saveWriting(userDetails.getUsername(),writingDTO);
-//    }
     @PostMapping("/api/noticeRegister")
     public void boardwritepro(@RequestBody WritingRegisterDTO writingRegisterDTO){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -104,7 +46,7 @@ public class WritingController {
     }
 
     //게시글 내용 목록 조회를 위한 부분
-    @RequestMapping("/notice/noticePage")
+    @RequestMapping("/api/noticePage")
     public List<WritingDTO> boardList()
     {
         List<WritingDTO> writingDTOList = writingService.findAll();
@@ -113,7 +55,7 @@ public class WritingController {
 
 
     //게시글 아이디 하나로 상세 페이지 조회 하는 로직
-    @GetMapping ("/api/noticeConfirm/{postId}")
+    @GetMapping ("/notice/noticeConfirm/{postId}")
     public WritingDTO getPost(@PathVariable int postId)
     {
         WritingDTO writingDTO = writingService.findById(postId);
@@ -125,7 +67,7 @@ public class WritingController {
         return writingService.isAuction(wid);
     }
 
-    //게시글 로그인한 사용자 게시글 필터링
+    // 로그인한 사용자 entity반환
     @GetMapping("/api/UserInfo")
     public UserEntity getUserInfo()
     {
@@ -141,17 +83,4 @@ public class WritingController {
         writingService.deletePost(postId);
 
     }
-
-//    //경매 기능
-//    @GetMapping("/api/Auctions/{postId}")
-//    public AuctionDTO getAuctionInfo(@PathVariable int postId)
-//    {
-//        AuctionDTO auctionDTO = writingService.findByauctionId(postId);
-//        return auctionDTO;
-//    }
-
-
-
-
-
 }
