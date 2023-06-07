@@ -29,7 +29,7 @@ const NoticeRegist = () => {
     const [count, setCount] = useState(0);
     const [price, setPrice] = useState(0);
     const [content, setContent] = useState('');
-    const [windowSize, setWindowSize] = useState(0);
+    const [windowSize, setWindowSize] = useState(window.innerWidth);
     const imageInput = useRef();
 
     //경매 정보

@@ -393,6 +393,7 @@
     font-size:10px;
     width: 1000px;
     margin:100px auto;
+    margin-top: 0px;
 }
 
 @media (max-width: 1000px)
