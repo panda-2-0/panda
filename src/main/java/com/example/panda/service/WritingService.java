@@ -126,7 +126,7 @@ public class WritingService {
             AuctionEntity auctionEntity=AuctionEntity.toAuctionEntity(auctionDTO,writingRegisterDTO.getAuction_date());
             auctionEntity.setUserEntity(userEntity.get());
             auctionRepository.save(auctionEntity);
-        }
+       }
 
     }
 

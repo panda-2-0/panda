@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
@@ -16,7 +17,7 @@ public class FavoriteDTO {
     private int writing_id;
     private int price;
     private String writing_name;
-    private LocalDateTime regit_date;
+    private LocalDate regit_date;
     private UserDTO userDTO;
     private WritingDTO writingDTO;
 

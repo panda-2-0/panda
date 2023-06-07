@@ -1,6 +1,6 @@
 package com.example.panda.controller;
 
-import com.example.panda.dto.AuctionDTO;
+//import com.example.panda.dto.AuctionDTO;
 import com.example.panda.dto.UserDTO;
 import com.example.panda.dto.WritingDTO;
 

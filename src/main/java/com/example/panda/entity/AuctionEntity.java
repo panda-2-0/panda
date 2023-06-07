@@ -17,11 +17,11 @@ public class AuctionEntity {
     @Id
     private int wid;
     @Column
-    private LocalDateTime auction_date;
+     private LocalDateTime auction_date;
     @Column
     private int highest_value;
     @Column
-    private int buy_now;
+   private int buy_now;
     @ManyToOne
     @JoinColumn(name = "email")
     private UserEntity userEntity;
@@ -38,6 +38,7 @@ public class AuctionEntity {
 
         return auctionEntity;
     }
+
 
 
 }

@@ -28,9 +28,11 @@ public class QAuctionEntity extends EntityPathBase<AuctionEntity> {
 
     public final NumberPath<Integer> highest_value = createNumber("highest_value", Integer.class);
 
+    public final NumberPath<Integer> lowest_value = createNumber("lowest_value", Integer.class);
+
     public final QUserEntity userEntity;
 
-    public final NumberPath<Integer> writing_Id = createNumber("writing_Id", Integer.class);
+    public final NumberPath<Integer> wid = createNumber("wid", Integer.class);
 
     public QAuctionEntity(String variable) {
         this(AuctionEntity.class, forVariable(variable), INITS);

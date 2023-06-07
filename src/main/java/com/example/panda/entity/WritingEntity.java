@@ -6,7 +6,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Entity
 @Getter
@@ -31,7 +33,7 @@ public class WritingEntity {
     @Column
     private int price;
     @Column
-    private LocalDateTime regit_date;
+    private LocalDate regit_date;
 
     @ManyToOne
     @JoinColumn(name="email")
@@ -43,7 +45,10 @@ public class WritingEntity {
 
 
 
-
+    public String getRegit_dateFormatted() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        return regit_date.format(formatter);
+    }
     public static WritingEntity toWritingEntity(WritingDTO writingDTO){  //글 저장용
         WritingEntity writingEntity=new WritingEntity();
 
@@ -56,7 +61,10 @@ public class WritingEntity {
         writingEntity.setDetail_category(writingDTO.getDetail_category());
         writingEntity.setCount(writingDTO.getCount());
         writingEntity.setPrice(writingDTO.getPrice());
-        writingEntity.setRegit_date(LocalDateTime.now());
+
+
+        writingEntity.setRegit_date(LocalDate.now());
+
         writingEntity.setFavorite_count(0);
         return writingEntity;
     }

@@ -34,7 +34,7 @@ public class QWritingEntity extends EntityPathBase<WritingEntity> {
 
     public final NumberPath<Integer> price = createNumber("price", Integer.class);
 
-    public final DateTimePath<java.time.LocalDateTime> regit_date = createDateTime("regit_date", java.time.LocalDateTime.class);
+    public final DatePath<java.time.LocalDate> regit_date = createDate("regit_date", java.time.LocalDate.class);
 
     public final QUserEntity userEntity;
 

@@ -101,7 +101,7 @@ function NoticePage(){
                                         <div className={styles.num}>{post.writing_Id}</div>
                                         <div className={styles.title} onClick={movePage1} id={post.writing_Id}>{post.writing_name}</div>
                                         <div className={styles.writer}>{post.user_name}</div>
-                                        <div className={styles.date}>{post.regit_date}</div>
+                                        <div className={styles.date}>{formatDate(post.regit_date)}</div>
                                         <div className={styles.count}>{post.favorite_count}</div>
                                     </div>
                                     )
