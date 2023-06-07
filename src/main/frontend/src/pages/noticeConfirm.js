@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styles from "../Css_dir/notice.module.css";
+import profile from "../imgs/logo512_512.png";
 
 function NoticeConfirm() {
     const movePage = useNavigate();
@@ -12,7 +13,7 @@ function NoticeConfirm() {
     const writingdata = new FormData();
     writingdata.append('wid', writingInfo.word);
     const [data, setData] = useState({}); // 해당 게시글에 찜등록한 사람 수
-    const [imagedata, setImagedata] = useState(null); // 이미지 데이터
+
 
     const goNoticePage = () => {
         movePage('/pages/noticePage');
@@ -79,6 +80,18 @@ function NoticeConfirm() {
             .catch((error) => console.log(error));
     }, []);
 
+    const [loginUser , setLoginUser] = useState(null)
+
+    useEffect(() => {
+        axios.get('/api/UserInfo')
+            .then(response => {
+                setLoginUser(response.data);
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    } , [])
+
     const deletePost = (postId) => {
         axios
             .delete(`/api/posts/${postId}`)
@@ -131,7 +144,7 @@ function NoticeConfirm() {
                             <dt>사진</dt>
                             <dd>
 
-                                <img alt="불러오는중" src={`data:image/jpeg;base64,${btoa(data.writing_photo)}`} style={{ maxWidth: '200px' }} />
+                                <img alt="불러오는중" src={data.writingImg!=null ? `${atob(data.writingImg)}`: profile} style={{ maxWidth: '200px' }} />
 
                             </dd>
                         </dl>
@@ -141,8 +154,14 @@ function NoticeConfirm() {
                         <a onClick={goNoticePage} className={styles.on}>
                             목록
                         </a>
-                        <a onClick={goModify}>수정</a>
-                        <a onClick={handleDelete}>삭제</a>
+                        {loginUser && data.user_name === loginUser.nickname && (
+                            <a onClick={goModify}>수정</a>
+                        )}
+                        {loginUser && data.user_name === loginUser.nickname && (
+                            <a onClick={handleDelete}>삭제</a>
+                        )}
+
+
                         <a onClick={goChat} className={styles.on}>
                             채팅
                         </a>
