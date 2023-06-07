@@ -717,74 +717,118 @@ const NoticeRegist = () => {
                                                     <dt>세부 카테고리</dt>
                                                     <dd><select name="detail_category" id="detail_category"
                                                                 onChange={(e) => setDetail_category(e.target.value)}>
-                                                        <optgroup label={"의류"}>
-                                                            <option value={"모자"}>모자</option>
-                                                            <option value={"상의"}>상의</option>
-                                                            <option value={"하의"}>하의</option>
-                                                            <option value={"신발"}>신발</option>
-                                                            <option value={"기타"}>기타</option>
-                                                        </optgroup>
-                                                        <optgroup label={"뷰티"}>
-                                                            <option value={"공용화장품"}>모자</option>
-                                                            <option value={"남자 화장품"}>상의</option>
-                                                            <option value={"여자 화장품"}>하의</option>
-                                                            <option value={"기타"}>기타</option>
-                                                        </optgroup>
-                                                        <optgroup label={"가구/인테리어"}>
-                                                            <option value={"침대"}>침대</option>
-                                                            <option value={"소파"}>소파</option>
-                                                            <option value={"책상"}>책상</option>
-                                                            <option value={"기타"}>기타</option>
-                                                        </optgroup>
-                                                        <optgroup label={"가전"}>
-                                                            <option value={"냉장고"}>냉장고</option>
-                                                            <option value={"TV"}>TV</option>
-                                                            <option value={"청소기"}>청소기</option>
-                                                            <option value={"에어컨"}>에어컨</option>
-                                                            <option value={"기타"}>기타</option>
-                                                        </optgroup>
-                                                        <optgroup label={"모바일/태블릿/PC"}>
-                                                            <option value={"스마트폰"}>스마트폰</option>
-                                                            <option value={"태블릿"}>태블릿</option>
-                                                            <option value={"노트북"}>노트북</option>
-                                                            <option value={"기타"}>기타</option>
-                                                        </optgroup>
-                                                        <optgroup label={"생활용품"}>
-                                                            <option value={"생활필수품"}>생활필수품</option>
-                                                            <option value={"욕실"}>욕실</option>
-                                                            <option value={"주방"}>주방</option>
-                                                            <option value={"기타"}>기타</option>
-                                                        </optgroup>
-                                                        <optgroup label={"반려동물"}>
-                                                            <option value={"사료"}>사료</option>
-                                                            <option value={"장난감"}>장난감</option>
-                                                            <option value={"의류"}>의류</option>
-                                                            <option value={"기타"}>기타</option>
-                                                        </optgroup>
-                                                        <optgroup label={"문구/도서"}>
-                                                            <option value={"책"}>책</option>
-                                                            <option value={"볼펜"}>볼펜</option>
-                                                            <option value={"샤프/연필"}>샤프/연필</option>
-                                                            <option value={"기타"}>기타</option>
-                                                        </optgroup>
-                                                        <optgroup label={"스포츠"}>
-                                                            <option value={"축구"}>축구</option>
-                                                            <option value={"야구"}>야구</option>
-                                                            <option value={"농구"}>농구</option>
-                                                            <option value={"기구"}>기구</option>
-                                                        </optgroup>
-                                                        <optgroup label={"자동차용품"}>
-                                                            <option value={"방향제"}>방향제</option>
-                                                            <option value={"장식 악세사리"}>장식 악세사리</option>
-                                                            <option value={"블랙박스"}>블랙박스</option>
-                                                            <option value={"기타"}>기타</option>
-                                                        </optgroup>
-                                                        <optgroup label={"식품"}>
-                                                            <option value={"생수"}>생수</option>
-                                                            <option value={"면"}>면</option>
-                                                            <option value={"과자"}>과자</option>
-                                                            <option value={"빵"}>빵</option>
-                                                        </optgroup>
+                                                        {category==='의류'?(
+                                                            <optgroup label={"의류"}>
+                                                                <option value={"모자"}>모자</option>
+                                                                <option value={"상의"}>상의</option>
+                                                                <option value={"하의"}>하의</option>
+                                                                <option value={"신발"}>신발</option>
+                                                                <option value={"기타"}>기타</option>
+                                                            </optgroup>
+                                                        ):(
+                                                            <></>
+                                                        )}
+                                                        {category==='뷰티'?(
+                                                            <optgroup label={"뷰티"}>
+                                                                <option value={"공용화장품"}>모자</option>
+                                                                <option value={"남자 화장품"}>상의</option>
+                                                                <option value={"여자 화장품"}>하의</option>
+                                                                <option value={"기타"}>기타</option>
+                                                            </optgroup>
+                                                        ):(
+                                                            <></>
+                                                        )}
+                                                        {category==='가구/인테리어'?(
+                                                            <optgroup label={"가구/인테리어"}>
+                                                                <option value={"침대"}>침대</option>
+                                                                <option value={"소파"}>소파</option>
+                                                                <option value={"책상"}>책상</option>
+                                                                <option value={"기타"}>기타</option>
+                                                            </optgroup>
+                                                        ):(
+                                                            <></>
+                                                        )}
+                                                        {category==='가전제품'?(
+                                                            <optgroup label={"가전제품"}>
+                                                                <option value={"냉장고"}>냉장고</option>
+                                                                <option value={"TV"}>TV</option>
+                                                                <option value={"청소기"}>청소기</option>
+                                                                <option value={"에어컨"}>에어컨</option>
+                                                                <option value={"기타"}>기타</option>
+                                                            </optgroup>
+                                                        ):(
+                                                            <></>
+                                                        )}
+                                                        {category==='모바일/태블릿/PC'?(
+                                                            <optgroup label={"모바일/태블릿/PC"}>
+                                                                <option value={"스마트폰"}>스마트폰</option>
+                                                                <option value={"태블릿"}>태블릿</option>
+                                                                <option value={"노트북"}>노트북</option>
+                                                                <option value={"기타"}>기타</option>
+                                                            </optgroup>
+                                                        ):(
+                                                            <></>
+                                                        )}
+                                                        {category==='생활용품'?(
+                                                            <optgroup label={"생활용품"}>
+                                                                <option value={"생활필수품"}>생활필수품</option>
+                                                                <option value={"욕실"}>욕실</option>
+                                                                <option value={"주방"}>주방</option>
+                                                                <option value={"기타"}>기타</option>
+                                                            </optgroup>
+                                                        ):(
+                                                            <></>
+                                                        )}
+                                                        {category==='반려동물'?(
+                                                            <optgroup label={"반려동물"}>
+                                                                <option value={"사료"}>사료</option>
+                                                                <option value={"장난감"}>장난감</option>
+                                                                <option value={"의류"}>의류</option>
+                                                                <option value={"기타"}>기타</option>
+                                                            </optgroup>
+                                                        ):(
+                                                            <></>
+                                                        )}
+                                                        {category==='문구/도서'?(
+                                                            <optgroup label={"문구/도서"}>
+                                                                <option value={"책"}>책</option>
+                                                                <option value={"볼펜"}>볼펜</option>
+                                                                <option value={"샤프/연필"}>샤프/연필</option>
+                                                                <option value={"기타"}>기타</option>
+                                                            </optgroup>
+                                                        ):(
+                                                            <></>
+                                                        )}
+                                                        {category==='스포츠'?(
+                                                            <optgroup label={"스포츠"}>
+                                                                <option value={"축구"}>축구</option>
+                                                                <option value={"야구"}>야구</option>
+                                                                <option value={"농구"}>농구</option>
+                                                                <option value={"기구"}>기구</option>
+                                                            </optgroup>
+                                                        ):(
+                                                            <></>
+                                                        )}
+                                                        {category==='자동차용품'?(
+                                                            <optgroup label={"자동차용품"}>
+                                                                <option value={"방향제"}>방향제</option>
+                                                                <option value={"장식 악세사리"}>장식 악세사리</option>
+                                                                <option value={"블랙박스"}>블랙박스</option>
+                                                                <option value={"기타"}>기타</option>
+                                                            </optgroup>
+                                                        ):(
+                                                            <></>
+                                                        )}
+                                                        {category==='식품'?(
+                                                            <optgroup label={"식품"}>
+                                                                <option value={"생수"}>생수</option>
+                                                                <option value={"면"}>면</option>
+                                                                <option value={"과자"}>과자</option>
+                                                                <option value={"빵"}>빵</option>
+                                                            </optgroup>
+                                                        ):(
+                                                            <></>
+                                                        )}
                                                     </select></dd>
                                                 </dl>
                                             </td>
