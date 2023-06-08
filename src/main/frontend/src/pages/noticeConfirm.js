@@ -313,7 +313,7 @@ function NoticeConfirm() {
                             {!loginUser && <button onClick={goLogin} className={styles.on}>
                                 로그인하여 중고거래하기
                             </button>}
-                            {loginUser && <button onClick={goNoticePage} className={styles.on}>
+                            {loginUser && data.userDTO.email !== loginUser.email && <button onClick={goNoticePage} className={styles.on}>
                                 목록
                             </button>}
                             {loginUser && data.userDTO.email !== loginUser.email && <button onClick={goChat} className={styles.on}>
