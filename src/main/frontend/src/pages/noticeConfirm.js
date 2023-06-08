@@ -325,12 +325,12 @@ function NoticeConfirm() {
                             {loginUser && data.userDTO.email === loginUser.email && (
                                 <button onClick={handleDelete}>삭제</button>
                             )}
-                            {loginUser && isAuction.writing_Id !== -1 && (
+                            {loginUser && data.userDTO.email !== loginUser.email && isAuction.writing_Id !== -1 && (
                                 <button onClick={goChat} className={styles.on}>
                                     즉시구매(채팅)
                                 </button>
                             )}
-                            {loginUser && isAuction.writing_Id !== -1 && (
+                            {loginUser && data.userDTO.email !== loginUser.email && isAuction.writing_Id !== -1 && (
                                 <button onClick={goMax} className={styles.on}>
                                     최고가 제시
                                 </button>
