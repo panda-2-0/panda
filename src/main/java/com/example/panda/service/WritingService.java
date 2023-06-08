@@ -1,17 +1,16 @@
 package com.example.panda.service;
 
-import com.example.panda.dto.AuctionDTO;
-import com.example.panda.dto.WritingDTO;
-import com.example.panda.dto.WritingRegisterDTO;
-import com.example.panda.dto.WritingResponseDTO;
+import com.example.panda.dto.*;
 import com.example.panda.entity.AuctionEntity;
 import com.example.panda.entity.UserEntity;
+import com.example.panda.entity.WritingContentEntity;
 import com.example.panda.entity.WritingEntity;
 import com.example.panda.repository.*;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.data.crossstore.ChangeSetPersister;
@@ -35,6 +34,7 @@ public class WritingService {
     private final UserRepository userRepository;
     private final AuctionRepository auctionRepository;
     private final AuctionDSLRepository auctionDSLRepository;
+    private final WritingContentRepository writingContentRepository;
 
     public void write(WritingEntity we)
     {
@@ -59,6 +59,11 @@ public class WritingService {
             writingDTOList.add(WritingDTO.toWritingDTO(writingEntity));
         }
         return writingDTOList;
+    }
+    public WritingContentDTO findBycontentId(int wid){
+        Optional<WritingContentEntity> writingContentEntity = writingContentRepository.findById(wid);
+        WritingContentDTO writingContentDTO=WritingContentDTO.toWritingContentDTO(writingContentEntity.get());
+        return writingContentDTO;
     }
     public WritingDTO findById(int wid){
         Optional<WritingEntity> writingEntity = writingRepository.findById(wid);
@@ -103,31 +108,42 @@ public class WritingService {
     public void saveWriting(String email, WritingRegisterDTO writingRegisterDTO){  //게시글과 옥션을 저장
         WritingDTO writingDTO=new WritingDTO();
         AuctionDTO auctionDTO=new AuctionDTO();
+        WritingContentDTO writingContentDTO = new WritingContentDTO();
+
 
         writingDTO.setWriting_name(writingRegisterDTO.getWriting_name());
         writingDTO.setCategory(writingRegisterDTO.getCategory());
         if(writingRegisterDTO.getWritingImg()!=null){
             writingDTO.setWritingImg(writingRegisterDTO.getWritingImg());
         }
-        if(writingRegisterDTO.getWritingImg1()!=null){
-            writingDTO.setWritingImg1(writingRegisterDTO.getWritingImg1());
+
+        if(writingRegisterDTO.getContent_img()!=null){
+            writingContentDTO.setContent_img(writingRegisterDTO.getContent_img());
         }
-        if(writingRegisterDTO.getWritingImg2()!=null){
-            writingDTO.setWritingImg2(writingRegisterDTO.getWritingImg2());
+        if(writingRegisterDTO.getContent_img1()!=null){
+            writingContentDTO.setContent_img1(writingRegisterDTO.getContent_img1());
         }
-        if(writingRegisterDTO.getWritingImg3()!=null){
-            writingDTO.setWritingImg3(writingRegisterDTO.getWritingImg3());
+        if(writingRegisterDTO.getContent_img2()!=null){
+            writingContentDTO.setContent_img2(writingRegisterDTO.getContent_img2());
         }
+
         writingDTO.setDetail_category(writingRegisterDTO.getDetail_category());
         writingDTO.setCount(writingRegisterDTO.getCount());
         writingDTO.setPrice(writingRegisterDTO.getPrice());
         writingDTO.setContent(writingRegisterDTO.getContent());
+
 
         WritingEntity writingEntity=WritingEntity.toWritingEntity(writingDTO);
         Optional<UserEntity> userEntity=userRepository.findByEmail(email);
 
         writingEntity.setUserEntity(userEntity.get());
         writingRepository.save(writingEntity);
+
+        int wid = writingEntity.getWid();
+
+        WritingContentEntity writingContentEntity = WritingContentEntity.toWritingContentEntity(writingContentDTO);
+        writingContentEntity.setWid(wid);
+        writingContentRepository.save(writingContentEntity);
 
         //System.out.println(writingEntity.getWid());
 
@@ -196,11 +212,11 @@ public class WritingService {
         auctionRepository.save(auction);
     }
 
-    //경매 등록
-//    public void saveAuction(AuctionDTO auctionDTO){
-//        AuctionEntity auctionEntity = AuctionEntity.toAuctionEntity(auctionDTO);
-//
-//        auctionRepository.save(auctionEntity);
-//    }
+    //경매 시간 종료 처리
+    @Scheduled(cron = "0 * * * * ?") // 분 마다 실행됨
+    public void deleteExpiredAuctions(){
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        writingDSLRepository.deleteByAuction_dateBefore(currentDateTime);
+    }
 
 }

@@ -1,11 +1,8 @@
 package com.example.panda.controller;
 
 //import com.example.panda.dto.AuctionDTO;
-import com.example.panda.dto.AuctionDTO;
-import com.example.panda.dto.UserDTO;
-import com.example.panda.dto.WritingDTO;
+import com.example.panda.dto.*;
 
-import com.example.panda.dto.WritingRegisterDTO;
 import com.example.panda.entity.AuctionEntity;
 import com.example.panda.entity.UserEntity;
 import com.example.panda.entity.WritingEntity;
@@ -40,7 +37,7 @@ public class WritingController {
     private final UserService userService;
 
     @PostMapping("/api/noticeRegister")
-    public void boardwritepro(@RequestBody WritingRegisterDTO writingRegisterDTO){
+    public void boardwritepro(@RequestBody WritingRegisterDTO writingRegisterDTO ){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetails userDetails = (UserDetails)authentication.getPrincipal();
 
@@ -108,6 +105,13 @@ public class WritingController {
         {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("경매 최고가 업데이트 실패: " + e.getMessage());
         }
+    }
+
+    @PostMapping("/notice/writing_content")
+    public WritingContentDTO writingContent(@RequestParam("wid") int wid){
+        List<WritingContentDTO> writingContentDTOList = new ArrayList<>();
+        WritingContentDTO writingContentDTO = writingService.findBycontentId(wid);
+        return writingContentDTO;
     }
 
 }

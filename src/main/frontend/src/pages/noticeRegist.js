@@ -31,6 +31,7 @@ const NoticeRegist = () => {
     const [content, setContent] = useState('');
     const [windowSize, setWindowSize] = useState(window.innerWidth);
     const imageInput = useRef();
+
     const imageInput1 = useRef();
     const imageInput2 = useRef();
     const imageInput3 = useRef();
@@ -180,42 +181,42 @@ const NoticeRegist = () => {
     };
 
     const registerInfo = () => {
-        if(writing_name===''){
+        if (writing_name === '') {
             alert('글 제목을 입력해주세요!');
             return;
         }
-        if(category===''){
+        if (category === '') {
             alert('카테고리를 입력해주세요!');
             return;
         }
-        if(detail_category===''){
+        if (detail_category === '') {
             alert('세부 카테고리를 입력해주세요!');
             return;
         }
-        if(!visiable){
-            if(count===0){
+        if (!visiable) {
+            if (count === 0) {
                 alert('수량 입력해주세요!');
                 return;
             }
-            if(price===0){
+            if (price === 0) {
                 alert('금액을 0원으로 책정할 수 없습니다!');
                 return;
             }
         }
-        if(content===''){
+        if (content === '') {
             alert('글 내용을 입력해주세요!');
             return;
         }
-        if(auction_date > 7){
+        if (auction_date > 7) {
             alert('경매 마감일은 등록날짜로부터 최대 7일입니다. ');
             return;
         }
 
 
-        var auction_flag=0;
-        if(visiable){
-            auction_flag=1;   //flag값
-            if(buy_now==0 || lowest_value==0){
+        var auction_flag = 0;
+        if (visiable) {
+            auction_flag = 1;   //flag값
+            if (buy_now == 0 || lowest_value == 0) {
                 alert('즉시구매가와 경매시작가를 기입하지 않으면 0원으로 책정됩니다.');
             }
         }
@@ -232,11 +233,33 @@ const NoticeRegist = () => {
             highest_value: highest_value,
             buy_now: buy_now,
             lowest_value: lowest_value,
-            auction_flag:auction_flag,
-            writingImg1: btoa(writing_photo1),
-            writingImg2: btoa(writing_photo2),
-            writingImg3: btoa(writing_photo3),
+            auction_flag: auction_flag,
+            content_img: btoa(writing_photo1),
+            content_img1: btoa(writing_photo2),
+            content_img2: btoa(writing_photo3),
         }
+
+        // const writing_content = {
+        //     content_img: btoa(writing_photo1),
+        //     content_img1: btoa(writing_photo2),
+        //     content_img2: btoa(writing_photo3),
+        // }
+
+        // axios.post("/api/noticeContent", writing_content, {
+        //         headers: {
+        //             "Content-Type": "application/json",
+        //             "Access-Control-Allow-Origin": "http://localhost:8000",
+        //             "Access-Control-Allow-Credentials": "true",
+        //         },
+        //     })
+        //     .then((response) => {
+        //         console.log("정상등록");
+        //     })
+        //     .catch(error => {
+        //         console.log("등록에러");
+        //     });
+
+
 
         axios.post('/api/noticeRegister', writing, {
             headers: {

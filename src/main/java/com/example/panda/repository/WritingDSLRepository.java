@@ -1,13 +1,17 @@
 package com.example.panda.repository;
 
 import com.example.panda.dto.WritingResponseDTO;
+import com.example.panda.entity.AuctionEntity;
 import com.example.panda.entity.WritingEntity;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
+
+import static com.example.panda.entity.QAuctionEntity.auctionEntity;
 import static com.example.panda.entity.QWritingEntity.writingEntity;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
@@ -59,5 +63,12 @@ public class WritingDSLRepository {
                 .selectFrom(writingEntity)
                 .where(writingEntity.userEntity.email.eq(userEmail))
                 .fetch();
+    }
+
+    public void deleteByAuction_dateBefore(LocalDateTime currentDateTime){
+            queryFactory
+                .delete(auctionEntity)
+                .where(auctionEntity.auction_date.before(currentDateTime))
+                .execute();
     }
 }

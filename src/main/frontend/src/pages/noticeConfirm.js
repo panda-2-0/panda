@@ -13,6 +13,7 @@ function NoticeConfirm() {
     listdata.append('wid', writingInfo.word);
     const writingdata = new FormData();
     writingdata.append('wid', writingInfo.word);
+    const [writingcontent , setWritingContent] = useState({});
     const [data, setData] = useState({});
     const [isAuction, setIsAuction] = useState({"writing_Id": -1});
     const [auctionDate, setAuctionDate] = useState([]);
@@ -84,6 +85,18 @@ function NoticeConfirm() {
                 console.log(error);
             });
     };
+
+    useEffect(() => {
+        axios.post("/notice/writing_content" , writingdata,{
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        }).then((response) => {
+            setWritingContent(response.data);
+            console.log("이미지 가져오기 성공");
+        })
+            .catch((error) => console.log(error));
+    })
 
     useEffect(() => {
         axios
@@ -277,16 +290,16 @@ function NoticeConfirm() {
                                 fontSize: 26
                             }}>{data.content}
                         </div>
-                        {data.writingImg1 != null &&
-                        <img alt="불러오는중" src={`${atob(data.writingImg1)}`}
+                        {writingcontent.content_img != null &&
+                        <img alt="불러오는중" src={`${atob(writingcontent.content_img)}`}
                              style={{width: '70%'}}/>}
                         <br/>
-                        {data.writingImg2 != null &&
-                            <img alt="불러오는중" src={`${atob(data.writingImg2)}`}
+                        {writingcontent.content_img1 != null &&
+                            <img alt="불러오는중" src={`${atob(writingcontent.content_img1)}`}
                                  style={{width: '70%'}}/>}
                         <br/>
-                        {data.writingImg3 != null &&
-                            <img alt="불러오는중" src={`${atob(data.writingImg3)}`}
+                        {writingcontent.content_img2 != null &&
+                            <img alt="불러오는중" src={`${atob(writingcontent.content_img2)}`}
                                  style={{width: '70%'}}/>}
                         <div className={styles.bt_wrap}>
                             {!loginUser && <button onClick={goLogin} className={styles.on}>

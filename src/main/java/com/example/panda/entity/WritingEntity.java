@@ -43,12 +43,12 @@ public class WritingEntity {
     @Column(length = 1024)
     private String content;
 
-    @Builder.Default
-    private byte[] writing_photo1=null;
-    @Builder.Default
-    private byte[] writing_photo2=null;
-    @Builder.Default
-    private byte[] writing_photo3=null;
+//    @Builder.Default
+//    private byte[] writing_photo1=null;
+//    @Builder.Default
+//    private byte[] writing_photo2=null;
+//    @Builder.Default
+//    private byte[] writing_photo3=null;
 
 
     public String getRegit_dateFormatted() {
@@ -73,17 +73,17 @@ public class WritingEntity {
 
         writingEntity.setFavorite_count(0);
 
-        if(writingDTO.getWritingImg1()!=null) {
-            writingEntity.setWriting_photo1(writingDTO.getWritingImg1());
-        }
-
-        if(writingDTO.getWritingImg2()!=null) {
-            writingEntity.setWriting_photo2(writingDTO.getWritingImg2());
-        }
-
-        if(writingDTO.getWritingImg3()!=null) {
-            writingEntity.setWriting_photo3(writingDTO.getWritingImg3());
-        }
+//        if(writingDTO.getWritingImg1()!=null) {
+//            writingEntity.setWriting_photo1(writingDTO.getWritingImg1());
+//        }
+//
+//        if(writingDTO.getWritingImg2()!=null) {
+//            writingEntity.setWriting_photo2(writingDTO.getWritingImg2());
+//        }
+//
+//        if(writingDTO.getWritingImg3()!=null) {
+//            writingEntity.setWriting_photo3(writingDTO.getWritingImg3());
+//        }
 
         return writingEntity;
     }
