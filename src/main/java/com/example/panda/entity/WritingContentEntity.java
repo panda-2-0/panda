@@ -1,14 +1,10 @@
 package com.example.panda.entity;
 
 import com.example.panda.dto.WritingContentDTO;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-
-
 
 @Setter
 @Getter
@@ -16,6 +12,9 @@ import lombok.Setter;
 @Table(name = "Writing_content")
 public class WritingContentEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int wcid;
+    @Builder.Default
     private int wid;
     @Builder.Default
     private byte[] content_img = null;

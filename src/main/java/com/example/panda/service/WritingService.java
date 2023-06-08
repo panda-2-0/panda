@@ -134,24 +134,32 @@ public class WritingService {
             wd.setContent_img(writingRegisterDTO.getContent_img());
             wd.setWid(wid);
             writingContentDTOlist.add(wd);
+            log.info("img add");
+            log.info("imga : {}", wd.getContent_img()[0]);
         }
         if(writingRegisterDTO.getContent_img1()!=null){
             WritingContentDTO wd1 = new WritingContentDTO();
             wd1.setContent_img(writingRegisterDTO.getContent_img1());
             wd1.setWid(wid);
             writingContentDTOlist.add(wd1);
+            log.info("img add");
+            log.info("imga : {}", wd1.getContent_img()[0]);
         }
         if(writingRegisterDTO.getContent_img2()!=null){
             WritingContentDTO wd2 = new WritingContentDTO();
             wd2.setContent_img(writingRegisterDTO.getContent_img2());
             wd2.setWid(wid);
             writingContentDTOlist.add(wd2);
+            log.info("img add");
+            log.info("imga : {}", wd2.getContent_img()[0]);
         }
         Iterator<WritingContentDTO> iter = writingContentDTOlist.iterator();
         while(iter.hasNext()){
             WritingContentDTO wd = iter.next();
             WritingContentEntity writingContentEntity = WritingContentEntity.toWritingContentEntity(wd);
             writingContentEntity.setWid(wid);
+            log.info("img put");
+            log.info("imgp : {}", writingContentEntity.getContent_img()[0]);
             writingContentRepository.save(writingContentEntity);
         }
 

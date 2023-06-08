@@ -244,6 +244,15 @@ const NoticeRegist = () => {
             content_img1: btoa(writing_photo2),
             content_img2: btoa(writing_photo3),
         }
+        if(writing_photo1 === null){
+            writing["content_img"] = null;
+        }
+        if(writing_photo2 === null){
+            writing["content_img1"] = null;
+        }
+        if(writing_photo3 === null){
+            writing["content_img2"] = null;
+        }
 
         // const writing_content = {
         //     content_img: btoa(writing_photo1),

@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class WritingContentDTO {
+    private int wcid;
     private int wid;
     private byte[] content_img;
 
