@@ -171,7 +171,7 @@ public class WritingService {
             auctionDTO.setLowest_value(writingRegisterDTO.getLowest_value());
 
             AuctionEntity auctionEntity=AuctionEntity.toAuctionEntity(auctionDTO,writingRegisterDTO.getAuction_date());
-            auctionEntity.setUserEntity(userEntity.get());
+            auctionEntity.setUserEntity(null);
             auctionRepository.save(auctionEntity);
        }
     }
@@ -235,7 +235,7 @@ public class WritingService {
     }
 
     //경매 시간 종료 처리
-    @Scheduled(cron = "0 * * * * ?") // 분 마다 실행됨
+    @Scheduled(cron = "0 0 0 * * ?") // 분 마다 실행됨
     public void deleteExpiredAuctions(){
         LocalDateTime currentDateTime = LocalDateTime.now();
 
@@ -244,12 +244,16 @@ public class WritingService {
 
         if(auctionEntityList != null) { // -> 삭제할 내용이 있다는 의미 -> 채팅방을 만들어야 함.
             for(AuctionEntity auctionEntity : auctionEntityList) {  // 삭제할 내용 모두에 대하여 채팅방 개설
-
                 UserEntity buyerEntity = auctionEntity.getUserEntity();     // Auction에 저장된 유저 -> 구매자
-                int wid = auctionEntity.getWid();   // wid를 가져옴
 
-                if(chatRoomDSLRepository.isExists(buyerEntity.getEmail(), wid) != null) // 이미 채팅방이 있는지 확인 (즉시구매 등으로 인하여)
+                if(buyerEntity == null) {
+                    continue; // 구매자가 없으면 넘김
+                }
+
+                int wid = auctionEntity.getWid();   // wid를 가져옴
+                if(chatRoomDSLRepository.isExists(buyerEntity.getEmail(), wid)) { // 이미 채팅방이 있는지 확인 (즉시구매 등으로 인하여)
                     continue;
+                }
 
                 WritingEntity writingEntity = writingRepository.findById(wid).get(); // 저장할 글을 가져옴
 
@@ -257,7 +261,6 @@ public class WritingService {
 
                 ChatRoomEntity chatRoomEntity
                         = new ChatRoomEntity(null, buyerEntity, sellerEntity, " ", null, false, false, writingEntity, 0, 0, false, false);
-                
                 chatRoomRepository.save(chatRoomEntity);    // 채팅방 개설
             }
         }

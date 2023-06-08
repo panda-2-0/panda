@@ -271,7 +271,12 @@ function NoticeConfirm() {
                                         </dl>
                                         <dl>
                                             <dt>현재 최고가</dt>
-                                            <dd>{isAuction.highest_value + "원(" + isAuction.userEntity.nickname + ")"}</dd>
+                                            {
+                                                isAuction.userEntity !== null ?
+                                                    <dd>{isAuction.highest_value + "원(" + isAuction.userEntity.nickname + ")"}</dd>
+                                                    :
+                                                    <dd>0</dd>
+                                            }
                                         </dl>
                                         <dl>
                                             <dt>즉시구매가</dt>
