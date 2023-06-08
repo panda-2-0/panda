@@ -251,7 +251,9 @@ public class WritingService {
                 }
 
                 int wid = auctionEntity.getWid();   // wid를 가져옴
-                if(chatRoomDSLRepository.isExists(buyerEntity.getEmail(), wid)) { // 이미 채팅방이 있는지 확인 (즉시구매 등으로 인하여)
+                Long roomId = chatRoomDSLRepository.findByBuyerEmailAndWid(buyerEntity.getEmail(), wid);
+                if(roomId != null) { // 이미 채팅방이 있는지 확인 (즉시구매 등으로 인하여)
+                    chatRoomRepository.setExitBuyerByRoomId(roomId, false);
                     continue;
                 }
 

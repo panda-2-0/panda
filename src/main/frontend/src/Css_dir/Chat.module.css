@@ -550,8 +550,9 @@ body::-webkit-scrollbar {
     position: absolute;
     width: 35px;
     height: 35px;
-    left: 18px;
-    top: 18px;
+    left: 5px;
+    top: 93px;
+    z-index: 50;
 }
 .emenuL{
     display: none;
@@ -566,12 +567,13 @@ body::-webkit-scrollbar {
     position: absolute;
     width: 35px;
     height: 35px;
-    left: 18px;
-    top: 18px;
+    left: 305px;
+    top: 93px;
+    z-index: 50;
 }
 @media screen and (max-width: 600px){
     .chat_page {
-        z-index: 22;
+        z-index: 19;
     }
     .plist {
         left: -300px;

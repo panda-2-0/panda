@@ -43,8 +43,15 @@ public class ChatRoomService {
 
         UserEntity sellerEntity = writingEntity.getUserEntity();
 
-        if(sellerEntity.getEmail().equals(buyer) || chatRoomDSLRepository.isExists(buyer, wid))
-            return null; // 판매자와 구매자가 같은 경우 or 이미 그 게시글에 대한 채팅이 있을 경우
+        if(sellerEntity.getEmail().equals(buyer))
+            return null; // 판매자와 구매자가 같은 경우
+
+        Long roomId = chatRoomDSLRepository.findByBuyerEmailAndWid(buyer, wid);
+        if(roomId != null) {
+            chatRoomRepository.setExitBuyerByRoomId(roomId, false);
+            return roomId;
+            // 이미 그 게시글에 대한 채팅이 있을 경우
+        }
 
         Optional<UserEntity> optionalBuyerEntity = userRepository.findByEmail(buyer);
         UserEntity buyerEntity = optionalBuyerEntity.get();

@@ -36,6 +36,16 @@ public class ChatRoomDSLRepository {
                 .fetchFirst();
 
         return fetchOne != null;
+    }
 
+    public Long findByBuyerEmailAndWid(String buyer, int wid) {
+        ChatRoomEntity cre =
+                queryFactory
+                .selectFrom(chatRoomEntity)
+                .where(chatRoomEntity.buyer.email.eq(buyer)
+                        .and(chatRoomEntity.writing.wid.eq(wid)))
+                .fetchOne();
+
+        return cre != null ? cre.getRoom_id() : null;
     }
 }

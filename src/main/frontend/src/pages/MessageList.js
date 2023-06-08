@@ -111,7 +111,7 @@ const MessageList = React.memo(({ messages, toMessageList, socket}) => {
         setMenuVisible(false);
     }
 
-    const exitChat = (roomId) => {
+    const exitChat = () => {
         socket.send(JSON.stringify({
             roomId:toMessageList.roomId,
             type:"exit",
@@ -219,7 +219,7 @@ const MessageList = React.memo(({ messages, toMessageList, socket}) => {
                     </div>
 
                     <div className={styles.eval_button}>
-                        <button onClick={messages[0] != null ? () => exitChat(messages[0].roomId) : () => exitChat()}>확인</button>
+                        <button onClick={exitChat}>확인</button>
                         <button onClick={closeExitChatModal}>닫기</button>
                     </div>
                 </div>
