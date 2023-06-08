@@ -8,8 +8,6 @@ function NoticePage(){
     const location=useLocation();
     const writingInfo = { ...location.state };
     const listdata=new FormData();
-    // const writingdata = new FormData();
-    const [data, setData] = useState([])  //해당 게시글에 찜등록한 사람 수
     listdata.append('wid', writingInfo.word);  //이전 페이지에서 받아온 글id
     const writingdata = new FormData();
     writingdata.append('wid',writingInfo.word);
@@ -64,17 +62,6 @@ function NoticePage(){
                 console.log(error);
             })
     } , [])
-
-    useEffect(() => {
-
-        axios.post('/api/favorite_writing',listdata,{  //해당 게시글을 찜등록한 사람의 수를 카운팅해서 가져옴
-            headers: {
-                'Content-Type' : 'multipart/form-data'
-            }
-        })
-            .then(response => setData(response.data))
-            .catch(error => console.log(error))
-    }, []);
 
     return (
             <div className={styles.wrap}>
