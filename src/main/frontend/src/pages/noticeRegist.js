@@ -156,16 +156,6 @@ const NoticeRegist = () => {
             };
             reader.readAsDataURL(file);
         }
-
-
-
-        // const reader = new FileReader();
-        // reader.onload = function (e) {
-        //     setWriting_photo(e.target.result);
-        // };
-        // if (event.target.files.length > 0) { // Check if an image is selected
-        //     reader.readAsDataURL(event.target.files[0]);
-        // }
     };
 
     const handleFileChange3 = (event) => {    //이미지 업로드

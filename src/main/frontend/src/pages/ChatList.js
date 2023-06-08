@@ -51,7 +51,6 @@ const ChatList = React.memo(({ chatRooms, onClick, toChatList}) => {
                                 chatList.buyer.userImg === null ? profile : atob(chatList.buyer.userImg)} width="100%" height="100%"></img>
                         </div>
                         <div className={styles.p_info}>
-                            {/*{chatList.writing !== null ? chatList.writing.writing_name : null}*/}
                             {
                                 isMe ?
                                     <div className={`${toChatList.roomId === chatList.roomId ? styles.black_color : styles.whitesmoke_color} ${styles.p_name}`}>
@@ -69,7 +68,7 @@ const ChatList = React.memo(({ chatRooms, onClick, toChatList}) => {
                                         {   chatList.writing.writing_name + "\n"}
                                     </div>
                                         :
-                                        ""
+                                        <></>
                             }
                             <div className={`${toChatList.roomId === chatList.roomId ? styles.black_color : styles.whitesmoke_color} ${styles.p_last_message}`}>
                                 {chatList.lastContent === null ?

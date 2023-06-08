@@ -39,7 +39,6 @@ function FixBar() {
                         </div>
                     </div>
                 </div>
-                {/* <div className="my_page_text"> 마이페이지 </div> */}
                 <div className={styles.my_page_tab}>
                     <ul>
                         <li><Link to="/pages/OtherPage2">회원 정보</Link></li>

@@ -8,7 +8,6 @@ import guidance from '../imgs/temp_map.png';
 import XButton from '../imgs/XButton.png';
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
-//import { GoogleMap, LoadScript } from '@react-google-maps/api';
 
 function Chat() {
     const [isOpen, setIsOpen] = useState(false);
@@ -93,7 +92,6 @@ function Chat() {
                     socketMap.set(chatRoom.roomId, room);
 
                     room.onopen = () => {
-                        // console.log(`방번호 : ${chatRoom.roomId} 소켓 열림`)
                         socketMap.set(chatRoom.roomId, room);
                     }
 
@@ -101,9 +99,6 @@ function Chat() {
                         let parsedMap = JSON.parse(event.data);
 
                         let type = parsedMap.type; // 해당 메시지 정보
-
-                        // let opNickname = parsedMap.opNickname;  // 상대방 닉네임
-                        // let opUserImg = parsedMessage.opUserImg;
 
                         // 스크롤을 내려야 하는가 true or false,
                         // 더 이상 불러올 메시지가 없는가 full의 내용이 담김.
@@ -404,13 +399,6 @@ function Chat() {
                         <div className={styles.no_room_selected}>채팅 방을 클릭해주세요.</div>
                     </div>
                     <div className={styles.chat_message} />
-                    {/*<LoadScript googleMapsApiKey="YOUR_API_KEY">*/}
-                    {/*    <GoogleMap*/}
-                    {/*        mapContainerStyle={mapStyles}*/}
-                    {/*        zoom={13}*/}
-                    {/*        center={defaultCenter}*/}
-                    {/*    />*/}
-                    {/*</LoadScript>*/}
                 </div>
 
             }
