@@ -14,10 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.data.crossstore.ChangeSetPersister;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -56,10 +53,16 @@ public class WritingService {
         }
         return writingDTOList;
     }
-    public WritingContentDTO findBycontentId(int wid){
-        Optional<WritingContentEntity> writingContentEntity = writingContentRepository.findById(wid);
-        WritingContentDTO writingContentDTO=WritingContentDTO.toWritingContentDTO(writingContentEntity.get());
-        return writingContentDTO;
+    public List<WritingContentDTO> findBycontentId(int wid){
+        List<WritingContentEntity> writingContentEntity = writingContentRepository.findAllByWid(wid);
+        Iterator<WritingContentEntity> iter = writingContentEntity.iterator();
+        List<WritingContentDTO> contentDTOList = new LinkedList<WritingContentDTO>();
+        while(iter.hasNext()){
+            WritingContentEntity wce = iter.next();
+            if(wce != null)
+                contentDTOList.add(WritingContentDTO.toWritingContentDTO(wce));
+        }
+        return contentDTOList;
     }
     public WritingDTO findById(int wid){
         Optional<WritingEntity> writingEntity = writingRepository.findById(wid);
@@ -104,7 +107,7 @@ public class WritingService {
     public void saveWriting(String email, WritingRegisterDTO writingRegisterDTO){  //게시글과 옥션을 저장
         WritingDTO writingDTO=new WritingDTO();
         AuctionDTO auctionDTO=new AuctionDTO();
-        WritingContentDTO writingContentDTO = new WritingContentDTO();
+        List<WritingContentDTO> writingContentDTOlist = new LinkedList<WritingContentDTO>();
 
 
         writingDTO.setWriting_name(writingRegisterDTO.getWriting_name());
@@ -114,13 +117,19 @@ public class WritingService {
         }
 
         if(writingRegisterDTO.getContent_img()!=null){
-            writingContentDTO.setContent_img(writingRegisterDTO.getContent_img());
+            WritingContentDTO wd = new WritingContentDTO();
+            wd.setContent_img(writingRegisterDTO.getContent_img());
+            writingContentDTOlist.add(wd);
         }
         if(writingRegisterDTO.getContent_img1()!=null){
-            writingContentDTO.setContent_img1(writingRegisterDTO.getContent_img1());
+            WritingContentDTO wd1 = new WritingContentDTO();
+            wd1.setContent_img(writingRegisterDTO.getContent_img1());
+            writingContentDTOlist.add(wd1);
         }
         if(writingRegisterDTO.getContent_img2()!=null){
-            writingContentDTO.setContent_img2(writingRegisterDTO.getContent_img2());
+            WritingContentDTO wd2 = new WritingContentDTO();
+            wd2.setContent_img(writingRegisterDTO.getContent_img2());
+            writingContentDTOlist.add(wd2);
         }
 
         writingDTO.setDetail_category(writingRegisterDTO.getDetail_category());
@@ -136,10 +145,13 @@ public class WritingService {
         writingRepository.save(writingEntity);
 
         int wid = writingEntity.getWid();
-
-        WritingContentEntity writingContentEntity = WritingContentEntity.toWritingContentEntity(writingContentDTO);
-        writingContentEntity.setWid(wid);
-        writingContentRepository.save(writingContentEntity);
+        Iterator<WritingContentDTO> iter = writingContentDTOlist.iterator();
+        while(iter.hasNext()){
+            WritingContentDTO wd = iter.next();
+            WritingContentEntity writingContentEntity = WritingContentEntity.toWritingContentEntity(wd);
+            writingContentEntity.setWid(wid);
+            writingContentRepository.save(writingContentEntity);
+        }
 
         //System.out.println(writingEntity.getWid());
 

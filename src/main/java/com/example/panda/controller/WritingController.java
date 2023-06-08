@@ -100,9 +100,11 @@ public class WritingController {
     }
 
     @PostMapping("/notice/writing_content")
-    public WritingContentDTO writingContent(@RequestParam("wid") int wid) {
-        WritingContentDTO writingContentDTO = writingService.findBycontentId(wid);
-        return writingContentDTO;
+    public List<WritingContentDTO> writingContent(@RequestParam("wid") int wid) {
+        List<WritingContentDTO> writingContentDTO = writingService.findBycontentId(wid);
+        if(writingContentDTO != null)
+            return writingContentDTO;
+        else return null;
     }
 
     @PostMapping("/api/analysis")

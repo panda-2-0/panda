@@ -13,7 +13,7 @@ function NoticeConfirm() {
     listdata.append('wid', writingInfo.word);
     const writingdata = new FormData();
     writingdata.append('wid', writingInfo.word);
-    const [writingcontent , setWritingContent] = useState({});
+    const [writingcontent , setWritingContent] = useState([]);
     const [data, setData] = useState({});
     const [isAuction, setIsAuction] = useState({"writing_Id": -1});
     const [auctionDate, setAuctionDate] = useState([]);
@@ -88,10 +88,11 @@ function NoticeConfirm() {
             },
         }).then((response) => {
             setWritingContent(response.data);
+            console.log(response.data);
             console.log("이미지 가져오기 성공");
         })
             .catch((error) => console.log(error));
-    })
+    },[]);
 
     useEffect(() => {
         axios
@@ -297,16 +298,16 @@ function NoticeConfirm() {
                                 fontSize: 26
                             }}>{data.content}
                         </div>
-                        {writingcontent.content_img != null &&
-                        <img alt="불러오는중" src={`${atob(writingcontent.content_img)}`}
+                        {writingcontent[0] != null &&
+                        <img alt="불러오는중" src={`${atob(writingcontent[0].content_img)}`}
                              style={{width: '70%'}}/>}
                         <br/>
-                        {writingcontent.content_img1 != null &&
-                            <img alt="불러오는중" src={`${atob(writingcontent.content_img1)}`}
+                        {writingcontent[1] != null &&
+                            <img alt="불러오는중" src={`${atob(writingcontent[1].content_img)}`}
                                  style={{width: '70%'}}/>}
                         <br/>
-                        {writingcontent.content_img2 != null &&
-                            <img alt="불러오는중" src={`${atob(writingcontent.content_img2)}`}
+                        {writingcontent[2] != null &&
+                            <img alt="불러오는중" src={`${atob(writingcontent[2].content_img)}`}
                                  style={{width: '70%'}}/>}
                         <div className={styles.bt_wrap}>
                             {!loginUser && <button onClick={goLogin} className={styles.on}>

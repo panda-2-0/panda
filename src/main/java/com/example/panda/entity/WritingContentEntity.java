@@ -19,11 +19,6 @@ public class WritingContentEntity {
     private int wid;
     @Builder.Default
     private byte[] content_img = null;
-    @Builder.Default
-    private byte[] content_img1 = null;
-    @Builder.Default
-    private byte[] content_img2 = null;
-
     public static WritingContentEntity toWritingContentEntity(WritingContentDTO writingContentDTO)
     {
         WritingContentEntity writingContentEntity = new WritingContentEntity();
@@ -31,14 +26,6 @@ public class WritingContentEntity {
         if(writingContentDTO.getContent_img() != null)
         {
             writingContentEntity.setContent_img(writingContentDTO.getContent_img());
-        }
-        if(writingContentDTO.getContent_img1() != null)
-        {
-            writingContentEntity.setContent_img1(writingContentDTO.getContent_img1());
-        }
-        if(writingContentDTO.getContent_img2() != null)
-        {
-            writingContentEntity.setContent_img2(writingContentDTO.getContent_img2());
         }
 
         return writingContentEntity;
