@@ -359,7 +359,7 @@ public class MessageHandler extends TextWebSocketHandler {
     public void sendMessage(WebSocketSession session, Map<String, Object> map) throws IOException {
         if(session != null && session.isOpen()) {
             ObjectMapper objectMapper = new ObjectMapper();
-//            objectMapper.registerModule(new JavaTimeModule()); // 직렬화 문제 해결
+            objectMapper.registerModule(new JavaTimeModule()); // 직렬화 문제 해결
             String json = objectMapper.writeValueAsString(map);
             TextMessage textMessage = new TextMessage(json);
             session.sendMessage(textMessage);
