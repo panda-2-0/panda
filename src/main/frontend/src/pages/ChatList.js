@@ -39,7 +39,6 @@ const ChatList = React.memo(({ chatRooms, onClick, toChatList}) => {
                 else diff = `${date1.format("A h:mm")}`;
 
                 let isMe = chatList.buyer.email === toChatList.email;
-
                 return (
                     <li className = {`${styles.profile_list} ${toChatList.roomId === chatList.roomId ? styles.profile_list_clicked : null}`} key={index} onClick={() => onClick(chatList.roomId,
                         isMe ? chatList.seller.nickname : chatList.buyer.nickname,
@@ -52,6 +51,7 @@ const ChatList = React.memo(({ chatRooms, onClick, toChatList}) => {
                                 chatList.buyer.userImg === null ? profile : atob(chatList.buyer.userImg)} width="100%" height="100%"></img>
                         </div>
                         <div className={styles.p_info}>
+                            {/*{chatList.writing !== null ? chatList.writing.writing_name : null}*/}
                             {
                                 isMe ?
                                     <div className={`${toChatList.roomId === chatList.roomId ? styles.black_color : styles.whitesmoke_color} ${styles.p_name}`}>
@@ -63,6 +63,14 @@ const ChatList = React.memo(({ chatRooms, onClick, toChatList}) => {
                                     </div>
                             }
                             <div className={`${toChatList.roomId === chatList.roomId ? styles.black_color : styles.whitesmoke_color } ${styles.p_time}`}>{date1.isValid() ? diff : null}</div>
+                            {
+                                chatList.writing !== null ?
+                                    <div className={`${toChatList.roomId === chatList.roomId ? styles.black_color : styles.whitesmoke_color} ${styles.p_writing_name}`}>
+                                        {   chatList.writing.writing_name + "\n"}
+                                    </div>
+                                        :
+                                        ""
+                            }
                             <div className={`${toChatList.roomId === chatList.roomId ? styles.black_color : styles.whitesmoke_color} ${styles.p_last_message}`}>
                                 {chatList.lastContent === null ?
                                     "사진" : chatList.lastContent}
