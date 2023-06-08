@@ -22,7 +22,27 @@ function NoticePage(){
 
     function goregist()
     {
-        navigate('/pages/noticeRegist');
+        axios.get('/check')
+            .then((response)=>{
+                console.log(response.data)
+                if(response.data){
+                    console.log('now login');
+                    navigate('/pages/noticeRegist');
+                }
+                else{
+                    console.log('need login');
+                    document.cookie = "isLogin=false; path=/; expires=Thu, 01 JAN 1999 00:00:10 GMT";
+                    sessionStorage.clear();
+                    alert('로그인이 필요합니다.');
+                    navigate('/pages/loginPage');
+                }
+            }).catch(error=>{
+            console.error(error);
+            console.log('need login');
+            document.cookie = "isLogin=false; path=/; expires=Thu, 01 JAN 1999 00:00:10 GMT";
+            sessionStorage.clear();
+            alert('로그인이 필요합니다.');
+            navigate('/pages/loginPage');});
     }
 
     function goconfirm()
