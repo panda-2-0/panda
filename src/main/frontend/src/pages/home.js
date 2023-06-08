@@ -74,7 +74,10 @@ function Home() {
                         <section className={styles.top_section}>
                             <h1 className={styles.head}>추천 매물</h1>
                             <div className={styles.list_wrap}>
-                                {recommend_item.length !== 0 ? <ListVeiw list={recommend_item}></ListVeiw> : <ListVeiw></ListVeiw>}
+                                {/*{recommend_item.length !== 0 ? <ListVeiw list={recommend_item}></ListVeiw> : <ListVeiw></ListVeiw>}*/}
+                                {recommend_item.length !== 0 ? <></>:<h3>다른사람의 제품을 구매해 다양한 추천을 받아보세요!</h3>}
+                                {recommend_item.length !== 0 ? <ListVeiw list={recommend_item}></ListVeiw> :
+                                    <ListVeiw list={popular}></ListVeiw>}
                             </div>
                         </section>
                         <section className={styles.mid_section}>
