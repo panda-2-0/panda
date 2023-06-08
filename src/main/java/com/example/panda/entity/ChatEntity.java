@@ -30,7 +30,8 @@ public class ChatEntity {
         chatEntity.setRoomId(chatDTO.getRoomId());
         chatEntity.setContent(chatDTO.getContent());
         chatEntity.setIsFromBuyer(chatDTO.isFromBuyer());
-        chatEntity.setChatDate(new java.sql.Timestamp(chatDTO.getChatDate().getTime()).toLocalDateTime());
+        if(chatDTO.getChatDate() != null)
+            chatEntity.setChatDate(new java.sql.Timestamp(chatDTO.getChatDate().getTime()).toLocalDateTime());
         if(chatDTO.getPhoto() != null) {
             chatEntity.setPhoto(chatDTO.getPhoto());
         }
