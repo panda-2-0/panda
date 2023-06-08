@@ -105,7 +105,7 @@ public class SignService {
             Long roomId = chatRoomRepository.save(new ChatRoomEntity(null, user, chatbot.get(), "저는 판다 봇입니다. 궁금한게 있으시다면 물어보세요!\n (ex: 인기 상품 추천해줘)", null, false, false, null, 0, 0, false, false))
                     .getRoom_id();
 
-            chatRepository.save(ChatEntity.toSaveEntity(new ChatDTO(roomId, "저는 판다 봇입니다. 궁금한게 있으시다면 물어보세요!\n (ex: 인기 상품 추천해줘)", false, null, null, 0, 0, "")));
+            chatRepository.save(ChatEntity.toSaveEntity(new ChatDTO(roomId, "저는 판다 봇입니다. 궁금한게 있으시다면 물어보세요!\n (ex: 인기 상품 추천해줘)", false, null, null, 0, "")));
         }
     }
 }

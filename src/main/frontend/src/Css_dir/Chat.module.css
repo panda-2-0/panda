@@ -78,7 +78,15 @@ body::-webkit-scrollbar {
     color:whitesmoke;
 }
 
-.p_profile, .chat_image {
+.p_profile {
+    float:left;
+    width: 60px;
+    height: 65px;
+    border-radius: 70%;
+    overflow: hidden;
+}
+
+.chat_image {
     float:left;
     width: 50px;
     height: 50px;
@@ -88,7 +96,7 @@ body::-webkit-scrollbar {
 
 .p_info {
     float: left;
-    width:77%;
+    width:74%;
     height:100%;
     margin-left:10px;
 }
@@ -104,6 +112,8 @@ body::-webkit-scrollbar {
     overflow:hidden;
     font-family:"NanumGothicOTF";
     font-weight: bold;
+    margin-bottom: 4px;
+    margin-left:1px;
 }
 
 .p_time {
@@ -114,6 +124,15 @@ body::-webkit-scrollbar {
 .p_last_message {
     float:left;
     font-family:"NanumSquare";
+    margin-top:5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 160px; /* 원하는 너비로 설정 */
+}
+.p_writing_name {
+    float:left;
+    font-family:"NanumGothicOTF";
     margin-top:5px;
     white-space: nowrap;
     overflow: hidden;

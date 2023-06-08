@@ -11,11 +11,8 @@ import com.example.panda.entity.ChatEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.io.Serializable;
-import java.time.LocalDateTime;
-import java.util.Base64;
+import java.time.ZoneId;
 import java.util.Date;
 
 @Data
@@ -28,8 +25,6 @@ public class ChatDTO {
     private boolean isFromBuyer;
     private Date chatDate;
     private byte[] photo = null;
-    private int index;
-    // 웹 소켓 용도, DB와 관련 X
     private int count;
     // 웹 소켓 용도, DB와 관련 X
     private String type;
@@ -40,10 +35,13 @@ public class ChatDTO {
         chatDTO.setRoomId(chatEntity.getRoomId());
         chatDTO.setContent(chatEntity.getContent());
         chatDTO.setFromBuyer(chatEntity.getIsFromBuyer());
-        chatDTO.setChatDate(chatEntity.getChatDate());
-        if(chatEntity.getPhoto() != null) {
+
+        if(chatEntity.getChatDate() != null)
+            chatDTO.setChatDate(Date.from(chatEntity.getChatDate().atZone(ZoneId.systemDefault()).toInstant()));
+
+        if(chatEntity.getPhoto() != null)
             chatDTO.setPhoto(chatEntity.getPhoto());
-        }
+
         return chatDTO;
     }
 }

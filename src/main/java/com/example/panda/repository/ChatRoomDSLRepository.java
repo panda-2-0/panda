@@ -26,4 +26,16 @@ public class ChatRoomDSLRepository {
                 .orderBy(chatRoomEntity.last_date.desc())
                 .fetch();
     }
+
+    public Boolean isExists(String email, int wid) {
+        Integer fetchOne = queryFactory
+                .selectOne()
+                .from(chatRoomEntity)
+                .where(chatRoomEntity.buyer.email.eq(email)
+                        .and(chatRoomEntity.writing.wid.eq(wid)))
+                .fetchFirst();
+
+        return fetchOne != null;
+
+    }
 }

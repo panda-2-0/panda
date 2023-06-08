@@ -22,7 +22,7 @@ const MessageList = React.memo(({ messages, toMessageList, socket}) => {
         if(messages.length < 1) return;
         // 시작할 때 messages 배열이 빈채로 하위 컴포넌트가 시작되어 오류 메시지가 출력되는 것을 방지
         else {
-            console.log(messages[0]);
+            // console.log(messages[0]);
             let type = messages[messages.length - 1].type;
 
             // 스크롤을 내려야 하는가?

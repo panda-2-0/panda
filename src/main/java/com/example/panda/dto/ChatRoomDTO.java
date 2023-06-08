@@ -8,13 +8,11 @@
 package com.example.panda.dto;
 
 import com.example.panda.entity.ChatRoomEntity;
-import com.example.panda.entity.WritingEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
-import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -38,13 +36,15 @@ public class ChatRoomDTO {
         ChatRoomDTO chatRoomDTO = new ChatRoomDTO();
         chatRoomDTO.setRoomId(chatRoomEntity.getRoom_id());
         chatRoomDTO.setLastContent(chatRoomEntity.getLast_content());
-        chatRoomDTO.setLastDate(chatRoomEntity.getLast_date());
         chatRoomDTO.setEvaluateBuyer(chatRoomEntity.getEvaluate_buyer());
         chatRoomDTO.setEvaluateSeller(chatRoomEntity.getEvaluate_seller());
         chatRoomDTO.setNoReadBuyer(chatRoomEntity.getNo_read_buyer());
         chatRoomDTO.setIsNoRead(chatRoomEntity.getIs_no_read());
         chatRoomDTO.setIsExitBuyer(chatRoomEntity.getIs_exit_buyer());
         chatRoomDTO.setIsExitSeller(chatRoomEntity.getIs_exit_seller());
+
+        if(chatRoomEntity.getLast_date() != null)
+            chatRoomDTO.setLastDate(Date.from(chatRoomEntity.getLast_date().atZone(ZoneId.systemDefault()).toInstant()));
 
         if(chatRoomEntity.getBuyer() != null)
             chatRoomDTO.setBuyer(UserDTO.toUserDTO(chatRoomEntity.getBuyer()));

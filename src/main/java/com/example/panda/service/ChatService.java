@@ -62,7 +62,7 @@ public class ChatService {
             ChatEntity chatEntity = ChatEntity.toSaveEntity(chatDTO);
 
             chatRoomEntity.setLast_content(chatDTO.getContent());
-            chatRoomEntity.setLast_date(chatDTO.getChatDate());
+            chatRoomEntity.setLast_date(new java.sql.Timestamp(chatDTO.getChatDate().getTime()).toLocalDateTime());
 
             chatRoomRepository.save(chatRoomEntity);
             return chatRepository.save(chatEntity).getRoomId();

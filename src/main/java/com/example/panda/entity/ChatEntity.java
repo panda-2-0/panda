@@ -11,6 +11,8 @@ import com.example.panda.dto.ChatDTO;
 import lombok.Data;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
@@ -20,7 +22,7 @@ public class ChatEntity {
     private Long roomId;
     private Boolean isFromBuyer;
     private String content;
-    private Date chatDate;
+    private LocalDateTime chatDate;
     private byte[] photo = null;
 
     public static ChatEntity toSaveEntity(ChatDTO chatDTO) {
@@ -28,7 +30,7 @@ public class ChatEntity {
         chatEntity.setRoomId(chatDTO.getRoomId());
         chatEntity.setContent(chatDTO.getContent());
         chatEntity.setIsFromBuyer(chatDTO.isFromBuyer());
-        chatEntity.setChatDate(chatDTO.getChatDate());
+        chatEntity.setChatDate(new java.sql.Timestamp(chatDTO.getChatDate().getTime()).toLocalDateTime());
         if(chatDTO.getPhoto() != null) {
             chatEntity.setPhoto(chatDTO.getPhoto());
         }
