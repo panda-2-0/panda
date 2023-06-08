@@ -280,7 +280,7 @@ function Chat() {
 
     const chatListClick = (roomId, op, amIBuyer, userImg) => {
         setRoomId(roomId);
-        setToMessageList(prevState => ({...prevState, op_Id: op, amIBuyer: amIBuyer, userImg:userImg}));
+        setToMessageList(prevState => ({...prevState, op_Id: op, amIBuyer: amIBuyer, userImg:userImg, roomId:roomId}));
         setToChatList(prevState => ({...prevState, roomId:roomId}));
         setChatRooms(prevChatRooms => {
            return prevChatRooms.map(chatRoom => {

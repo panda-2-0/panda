@@ -113,7 +113,7 @@ const MessageList = React.memo(({ messages, toMessageList, socket}) => {
 
     const exitChat = (roomId) => {
         socket.send(JSON.stringify({
-            roomId:roomId,
+            roomId:toMessageList.roomId,
             type:"exit",
         }));
         setExitOpen(false);
