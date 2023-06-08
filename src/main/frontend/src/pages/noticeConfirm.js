@@ -324,9 +324,9 @@ function NoticeConfirm() {
                             {loginUser && data.userDTO && data.userDTO.email !== loginUser.email && <button onClick={goChat} className={styles.on}>
                                 채팅
                             </button>}
-                            {loginUser && data.userDTO && data.userDTO.email === loginUser.email && (
-                                <button onClick={goModify}>수정</button>
-                            )}
+                            {/*{loginUser && data.userDTO && data.userDTO.email === loginUser.email && (*/}
+                            {/*    <button onClick={goModify}>수정</button>*/}
+                            {/*)}*/}
                             {loginUser && data.userDTO && data.userDTO.email === loginUser.email && (
                                 <button onClick={handleDelete}>삭제</button>
                             )}
