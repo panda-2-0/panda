@@ -50,7 +50,7 @@ const MessageList = React.memo(({ messages, toMessageList, socket}) => {
 
     const handleScroll = () => {
         if(messages[0] != null)
-            if(chatContainerRef.current.scrollTop === 0 && messages[0].type !== 'full') {
+            if(chatContainerRef.current.scrollTop === 0 && messages[0].type !== 'full' && !toMessageList.isChatbot) {
                 socket.send(JSON.stringify({
                     roomId:messages[0].roomId,
                     count: messages.length,

@@ -254,7 +254,7 @@ public class WritingService {
                 WritingEntity writingEntity = writingRepository.findById(wid).get(); // 저장할 글을 가져옴
 
                 UserEntity sellerEntity = writingEntity.getUserEntity();    // Writing에 저장된 유저 -> 판매자
-                
+
                 ChatRoomEntity chatRoomEntity
                         = new ChatRoomEntity(null, buyerEntity, sellerEntity, " ", null, false, false, writingEntity, 0, 0, false, false);
                 

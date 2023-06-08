@@ -141,7 +141,7 @@ function Chat() {
                             let messageType = parsedMap.messageType; // -> 해당 메시지가 어떤 정보를 담고 있는지
 
                             if(chatList[0] != null)
-                                chatList[chatList.length-1].type = messageType;
+                                chatList[chatList.length - 1].type = messageType;
 
                             let currentRoom = parsedMap.currentRoom;
                             let myRoomId = parsedMap.myRoomId;  // 현재 내가 보고있는 채팅창 번호
