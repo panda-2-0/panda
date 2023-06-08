@@ -73,12 +73,7 @@ function NoticeConfirm() {
                 },
             })
             .then((response) => {
-                if (response.data !== '') {
-                    console.log('채팅 페이지 이동');
-                    window.open('/pages/Chat', '_blank');
-                } else {
-                    alert('당신의 글입니다');
-                }
+                window.open('/pages/Chat', '_blank');
             })
             .catch((error) => {
                 console.log(error);
@@ -295,7 +290,7 @@ function NoticeConfirm() {
                             {loginUser && <button onClick={goNoticePage} className={styles.on}>
                                 목록
                             </button>}
-                            {loginUser && data.user_name !== loginUser.nickname && <button onClick={goNoticePage} className={styles.on}>
+                            {loginUser && data.user_name !== loginUser.nickname && <button onClick={goChat} className={styles.on}>
                                 채팅
                             </button>}
                             {loginUser && data.user_name === loginUser.nickname && (
