@@ -240,7 +240,7 @@ function NoticeConfirm() {
                                     {data.writing_name}&nbsp;&nbsp;
                                     <span className={styles.favorite_count}>찜: {data.favorite_count}회</span>
                                 </div>
-                                {loginUser && data.user_name !== loginUser.nickname && (
+                                {loginUser && data.userDTO.email !== loginUser.email && (
                                     <button className={styles.favorite_btn} onClick={registerFavorite}>
                                         찜등록
                                     </button>
@@ -316,13 +316,13 @@ function NoticeConfirm() {
                             {loginUser && <button onClick={goNoticePage} className={styles.on}>
                                 목록
                             </button>}
-                            {loginUser && data.user_name !== loginUser.nickname && <button onClick={goChat} className={styles.on}>
+                            {loginUser && data.userDTO.email !== loginUser.email && <button onClick={goChat} className={styles.on}>
                                 채팅
                             </button>}
-                            {loginUser && data.user_name === loginUser.nickname && (
+                            {loginUser && data.userDTO.email === loginUser.email && (
                                 <button onClick={goModify}>수정</button>
                             )}
-                            {loginUser && data.user_name === loginUser.nickname && (
+                            {loginUser && data.userDTO.email === loginUser.email && (
                                 <button onClick={handleDelete}>삭제</button>
                             )}
                             {loginUser && isAuction.writing_Id !== -1 && (
