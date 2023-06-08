@@ -36,7 +36,7 @@ public class QChatRoomEntity extends EntityPathBase<ChatRoomEntity> {
 
     public final StringPath last_content = createString("last_content");
 
-    public final DateTimePath<java.util.Date> last_date = createDateTime("last_date", java.util.Date.class);
+    public final DateTimePath<java.time.LocalDateTime> last_date = createDateTime("last_date", java.time.LocalDateTime.class);
 
     public final BooleanPath no_read_buyer = createBoolean("no_read_buyer");
 

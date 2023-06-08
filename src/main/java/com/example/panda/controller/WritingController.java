@@ -60,6 +60,15 @@ public class WritingController {
         return userEntity;
     }
 
+    @GetMapping("/api/UserInfo1")
+    public UserEntity getUserInfo1() {
+        System.out.println("실행?");
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        UserEntity userEntity = userService.findbyEmail(userDetails.getUsername());
+        return userEntity;
+    }
+
     @DeleteMapping("/api/posts/{postId}")
     public void deletePost(@PathVariable Integer postId) throws ChangeSetPersister.NotFoundException {
         writingService.deletePost(postId);
@@ -78,8 +87,12 @@ public class WritingController {
 
     @PutMapping("/api/auction/{writing_id}")
     public ResponseEntity<String> updateAuction(@PathVariable("writing_id") Long writing_id, @RequestBody AuctionDTO updateAuction) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+
         try {
-            writingService.updateAuction(writing_id, updateAuction);
+            writingService.updateAuction(writing_id, updateAuction , userDetails.getUsername());
             return ResponseEntity.ok("경매 최고가 업데이트 완료");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("경매 최고가 업데이트 실패: " + e.getMessage());

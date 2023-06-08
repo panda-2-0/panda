@@ -172,6 +172,18 @@ function NoticeConfirm() {
             })
         }, []);
 
+        const [lloginUser , setlloginUser] = useState(null);
+
+        useEffect(()=> {
+            axios.get('/api/UserInfo1')
+                .then(response => {
+                    setlloginUser(response.data);
+                })
+                .catch(error => {
+                    console.log(error);
+                })
+        },[]);
+
         const deletePost = (postId) => {
             axios
                 .delete(`/api/posts/${postId}`)

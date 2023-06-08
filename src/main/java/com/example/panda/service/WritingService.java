@@ -9,19 +9,15 @@ import com.example.panda.repository.*;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.data.crossstore.ChangeSetPersister;
-import java.io.IOException;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
-
-import static com.example.panda.entity.QUserEntity.userEntity;
 
 @Service
 @RequiredArgsConstructor
@@ -204,11 +200,16 @@ public class WritingService {
         return writingDTO;
     }
 
-    public void updateAuction(Long writingId, AuctionDTO updateAuction) {
+    public void updateAuction(Long writingId, AuctionDTO updateAuction, String username) {
         AuctionEntity auction = auctionRepository.findById(Math.toIntExact(writingId))
                 .orElseThrow(() -> new RuntimeException("경매 정보를 찾을 수 없습니다."));
 
         auction.setHighest_value(updateAuction.getHighest_value());
+
+        Optional<UserEntity> userEntity=userRepository.findByEmail(username);
+        auction.setUserEntity(userEntity.get());
+
+
         auctionRepository.save(auction);
     }
 
