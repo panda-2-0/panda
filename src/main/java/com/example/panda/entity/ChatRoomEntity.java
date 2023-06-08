@@ -11,6 +11,7 @@ package com.example.panda.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -36,7 +37,7 @@ public class ChatRoomEntity {
     private String last_content;
 
     @Column
-    private Date last_date;
+    private LocalDateTime last_date;
 
     @Column
     private Boolean is_no_read; // 안읽었는지?

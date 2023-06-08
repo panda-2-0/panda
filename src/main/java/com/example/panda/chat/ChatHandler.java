@@ -11,6 +11,7 @@ import com.example.panda.dto.UserDTO;
 import com.example.panda.service.ChatRoomService;
 import com.example.panda.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
@@ -46,6 +47,7 @@ public class ChatHandler extends TextWebSocketHandler {
 
         if(session.isOpen()) {
             ObjectMapper objectMapper = new ObjectMapper();
+            objectMapper.registerModule(new JavaTimeModule()); // 직렬화 문제 해결
             String json = objectMapper.writeValueAsString(map);
             TextMessage textMessage = new TextMessage(json);
             session.sendMessage(textMessage);

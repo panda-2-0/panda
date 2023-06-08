@@ -12,6 +12,7 @@ const ChatList = React.memo(({ chatRooms, onClick, toChatList}) => {
     return (
         <ul>
             {chatRooms.map((chatList, index) => {
+
                 if(chatList.buyer.email === toChatList.email && chatList.isExitBuyer) {
                     return null;
                 }

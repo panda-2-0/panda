@@ -61,17 +61,33 @@ const NoticeRegist = () => {
             return;
         }
 
+
         if (file) {
             const reader = new FileReader();
             reader.onload = () => {
                 const imageUrl = reader.result;
                 setWriting_photo(imageUrl);
+                let fd = new FormData();
+                fd.append("image", imageUrl);
+                axios.post('/api/analysis', fd, {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                    },
+                })
+                    .then((response) => {
+                        if(response.data !== '') {
+                            let result = response.data;
+                            console.log(result);
+                            setCategory(result.category);
+                            setDetail_category(result.detail_category);
+                        }
+                    })
+                    .catch(error => {
+                        alert('예상치 못한 오류!');
+                    });
             };
             reader.readAsDataURL(file);
         }
-
-
-
         // const reader = new FileReader();
         // reader.onload = function (e) {
         //     setWriting_photo(e.target.result);
@@ -313,7 +329,7 @@ const NoticeRegist = () => {
                                             <td>
                                                 <dl>
                                                     <dt>카테고리</dt>
-                                                    <dd><select name="category" id="category"
+                                                    <dd><select name="category" id="category" value={category}
                                                                 onChange={(e) => {
                                                                     setCategory(e.target.value);
                                                                     if(e.target.value === "의류")
@@ -361,7 +377,7 @@ const NoticeRegist = () => {
                                             <td>
                                                 <dl>
                                                     <dt>세부 카테고리</dt>
-                                                    <dd><select name="detail_category" id="detail_category"
+                                                    <dd><select name="detail_category" id="detail_category" value={detail_category}
                                                                 onChange={(e) => setDetail_category(e.target.value)}>
                                                         {category==='의류'?(
                                                             <optgroup label={"의류"}>
@@ -597,7 +613,7 @@ const NoticeRegist = () => {
                                             <td>
                                                 <dl>
                                                     <dt>카테고리</dt>
-                                                    <dd><select name="category" id="category"
+                                                    <dd><select name="category" id="category" value={category}
                                                                 onChange={(e) => {
                                                                     setCategory(e.target.value);
                                                                     if(e.target.value === "의류")
@@ -628,7 +644,7 @@ const NoticeRegist = () => {
                                                         <option value={"의류"}>의류</option>
                                                         <option value={"뷰티"}>뷰티</option>
                                                         <option value={"가구/인테리어"}>가구/인테리어</option>
-                                                        <option value={"가전"}>가전</option>
+                                                        <option value={"가전제품"}>가전제품</option>
                                                         <option value={"모바일/태블릿/PC"}>모바일/태블릿/PC</option>
                                                         <option value={"생활용품"}>생활용품</option>
                                                         <option value={"반려동물"}>반려동물</option>
@@ -643,7 +659,7 @@ const NoticeRegist = () => {
                                             <td>
                                                 <dl>
                                                     <dt>세부 카테고리</dt>
-                                                    <dd><select name="detail_category" id="detail_category"
+                                                    <dd><select name="detail_category" id="detail_category" value={detail_category}
                                                                 onChange={(e) => setDetail_category(e.target.value)}>
                                                         {category==='의류'?(
                                                             <optgroup label={"의류"}>

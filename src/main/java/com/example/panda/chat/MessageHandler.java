@@ -9,6 +9,7 @@ package com.example.panda.chat;
 import com.example.panda.dto.*;
 import com.example.panda.service.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.*;
 import org.springframework.http.converter.StringHttpMessageConverter;
@@ -20,10 +21,9 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 import org.springframework.web.util.UriTemplate;
 
 import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.text.DecimalFormat;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -184,7 +184,7 @@ public class MessageHandler extends TextWebSocketHandler {
                     System.out.println("요청 실패 : " + response.getStatusCode());
                 }
 
-                ChatDTO chatbotMessage = new ChatDTO(chatDTO.getRoomId(), responseMessage, false, new Date(), null, 0, 0, "chatbot");
+                ChatDTO chatbotMessage = new ChatDTO(chatDTO.getRoomId(), responseMessage, false, new Date(), null, 0, "chatbot");
                 buyerMap.put("messageType", "receiver");
                 buyerMap.put("message", chatbotMessage);
                 sendMessage(buyerSession, buyerMap);
@@ -359,6 +359,7 @@ public class MessageHandler extends TextWebSocketHandler {
     public void sendMessage(WebSocketSession session, Map<String, Object> map) throws IOException {
         if(session != null && session.isOpen()) {
             ObjectMapper objectMapper = new ObjectMapper();
+//            objectMapper.registerModule(new JavaTimeModule()); // 직렬화 문제 해결
             String json = objectMapper.writeValueAsString(map);
             TextMessage textMessage = new TextMessage(json);
             session.sendMessage(textMessage);
