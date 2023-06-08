@@ -388,7 +388,7 @@ function Chat() {
                     <textarea name={styles.send_message} placeholder={"메시지를 입력하세요."} rows="3" value={sendText} onChange={(event) => setSendText(event.target.value)} onKeyPress={handleKeyPress}></textarea>
                     <button onClick={handleUpload}>전송</button>
                         <img src={Painting} className={styles.painting} onClick={imageSelectClick} />
-                        <img src={guidance} className={styles.map}  />
+                        {/*<img src={guidance} className={styles.map}  />*/}
                         <input type="file" ref={imageInput} className={styles.button_hidden} key={fileInputKey} onChange={handleFileChange} />
                     </div>
                 </div>
