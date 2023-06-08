@@ -116,22 +116,6 @@ public class WritingService {
             writingDTO.setWritingImg(writingRegisterDTO.getWritingImg());
         }
 
-        if(writingRegisterDTO.getContent_img()!=null){
-            WritingContentDTO wd = new WritingContentDTO();
-            wd.setContent_img(writingRegisterDTO.getContent_img());
-            writingContentDTOlist.add(wd);
-        }
-        if(writingRegisterDTO.getContent_img1()!=null){
-            WritingContentDTO wd1 = new WritingContentDTO();
-            wd1.setContent_img(writingRegisterDTO.getContent_img1());
-            writingContentDTOlist.add(wd1);
-        }
-        if(writingRegisterDTO.getContent_img2()!=null){
-            WritingContentDTO wd2 = new WritingContentDTO();
-            wd2.setContent_img(writingRegisterDTO.getContent_img2());
-            writingContentDTOlist.add(wd2);
-        }
-
         writingDTO.setDetail_category(writingRegisterDTO.getDetail_category());
         writingDTO.setCount(writingRegisterDTO.getCount());
         writingDTO.setPrice(writingRegisterDTO.getPrice());
@@ -145,6 +129,24 @@ public class WritingService {
         writingRepository.save(writingEntity);
 
         int wid = writingEntity.getWid();
+        if(writingRegisterDTO.getContent_img()!=null){
+            WritingContentDTO wd = new WritingContentDTO();
+            wd.setContent_img(writingRegisterDTO.getContent_img());
+            wd.setWid(wid);
+            writingContentDTOlist.add(wd);
+        }
+        if(writingRegisterDTO.getContent_img1()!=null){
+            WritingContentDTO wd1 = new WritingContentDTO();
+            wd1.setContent_img(writingRegisterDTO.getContent_img1());
+            wd1.setWid(wid);
+            writingContentDTOlist.add(wd1);
+        }
+        if(writingRegisterDTO.getContent_img2()!=null){
+            WritingContentDTO wd2 = new WritingContentDTO();
+            wd2.setContent_img(writingRegisterDTO.getContent_img2());
+            wd2.setWid(wid);
+            writingContentDTOlist.add(wd2);
+        }
         Iterator<WritingContentDTO> iter = writingContentDTOlist.iterator();
         while(iter.hasNext()){
             WritingContentDTO wd = iter.next();
