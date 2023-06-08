@@ -1,10 +1,7 @@
 package com.example.panda.service;
 
 import com.example.panda.dto.*;
-import com.example.panda.entity.AuctionEntity;
-import com.example.panda.entity.UserEntity;
-import com.example.panda.entity.WritingContentEntity;
-import com.example.panda.entity.WritingEntity;
+import com.example.panda.entity.*;
 import com.example.panda.repository.*;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -28,6 +25,7 @@ public class WritingService {
     private final AuctionRepository auctionRepository;
     private final AuctionDSLRepository auctionDSLRepository;
     private final WritingContentRepository writingContentRepository;
+    private final ChatRoomRepository chatRoomRepository;
 
     public void write(WritingEntity we)
     {
@@ -239,7 +237,24 @@ public class WritingService {
     @Scheduled(cron = "0 * * * * ?") // 분 마다 실행됨
     public void deleteExpiredAuctions(){
         LocalDateTime currentDateTime = LocalDateTime.now();
-        writingDSLRepository.deleteByAuction_dateBefore(currentDateTime);
+
+        List<AuctionEntity> auctionEntityList = writingDSLRepository.deleteByAuction_dateBefore(currentDateTime);
+        // 삭제할 내용이 있으면 그것을 가져옴.
+
+        if(auctionEntityList != null) { // -> 삭제할 내용이 있다는 의미 -> 채팅방을 만들어야 함.
+            for(AuctionEntity auctionEntity : auctionEntityList) {  // 삭제할 내용 모두에 대하여 채팅방 개설
+                int wid = auctionEntity.getWid();   // wid를 가져옴
+                WritingEntity writingEntity = writingRepository.findById(wid).get(); // 저장할 글을 가져옴
+
+                UserEntity buyerEntity = auctionEntity.getUserEntity();     // Auction에 저장된 유저 -> 구매자
+                UserEntity sellerEntity = writingEntity.getUserEntity();    // Writing에 저장된 유저 -> 판매자
+
+                ChatRoomEntity chatRoomEntity
+                        = new ChatRoomEntity(null, buyerEntity, sellerEntity, " ", null, false, false, writingEntity, 0, 0, false, false);
+                
+                chatRoomRepository.save(chatRoomEntity);    // 채팅방 개설
+            }
+        }
     }
 
 }

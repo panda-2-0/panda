@@ -65,10 +65,18 @@ public class WritingDSLRepository {
                 .fetch();
     }
 
-    public void deleteByAuction_dateBefore(LocalDateTime currentDateTime){
-            queryFactory
+    public List<AuctionEntity> deleteByAuction_dateBefore(LocalDateTime currentDateTime){
+
+        List<AuctionEntity> auctionEntityList = queryFactory
+                .selectFrom(auctionEntity)
+                .where(auctionEntity.auction_date.before(currentDateTime))
+                .fetch();
+
+        queryFactory
                 .delete(auctionEntity)
                 .where(auctionEntity.auction_date.before(currentDateTime))
                 .execute();
+
+        return auctionEntityList;
     }
 }

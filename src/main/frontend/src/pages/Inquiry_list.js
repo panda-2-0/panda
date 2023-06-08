@@ -10,6 +10,9 @@ import FixBar from "./FixBar";
 import {Routes,Route,Link,NavLink,useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import profile from "../imgs/logo512_512.png";
+import dayjs from "dayjs";
+import 'dayjs/locale/ko';
+dayjs.locale('ko');
 
 function Inquiry_list() {
     const [data, setData] = useState([]);
@@ -59,7 +62,7 @@ function Inquiry_list() {
                                     <td className={styles.common_check_box} onClick={movePage} id={item.writing_Id}><img width={150} height={150} src={item.writingImg !=null ? `${atob(item.writingImg)}`:profile} alt=""/></td>
                                     <td className={styles.common_check_box} onClick={movePage} id={item.writing_Id}>{item.writing_name}</td>
                                     <td className={styles.common_check_box} onClick={movePage} id={item.writing_Id}><label name="price">{dividePriceUnit(item.price.toString())}</label></td>
-                                    <td className={styles.common_check_box} onClick={movePage} id={item.writing_Id}>{item.regit_date}</td>
+                                    <td className={styles.common_check_box} onClick={movePage} id={item.writing_Id}>{dayjs(item.regit_date).format('YYYY-MM-DD')}</td>
                                 </CommonTableRow>
                             ))}
                         </CommonTable>
