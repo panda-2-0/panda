@@ -67,7 +67,6 @@ public class ChatHandler extends TextWebSocketHandler {
         webSocketSessionManager.removeRoomId(email);
     }
 
-
 }
 
 

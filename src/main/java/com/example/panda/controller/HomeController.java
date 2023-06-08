@@ -81,7 +81,7 @@ public class HomeController {
         RestTemplate restTemplate = new RestTemplate();
 
         // 요청 URL
-        String url = "http://127.0.0.1:5000/api/sendAssociation";
+        String url = "http://panda1562.iptime.org:5000/api/sendAssociation";
 
         // 요청 헤더
         HttpHeaders headers=new HttpHeaders();

@@ -109,7 +109,7 @@ public class MessageHandler extends TextWebSocketHandler {
                 restTemplate.getMessageConverters()
                         .add(0, new StringHttpMessageConverter(StandardCharsets.UTF_8));
 
-                String url = "http://127.0.0.1:5000/chatbot";
+                String url = "http://panda1562.iptime.org:5000/chatbot";
                 HttpHeaders headers = new HttpHeaders();
                 headers.setContentType(MediaType.TEXT_PLAIN);
 
@@ -263,7 +263,8 @@ public class MessageHandler extends TextWebSocketHandler {
             map.put("type", "exit");
             map.put("exitedRoomId", chatDTO.getRoomId());
 
-            webSocketSessionManager.removeRoomId(email);
+            if(webSocketSessionManager.getSession(email) != null)
+                webSocketSessionManager.removeRoomId(email);
 
             WebSocketSession buyerSession = webSocketSessionManager.
                     getSession(buyer.getEmail() + "/" + chatRoomDTO.getRoomId());

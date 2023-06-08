@@ -77,7 +77,11 @@ function Chat() {
             movePage('/pages/loginPage');
         });
 
-        const socket = new WebSocket('ws://localhost:8080/chat');
+        const socket = new WebSocket('ws://panda1562.iptime.org:8080/chat');
+
+        socket.onopen = () => {
+            console.log("소켓 열림");
+        }
         socket.onmessage = (event) => {
             let receivedMap = JSON.parse(event.data);
             setUserImg(receivedMap.userImg);
@@ -88,7 +92,7 @@ function Chat() {
                 let room = socketMap.get(chatRoom.roomId);
 
                 if (room == null) {
-                    let room = new WebSocket(`ws://localhost:8080/chat/${chatRoom.roomId}`);
+                    let room = new WebSocket(`ws://panda1562.iptime.org:8080/chat/${chatRoom.roomId}`);
                     socketMap.set(chatRoom.roomId, room);
 
                     room.onopen = () => {

@@ -47,7 +47,7 @@ public class SecurityConfig {
                 .and()
                 .csrf().disable()
                 .authorizeHttpRequests((authz) -> authz
-                        .requestMatchers("ws://localhost:8080/chat", "/logout","/api/searchResult**","/api/todayAds", "/login", "/check","/pages/SearchResult**", "/", "/pages/loginPage", "/pages/joinMemPage", "/sign/**", "/login/**","/notice/**").permitAll()
+                        .requestMatchers("ws://panda1562.iptime.org:8080/chat", "/logout","/api/searchResult**","/api/todayAds", "/login", "/check","/pages/SearchResult**", "/", "/pages/loginPage", "/pages/joinMemPage", "/sign/**", "/login/**","/notice/**").permitAll()
                         .anyRequest().authenticated());
         http.formLogin()
                 .loginPage("/login").usernameParameter("email").passwordParameter("password")
