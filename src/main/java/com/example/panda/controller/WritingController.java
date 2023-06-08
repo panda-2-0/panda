@@ -121,7 +121,7 @@ public class WritingController {
 
         if (response.getStatusCode().is2xxSuccessful()) {
             String detail_category = response.getBody();
-            String[] categories = {"가구/인테리어", "가전", "문구/도서", "모바일/태블릿/PC", "반려동물", "뷰티", "생활용품", "스포츠", "식품", "의류", "자동차용품"};
+            String[] categories = {"가구/인테리어", "가전제품", "문구/도서", "모바일/태블릿/PC", "반려동물", "뷰티", "생활용품", "스포츠", "식품", "의류", "자동차용품"};
             String[][] detail_categories = {
                     {"가구기타", "소파", "책상", "침대"},
                     {"가전기타", "TV", "냉장고", "청소기"},
