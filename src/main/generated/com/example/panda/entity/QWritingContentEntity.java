@@ -21,9 +21,7 @@ public class QWritingContentEntity extends EntityPathBase<WritingContentEntity> 
 
     public final ArrayPath<byte[], Byte> content_img = createArray("content_img", byte[].class);
 
-    public final ArrayPath<byte[], Byte> content_img1 = createArray("content_img1", byte[].class);
-
-    public final ArrayPath<byte[], Byte> content_img2 = createArray("content_img2", byte[].class);
+    public final NumberPath<Integer> wcid = createNumber("wcid", Integer.class);
 
     public final NumberPath<Integer> wid = createNumber("wid", Integer.class);
 
