@@ -43,8 +43,10 @@ public class ChatRoomService {
 
         UserEntity sellerEntity = writingEntity.getUserEntity();
 
-        if(sellerEntity.getEmail().equals(buyer))
+        if(sellerEntity.getEmail().equals(buyer)) {
+            System.out.println("판매자 = 구매자");
             return null; // 판매자와 구매자가 같은 경우
+        }
 
         Long roomId = chatRoomDSLRepository.findByBuyerEmailAndWid(buyer, wid);
         if(roomId != null) {
@@ -78,7 +80,7 @@ public class ChatRoomService {
 
         if(optionalChatRoomEntity.isPresent()) {
             ChatRoomEntity chatRoomEntity = optionalChatRoomEntity.get();
-          return ChatRoomDTO.toChatRoomDTO(chatRoomEntity);
+            return ChatRoomDTO.toChatRoomDTO(chatRoomEntity);
         } else return null;
     }
 

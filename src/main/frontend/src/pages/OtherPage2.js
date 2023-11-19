@@ -217,7 +217,7 @@ function OtherPage() {
                 ariaHideApp={false}
                 style={{
                     content: {
-                        width: '700px',
+                        width: '60%',
                         margin: '0 auto',
                         marginTop:'50px',
                         height: '380px',
@@ -231,25 +231,27 @@ function OtherPage() {
                     <div className={styles.modal_title}>
                         비밀번호 변경
                     </div>
-                    <div className={styles.form_item}>
-                        <label className={styles.form_label}>현재 비밀번호</label>
-                        <input type='password' className={inputStyles.input} onChange={changePw}></input> <br/>
+                    <div className={styles.modal_middle_content}>
+                        <div className={styles.form_item}>
+                            <label className={styles.form_label}>현재 비밀번호</label>
+                            <input type='password' className={`${inputStyles.input} ${styles.inputMsg}`} onChange={changePw}></input> <br/>
+                        </div>
+
+                        <div className={styles.form_item}>
+                            <label  className={styles.form_label}>새 비밀번호</label>
+                            <input type='password'  className={`${inputStyles.input} ${styles.inputMsg}`} onChange={changeNewPw}></input> <br />
+                        </div>
+
+                        <div className={styles.form_item}>
+                            <label  className={styles.form_label}>비밀번호 확인</label>
+                            <input type='password' className={`${inputStyles.input} ${styles.inputMsg}`} onChange={changePw_check}></input> <br />
+                        </div>
+
+                        {newPw !== pw_ch ? <div className={inputStyles.error_message}>{pwch_error}</div>:<div className={inputStyles.error_message}></div>}
+
+                        <button className={styles.form_button} onClick={confirmPwChange}>변경</button>
+                        <button className={styles.form_button} onClick={closeOpenPw}>취소</button>
                     </div>
-
-                    <div className={styles.form_item}>
-                        <label className={styles.form_label}>새 비밀번호</label>
-                        <input type='password' className={inputStyles.input} onChange={changeNewPw}></input> <br />
-                    </div>
-
-                    <div className={styles.form_item}>
-                        <label className={styles.form_label}>비밀번호 확인</label>
-                        <input type='password' className={inputStyles.input} onChange={changePw_check}></input> <br />
-                    </div>
-
-                    {newPw !== pw_ch ? <div className={inputStyles.error_message}>{pwch_error}</div>:<div className={inputStyles.error_message}></div>}
-
-                    <button className={styles.form_button} onClick={confirmPwChange}>변경</button>
-                    <button className={styles.form_button} onClick={closeOpenPw}>취소</button>
                 </div>
             </Modal>
             <div className={inputStyles.login_page}>
@@ -263,7 +265,7 @@ function OtherPage() {
                 <div className={inputStyles.login_wrap}>
                     <div id='root'>
                         <div className={styles.form_profile}>
-                            <label className={styles.form_label}>프로필 사진</label>
+                            <label id={styles.profile_img_label} className={styles.form_label}>프로필 사진</label>
                             <img src={previewImage == null ? profile : previewImage} className={styles.form_profile_img}/>
                             <div className={styles.selectImg}>
                                 <div className={styles.img_button} onClick={baseProfileImage}>기본 이미지</div>
@@ -273,28 +275,28 @@ function OtherPage() {
                         </div>
                         <div className={styles.form_item}>
                             <label className={styles.form_label}>이메일</label>
-                            <input type='text' className={inputStyles.input} value={userInfo.email}></input>
+                            <input type='text' className={`${inputStyles.input} ${styles.inputMsg}`} value={userInfo.email}></input>
                         </div>
 
                         <div className={styles.form_item}>
                             <label className={styles.form_label}>비밀번호</label>
-                            <input type='password' className={inputStyles.input} value={"00000000"}></input> <br/>
-                            <button className={styles.change_pw} onClick={openPw}>변경</button>
+                            <input type='password' className={`${inputStyles.input} ${styles.inputMsg}`} value={"00000000"} onClick={openPw}></input> <br/>
+                            {/* <button className={styles.change_pw} >변경</button> */}
                         </div>
 
                         <div className={styles.form_item}>
                             <label className={styles.form_label}>닉네임</label>
-                            <input type='text' className={inputStyles.input} value={nickname} onChange={changeNickname}></input> <br/>
+                            <input type='text' className={`${inputStyles.input} ${styles.inputMsg}`} value={nickname} onChange={changeNickname}></input> <br/>
                         </div>
 
                         <div className={styles.form_item}>
                             <label className={styles.form_label}>전화번호</label>
-                            <input type='text' className={inputStyles.input} value={phone} onChange={changePhone}></input> <br/>
+                            <input type='text' className={`${inputStyles.input} ${styles.inputMsg}`} value={phone} onChange={changePhone}></input> <br/>
                         </div>
 
                         <div className={styles.form_item}>
                             <label className={styles.form_label}>주소</label>
-                            <input type='text' className={inputStyles.input} value={addr} onChange={changeAddr}></input> <br/>
+                            <input type='text' className={`${inputStyles.input} ${styles.inputMsg}`} value={addr} onChange={changeAddr}></input> <br/>
                         </div>
                         {nickname === '' ? <div className={inputStyles.error_message}>{pwch_error}</div>:<div className={inputStyles.error_message}></div>}
                         <button className={styles.form_button} onClick={modifyInfo}>수정하기</button>

@@ -32,7 +32,8 @@ function App() {
             <CSSTransition key={useLocation().pathname} timeout={300} classNames={'pages_push_controll'}>
                 <div id='root'>
                     <Routes>
-                        <Route path="/" element={document.cookie.match('isLogin' + '=([^;]*)(;|$)') ? <Home/>:<Home_unlogin/>}></Route>
+                        <Route path="/" element={<Home_unlogin/>}></Route>
+                        <Route path="/loginHome" element={<Home/>}></Route>
                         <Route path="/pages/loginPage" element={<LogInPage/>}></Route>
                         <Route path="/pages/joinMemPage" element={<MemPage/>}></Route>
                         <Route path="/pages/OtherPage" exact={true} element={<OtherPage />}/>

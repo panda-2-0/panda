@@ -7,20 +7,26 @@
 package com.example.panda.security;
 
 import com.example.panda.service.CustomUserDetailsService;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+import java.io.IOException;
 import java.util.Arrays;
 
 @Configuration
@@ -50,9 +56,13 @@ public class SecurityConfig {
                         .requestMatchers("ws://panda1562.iptime.org:8080/chat", "/logout","/api/searchResult**","/api/todayAds", "/login", "/check","/pages/SearchResult**", "/", "/pages/loginPage", "/pages/joinMemPage", "/sign/**", "/login/**","/notice/**").permitAll()
                         .anyRequest().authenticated());
         http.formLogin()
-                .loginPage("/login").usernameParameter("email").passwordParameter("password")
-                .failureHandler(customFailureHandler)
-                .loginProcessingUrl("/login").defaultSuccessUrl("/",true);
+                .loginPage("http://panda1562.iptime.org:8000/login").usernameParameter("email").passwordParameter("password")
+                .failureHandler(customFailureHandler).successHandler(new AuthenticationSuccessHandler() {
+                    @Override
+                    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
+                        response.sendRedirect("/");
+                    }
+                }).loginProcessingUrl("/login").defaultSuccessUrl("/",true);
         http.logout().logoutSuccessUrl("/").deleteCookies("JSESSIONID");
         http.userDetailsService(userDetailsService);
         return http.build();

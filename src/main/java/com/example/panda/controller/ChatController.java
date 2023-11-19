@@ -17,6 +17,7 @@ public class ChatController {
 
     @PostMapping("/joinChat")
     public Long joinChat(@RequestBody WritingDTO writingDTO){
+        System.out.println("버튼 클릭됨");
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetails userDetails = (UserDetails)authentication.getPrincipal();
 

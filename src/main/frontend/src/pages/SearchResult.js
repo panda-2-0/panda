@@ -8,6 +8,7 @@ import profile from '../imgs/logo512_512.png'
 
 function SearchResult() {
     const [data, setData] = useState([])
+    const [dataFlag, setDataFlag] = useState(false)
     const [sortFlag,setFlag] = useState(0)
     const location = useLocation();
     const navigate = useNavigate();
@@ -132,7 +133,10 @@ function SearchResult() {
                 'Content-Type' : 'multipart/form-data'
             }
         })
-            .then(response => setData(response.data))
+            .then(response => {
+                setData(response.data)
+                setDataFlag(true)
+            })
             .catch(error => console.log(error))
     }, []);
     const firstPage=()=>{
@@ -179,13 +183,16 @@ function SearchResult() {
                 {firstPage()}
                 <br/>
                 <div className={styles.container}>
-                    {data.length === 0 ? (
-                        <p style={{ fontSize: '25px' }}>받아온 데이터가 없습니다.</p>
-                    ):(
-                        <div>
-                            {contentView(parseInt(location.search.toString().split("=").at(2)))}
-                        </div>
-                    )
+                    {data.length === 0 ? dataFlag === false ? (
+                            <p style={{ fontSize: '25px' }}>데이터를 받아오는 중 입니다.</p>
+                        ):(
+                            <p style={{ fontSize: '25px' }}>받아온 데이터가 없습니다.</p>
+                        )
+                        :(
+                            <div className={styles.result_container}>
+                                {contentView(parseInt(location.search.toString().split("=").at(2)))}
+                            </div>
+                        )
 
                     }
                 </div>

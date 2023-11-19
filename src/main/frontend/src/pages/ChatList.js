@@ -43,8 +43,8 @@ const ChatList = React.memo(({ chatRooms, onClick, toChatList}) => {
                     <li className = {`${styles.profile_list} ${toChatList.roomId === chatList.roomId ? styles.profile_list_clicked : null}`} key={index} onClick={() => onClick(chatList.roomId,
                         isMe ? chatList.seller.nickname : chatList.buyer.nickname,
                         isMe,
-                    isMe ? chatList.seller.userImg === null ? profile : atob(chatList.seller.userImg) :
-                    chatList.buyer.userImg === null ? profile : atob(chatList.buyer.userImg))} >
+                        isMe ? chatList.seller.userImg === null ? profile : atob(chatList.seller.userImg) :
+                            chatList.buyer.userImg === null ? profile : atob(chatList.buyer.userImg))} >
                         <div className={styles.p_profile} >
                             <img src={chatList.buyer.email === toChatList.email ?
                                 chatList.seller.userImg === null ? profile : atob(chatList.seller.userImg) :
@@ -67,8 +67,8 @@ const ChatList = React.memo(({ chatRooms, onClick, toChatList}) => {
                                     <div className={`${toChatList.roomId === chatList.roomId ? styles.black_color : styles.whitesmoke_color} ${styles.p_writing_name}`}>
                                         {   chatList.writing.writing_name + "\n"}
                                     </div>
-                                        :
-                                        <></>
+                                    :
+                                    <></>
                             }
                             <div className={`${toChatList.roomId === chatList.roomId ? styles.black_color : styles.whitesmoke_color} ${styles.p_last_message}`}>
                                 {chatList.lastContent === null ?
@@ -85,8 +85,8 @@ const ChatList = React.memo(({ chatRooms, onClick, toChatList}) => {
     );
 }, (prevProps, nextProps) => {
     if (prevProps.chatRooms === nextProps.chatRooms &&
-    prevProps.toChatList === nextProps.toChatList &&
-    prevProps.onClick === nextProps.onClick)
+        prevProps.toChatList === nextProps.toChatList &&
+        prevProps.onClick === nextProps.onClick)
     {
         return true;
     }

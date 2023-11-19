@@ -79,18 +79,18 @@ function Login() {
     };
     return (
         <>
-        <div>
-            <form name='login_form' id='login_form' method='post'>
-                <input type='text' className={styles.input} placeholder='E-mail' name='email' onChange={changeEmail} value={email} onKeyDown={handleOnKeyPress}></input>
-                {!email_regex.test(email) && email !== '' ? <div className={styles.error_message}>{email_error}</div>:<div className={styles.error_message}></div>}
-                <input type='password' className={styles.input} placeholder='Password : 영어, 숫자 포함 8자리 이상' name='password' onChange={changePw} value={pw} onKeyDown={handleOnKeyPress}></input>
-                {!pw_regex.test(pw) && pw !== '' ? <div className={styles.error_message}>{pw_error}</div>:<div className={styles.error_message}></div>}
-                <div className={styles.login_btn_wrap}>
-                    <button className={styles.login_btn_under}>LogIn</button>
-                    <button className={styles.login_btn} onClick={login}><span>LogIn</span></button>
-                </div>
-            </form>
-        </div>
+            <div>
+                <form name='login_form' id='login_form' method='post'>
+                    <input type='text' className={styles.input} placeholder='E-mail' name='email' onChange={changeEmail} value={email} onKeyDown={handleOnKeyPress}></input>
+                    {!email_regex.test(email) && email !== '' ? <div className={styles.error_message}>{email_error}</div>:<div className={styles.error_message}></div>}
+                    <input type='password' className={styles.input} placeholder='Password : 영어, 숫자 포함 8자리 이상' name='password' onChange={changePw} value={pw} onKeyDown={handleOnKeyPress}></input>
+                    {!pw_regex.test(pw) && pw !== '' ? <div className={styles.error_message}>{pw_error}</div>:<div className={styles.error_message}></div>}
+                    <div className={styles.login_btn_wrap}>
+                        <button className={styles.login_btn_under} onClick={login}>LogIn</button>
+                        <button className={styles.login_btn} onClick={login}><span>LogIn</span></button>
+                    </div>
+                </form>
+            </div>
         </>
     )
 }

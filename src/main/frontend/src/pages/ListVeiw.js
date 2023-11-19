@@ -55,7 +55,7 @@ class ListVeiw extends React.Component {
                 //남아있는 슬라이드의 길이에서 현재 슬라이드의 위치값을 뺀 값이 한 번에 움직여야 하는 값보다 작으면
                 this.setState({
                     slideSpot: slideSpot - (this.hiddenedSlideWidth - Math.abs(slideSpot)),
-                        //남은 길이만큼만 이동하고
+                    //남은 길이만큼만 이동하고
                 });
                 this.slideEnd =
                     slideSpot - (this.hiddenedSlideWidth - Math.abs(slideSpot));
@@ -100,30 +100,30 @@ class ListVeiw extends React.Component {
                 <button onClick={this.handlePrevBtn} className={(!!slideSpot ? `${styles.left_btn}` : `${styles.left_btn_hidden}`)}>
                     <img src={'/imgs/left_btn.png'} width={100}/>
                 </button>
-            <div className={styles.list_view_box}>
-                <ul className={styles.list}>
-                    <div style={{ transform: `translateX(${slideSpot}px)`}} className={styles.slide_item}>
-                        {list&&Array.isArray(list)&&list.map((item,i) => (
-                            <li key={i} className={styles.list_item}>
-                                <Link to={'/pages/noticeConfirm?search='+item.writingId} state={{ word:item.writingId }} style={{ textDecoration: "none" }} id={item.writingId}>
-                                    <div className={styles.list_container}>
-                                        <div className={styles.item_img}>
-                                            {/*<img width={200} height={200} src={"data:image/png;base64," + item.writingImg} className={styles.list_img} alt={"게시글 이미지."}/>*/}
-                                            <img width={200} height={200} src={item.writingImg !=null ? `${atob(item.writingImg)}`:profile} className={styles.list_img} alt={"게시글 이미지."}/>
+                <div className={styles.list_view_box}>
+                    <ul className={styles.list}>
+                        <div style={{ transform: `translateX(${slideSpot}px)`}} className={styles.slide_item}>
+                            {list&&Array.isArray(list)&&list.map((item,i) => (
+                                <li key={i} className={styles.list_item}>
+                                    <Link to={'/pages/noticeConfirm?search='+item.writingId} state={{ word:item.writingId }} style={{ textDecoration: "none" }} id={item.writingId}>
+                                        <div className={styles.list_container}>
+                                            <div className={styles.item_img}>
+                                                {/*<img width={200} height={200} src={"data:image/png;base64," + item.writingImg} className={styles.list_img} alt={"게시글 이미지."}/>*/}
+                                                <img width={200} height={200} src={item.writingImg !=null ? `${atob(item.writingImg)}`:profile} className={styles.list_img} alt={"게시글 이미지."}/>
+                                            </div>
+                                            <div className={styles.item_desc}>
+                                                <h2 className={styles.item_name}>{item.ad ? "[광고]" + item.writingName : item.writingName}</h2>
+                                                <p>{`${dividePriceUnit(item.price.toString())} 원`}</p>
+                                                <p>{item.addr}</p>
+                                                <p>{`${item.userPoint} 점`}</p>
+                                            </div>
                                         </div>
-                                        <div className={styles.item_desc}>
-                                            <h2 className={styles.item_name}>{item.ad ? "[광고]" + item.writingName : item.writingName}</h2>
-                                            <p>{`${dividePriceUnit(item.price.toString())} 원`}</p>
-                                            <p>{item.addr}</p>
-                                            <p>{`${item.userPoint} 점`}</p>
-                                        </div>
-                                    </div>
-                                </Link>
-                            </li>
-                        ))}
-                    </div>
-                </ul>
-            </div>
+                                    </Link>
+                                </li>
+                            ))}
+                        </div>
+                    </ul>
+                </div>
                 <button onClick={this.handleNextBtn} className={(slideSpot !== this.slideEnd ? `${styles.right_btn}` : `${styles.right_btn_hidden}`)}>
                     <img src={'/imgs/right_btn.png'} width={100}/>
                 </button>

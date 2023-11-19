@@ -33,7 +33,7 @@ const MessageList = React.memo(({ messages, toMessageList, socket}) => {
 
             else if(type === 'isBottom') {
                 if(chatContainerRef.current.scrollTop + chatContainerRef.current.clientHeight
-                >= chatContainerRef.current.scrollHeight - (128 + messageRef.current.offsetHeight))
+                    >= chatContainerRef.current.scrollHeight - (128 + messageRef.current.offsetHeight))
                     // 현재 사용자가 메시지를 받는 사람이며, 스크롤이 밑에 있는지 확인해야함
                     // 밑에 없으면 현재 스크롤을 올려서 메시지를 보고 있다는 의미.
                     // scrollTop, clientHeight 를 더한게 꼭 128 차이가 나길래 -128을 해줌.
@@ -161,8 +161,8 @@ const MessageList = React.memo(({ messages, toMessageList, socket}) => {
                 style={{
                     content: {
                         margin: '0 auto',
-                        marginTop:'10px',
-                        height: '80vh',
+                        marginTop:'50px',
+                        height: '50vh',
                         backgroundColor: 'whitesmoke',
                         display: 'flex',
                         justifyContent: 'center',
@@ -244,69 +244,69 @@ const MessageList = React.memo(({ messages, toMessageList, socket}) => {
                 }
             </div>
             <div className={styles.chat_history} ref={chatContainerRef} onScroll={handleScroll}>
-        <ul>
-            {messages.map((message, index) => {
+                <ul>
+                    {messages.map((message, index) => {
 
-                const date1 = dayjs(message.chatDate);
-                const date2 = dayjs(new Date());
+                        const date1 = dayjs(message.chatDate);
+                        const date2 = dayjs(new Date());
 
-                let date;
+                        let date;
 
-                if(dayjs(message.chatDate).isValid()) {
-                    if(date2.diff(date1, 'year') > 0)
-                        date = date1.format('yyyy년 M월 D일 A h시 m분');
-                    else if(date2.diff(date1, 'day') > 0)
-                        date = date1.format('M월 D일 A h시 m분');
-                    else
-                        date = date1.format('오늘 A h시 m분');
-                }
-                else {
-                    date="";
-                }
-                return (
-                    <li key={index}>
-                        {
-                            message.fromBuyer === toMessageList.amIBuyer ?
-                            <div>
-                                <div className={styles.message_info}>
-                                    <span className={`${styles.message_name} ${styles.float_right}`}>{message.fromBuyer}</span>
-                                    &nbsp; &nbsp;
-                                    <span className={`${styles.message_time} ${styles.float_right}`}>{date}</span>
-                                </div>
-                                {
-                                    message.content ?
-                                        <div className={`${styles.my_message} ${styles.align_right}`}>
-                                            {message.content}
-                                        </div>
-                                        :
-                                        <div className={`${styles.message_img} ${styles.align_right}`}>
-                                            <img src={atob(message.photo)} alt="이미지" onClick={() => openImageModal(atob(message.photo))} />
-                                        </div>
-                                }
-                            </div>
-                            :
-                            <div>
-                                <div className={styles.message_info}>
-                                    <span className={`${styles.message_name} ${styles.float_left}`}>{message.fromBuyer}</span>
-                                    &nbsp; &nbsp;
-                                    <span className={`${styles.message_time} ${styles.float_left}`}>{date}</span>
-                                </div>
-                                {
-                                    message.content ?
-                                        <div className={`${styles.op_message} ${styles.align_left}`} ref={messageRef}>
-                                            {message.content}
-                                        </div>
-                                        :
-                                        <div className={`${styles.message_img} ${styles.align_left}`}>
-                                            <img src={atob(message.photo)} alt="이미지" onClick={() => openImageModal(atob(message.photo))} />
-                                        </div>
-                                }
-                            </div>
+                        if(dayjs(message.chatDate).isValid()) {
+                            if(date2.diff(date1, 'year') > 0)
+                                date = date1.format('yyyy년 M월 D일 A h시 m분');
+                            else if(date2.diff(date1, 'day') > 0)
+                                date = date1.format('M월 D일 A h시 m분');
+                            else
+                                date = date1.format('오늘 A h시 m분');
                         }
-                    </li>
-                )
-            })}
-        </ul>
+                        else {
+                            date="";
+                        }
+                        return (
+                            <li key={index}>
+                                {
+                                    message.fromBuyer === toMessageList.amIBuyer ?
+                                        <div>
+                                            <div className={styles.message_info}>
+                                                <span className={`${styles.message_name} ${styles.float_right}`}>{message.fromBuyer}</span>
+                                                &nbsp; &nbsp;
+                                                <span className={`${styles.message_time} ${styles.float_right}`}>{date}</span>
+                                            </div>
+                                            {
+                                                message.content ?
+                                                    <div className={`${styles.my_message} ${styles.align_right}`}>
+                                                        {message.content}
+                                                    </div>
+                                                    :
+                                                    <div className={`${styles.message_img} ${styles.align_right}`}>
+                                                        <img src={atob(message.photo)} alt="이미지" onClick={() => openImageModal(atob(message.photo))} />
+                                                    </div>
+                                            }
+                                        </div>
+                                        :
+                                        <div>
+                                            <div className={styles.message_info}>
+                                                <span className={`${styles.message_name} ${styles.float_left}`}>{message.fromBuyer}</span>
+                                                &nbsp; &nbsp;
+                                                <span className={`${styles.message_time} ${styles.float_left}`}>{date}</span>
+                                            </div>
+                                            {
+                                                message.content ?
+                                                    <div className={`${styles.op_message} ${styles.align_left}`} ref={messageRef}>
+                                                        {message.content}
+                                                    </div>
+                                                    :
+                                                    <div className={`${styles.message_img} ${styles.align_left}`}>
+                                                        <img src={atob(message.photo)} alt="이미지" onClick={() => openImageModal(atob(message.photo))} />
+                                                    </div>
+                                            }
+                                        </div>
+                                }
+                            </li>
+                        )
+                    })}
+                </ul>
             </div>
             <Modal
                 isOpen={selectedImage !== null}
@@ -318,14 +318,16 @@ const MessageList = React.memo(({ messages, toMessageList, socket}) => {
                         display: 'flex',
                         justifyContent: 'center',
                         alignItems: 'center',
-                        // backgroundColor: 'rgba(0, 0, 0, 0.5)',
                         width: '80%',
                         margin: '0 auto',
                         padding:'0',
-                        marginTop:'50px',
+                        marginTop:'20vh',
+                        height: '40%',
+
                     },
                     overlay: {
                         backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                        zIndex: '20',
                     },
                 }}
                 onClick={closeImageModal}

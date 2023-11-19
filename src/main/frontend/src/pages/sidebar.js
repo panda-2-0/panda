@@ -8,10 +8,29 @@ const Sidebar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [isCategory, setIsCategory] = useState(false);
     const [inputText, setInputText] = useState('');
+    const [isLogin, setIsLogin] = useState(false);
     const sideClickRef = useRef(null);
     // button 클릭 시 토글
     const toggleMenu = () => {
         setIsOpen(!isOpen);
+        axios.get('/check')
+            .then((response) => {
+                console.log(response.data)
+                if (response.data) {
+                    setIsLogin(true);
+                } else {
+                    console.log('need login');
+                    setIsLogin(false);
+                    document.cookie = "isLogin=false; path=/; expires=Thu, 01 JAN 1999 00:00:10 GMT";
+                    sessionStorage.clear();
+                }
+            }).catch(error => {
+            console.error(error);
+            console.log('need login');
+            setIsLogin(false);
+            document.cookie = "isLogin=false; path=/; expires=Thu, 01 JAN 1999 00:00:10 GMT";
+            sessionStorage.clear();
+        });
     };
     const toggleCategory = () => {
         setIsCategory(!isCategory);
@@ -173,8 +192,8 @@ const Sidebar = () => {
                     </Link>
                     {/*<li className={styles.nav_list_item} onClick={goChat}>채팅<div className={styles.list_line}></div></li>*/}
                     <li className={styles.nav_list_item} onClick={goNotice}>판매등록<div className={styles.list_line}></div></li>
-                    <li className={styles.nav_list_item} onClick={document.cookie.match('isLogin' + '=([^;]*)(;|$)') ? logout:goLogin}>
-                        {(document.cookie.match('isLogin' + '=([^;]*)(;|$)')? 'LogOut' : 'LogIn')}
+                    <li className={styles.nav_list_item} onClick={isLogin ? logout:goLogin}>
+                        {isLogin ? 'LogOut' : 'LogIn'}
                         <div className={styles.list_line}></div>
                     </li>
                     <li className={styles.nav_list_item} onClick={goMypage}>마이페이지<div className={styles.list_line}></div></li>

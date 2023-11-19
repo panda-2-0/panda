@@ -13,8 +13,8 @@ function NoticePage(){
     writingdata.append('wid',writingInfo.word);
     const navigate = useNavigate();
 
-     const movePage1= (event)=>{
-        const getId=event.currentTarget.id
+    const movePage1= (event)=>{
+        const getId = event.currentTarget.id
         navigate('/pages/noticeConfirm?search='+getId, {state:{
                 word:getId
             }});
@@ -63,11 +63,11 @@ function NoticePage(){
     };
 
     useEffect(() => {
-       axios.get('/api/myPosts')
+        axios.get('/api/myPosts')
             .then(response => {
-            setPosts(response.data);
-           })
-           .catch(error => {
+                setPosts(response.data);
+            })
+            .catch(error => {
                 console.log(error);
             });
 
@@ -84,49 +84,49 @@ function NoticePage(){
     } , [])
 
     return (
-            <div className={styles.wrap}>
-                <div className={styles.board_wrap}>
-                    <div className={styles.board_title}>
-                        <strong>게시글 확인 및 등록</strong>
-                        {loginUser && (
-                            <p>{loginUser.nickname}님 반갑습니다. 하단 등록 버튼을 눌러 추가 게시글 등록을 할 수 있습니다.</p>
-                            
-                        )}
-                    </div>
-                    <div className={styles.border_list_wrap}>
-                        <div className={styles.board_list}>
-                            <div className={styles.top}>
-                                <div className={styles.num}>번호</div>
-                                <div className={styles.title}>제목</div>
-                                <div className={styles.writer}>글쓴이</div>
-                                <div className={styles.date}>작성일</div>
-                                <div className={styles.count}>찜</div>
+        <div className={styles.wrap}>
+            <div className={styles.board_wrap}>
+                <div className={styles.board_title}>
+                    <strong>게시글 확인 및 등록</strong>
+                    {loginUser && (
+                        <p>{loginUser.nickname}님 반갑습니다. 하단 등록 버튼을 눌러 추가 게시글 등록을 할 수 있습니다.</p>
+
+                    )}
+                </div>
+                <div className={styles.border_list_wrap}>
+                    <div className={styles.board_list}>
+                        <div className={styles.top}>
+                            <div className={styles.num}>번호</div>
+                            <div className={styles.title}>제목</div>
+                            <div className={styles.writer}>글쓴이</div>
+                            <div className={styles.date}>작성일</div>
+                            <div className={styles.count}>찜</div>
+                        </div>
+                        {posts.map(post => (
+                            // loginUser && post.user_name === loginUser.nickname && (
+                            <div key={post.writing_Id}>
+                                <div className={styles.num}>{post.writing_Id}</div>
+                                <div className={styles.title} onClick={movePage1} id={post.writing_Id}>{post.writing_name}</div>
+                                <div className={styles.writer}>{post.user_name}</div>
+                                <div className={styles.date}>{formatDate(post.regit_date)}</div>
+                                <div className={styles.count}>{post.favorite_count}</div>
                             </div>
-                            {posts.map(post => (
-                                // loginUser && post.user_name === loginUser.nickname && (
-                                    <div key={post.writing_Id}>
-                                        <div className={styles.num}>{post.writing_Id}</div>
-                                        <div className={styles.title} onClick={movePage1} id={post.writing_Id}>{post.writing_name}</div>
-                                        <div className={styles.writer}>{post.user_name}</div>
-                                        <div className={styles.date}>{formatDate(post.regit_date)}</div>
-                                        <div className={styles.count}>{post.favorite_count}</div>
-                                    </div>
-                                    // )
-                                 ))}
+                            // )
+                        ))}
 
-                        </div>
+                    </div>
 
-                        <div className={styles.bt_wrap}>
-                            <button onClick={goregist} className={styles.on}>등록</button>
-                        </div>
+                    <div className={styles.bt_wrap}>
+                        <button onClick={goregist} className={styles.on}>등록</button>
                     </div>
                 </div>
             </div>
+        </div>
 
 
 
-                );
+    );
 
-            }
+}
 
 export default NoticePage;

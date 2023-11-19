@@ -104,7 +104,6 @@ body::-webkit-scrollbar {
 .chat_info{
     width: 82%;
     float:left;
-    margin-left:10px;
 }
 
 .p_name{
@@ -161,6 +160,8 @@ body::-webkit-scrollbar {
     font-weight: bold;
     overflow:hidden;
     color: black;
+    margin-left:10px;
+    white-space:nowrap;
 }
 
 .float_left {
@@ -191,6 +192,8 @@ body::-webkit-scrollbar {
     background: whitesmoke;
     height:50px;
     position: fixed;
+    display:flex;
+
 }
 
 .chat_history {
@@ -219,7 +222,7 @@ body::-webkit-scrollbar {
 .message_time {
     color: gray;
     font-family: "NanumGothicOTF";
-    padding-left: 6px;
+    padding-left: -6px;
     padding-right: 6px;
 }
 
@@ -276,7 +279,7 @@ body::-webkit-scrollbar {
     min-height:26px;
     /*font-weight: bold;*/
     word-wrap: break-word;
-    left:calc(100vw - 450px);
+    left:calc(100vw - 420px);
     transform: translateX(-100%);
     font-family: "NanumGothicOTF";
 }
@@ -398,12 +401,12 @@ body::-webkit-scrollbar {
     font-size:25px;
 }
 
-.modal {
+/* .modal {
     width:800px;
     height:400px;
     position:absolute;
     z-index: 51;
-}
+} */
 
 .error_message {
     color:red;
@@ -571,6 +574,27 @@ body::-webkit-scrollbar {
     top: 93px;
     z-index: 50;
 }
+
+@media screen and (max-width: 700px) {
+    .eval_img {
+        white-space: nowrap;
+    }
+
+    .eval_img > img {
+        width:125px;
+        height:125px;
+    }
+    .eval_button > button{
+        width:70px;
+        padding:10px;
+        white-space: nowrap;
+        font-size:16px;
+    }
+    .eval_header {
+        font-size:20px;
+    }
+}
+
 @media screen and (max-width: 600px){
     .chat_page {
         z-index: 19;
@@ -598,16 +622,45 @@ body::-webkit-scrollbar {
         width:calc(100vw - 60px);
     }
     .chat_history {
-        width:calc(100vw - 60px);
+        width:calc(100vw - 30px);
     }
     .my_message {
-        left:calc(100vw - 150px);
+        left:calc(100vw - 95px);
     }
+
+    .op_message {
+        margin-left:-9px;
+    }
+
     .chat_message {
         width:calc(100vw - 60px);
     }
-
     .chat_message textarea {
         width:calc(100vw - 180px);
+    }
+}
+
+@media screen and (max-width: 550px) {
+
+    .eval_img > img {
+        width:80px;
+        height:80px;
+    }
+    .eval_button > button{
+        width:70px;
+        padding:10px;
+        white-space: nowrap;
+        font-size:16px;
+    }
+    .eval_header {
+        font-size:20px;
+    }
+}
+
+@media screen and (max-width: 550px) {
+
+    .eval_img > img {
+        width:50px;
+        height:50px;
     }
 }

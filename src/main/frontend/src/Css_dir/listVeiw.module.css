@@ -100,8 +100,8 @@
     transition: all 0.3s ease;
     cursor: pointer;
 }.left_btn:hover{
-    opacity: 0.9;
-    background-color: black;
+     opacity: 0.9;
+     background-color: black;
  }
 .left_btn_hidden{
     border: 0;

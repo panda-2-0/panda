@@ -75,6 +75,7 @@ public class WritingService {
         return auctionDTO;
     }
 
+
     public List<WritingResponseDTO> findResponseById(List<Integer> widList){
         List<WritingEntity> writingEntityList = writingDSLRepository.findByIdList(widList);
         List<WritingResponseDTO> writingResponseDTOList = new LinkedList<WritingResponseDTO>();
@@ -173,7 +174,7 @@ public class WritingService {
             AuctionEntity auctionEntity=AuctionEntity.toAuctionEntity(auctionDTO,writingRegisterDTO.getAuction_date());
             auctionEntity.setUserEntity(null);
             auctionRepository.save(auctionEntity);
-       }
+        }
     }
     public AuctionEntity isAuction(int wid){
         log.info("isAuctioning");
@@ -267,5 +268,47 @@ public class WritingService {
             }
         }
     }
+
+
+    public WritingDTO updateWriting(WritingDTO writingDTO) {
+        // 데이터베이스에서 해당 데이터를 찾습니다.
+        WritingEntity existingEntity = writingRepository.findById(writingDTO.getWriting_Id()).orElse(null);
+
+        if (existingEntity == null) {
+            // 해당 ID에 대한 데이터가 없을 경우 예외 처리 또는 적절한 동작 수행
+            return null; // 예를 들어, 데이터가 없는 경우 null을 반환하거나 예외를 던질 수 있습니다.
+        }
+
+        // 입력된 DTO의 내용으로 엔티티를 업데이트합니다.
+        existingEntity.setWriting_name(writingDTO.getWriting_name());
+        existingEntity.setCategory(writingDTO.getCategory());
+        existingEntity.setDetail_category(writingDTO.getDetail_category());
+        existingEntity.setCount(writingDTO.getCount());
+        existingEntity.setPrice(writingDTO.getPrice());
+        existingEntity.setContent(writingDTO.getContent());
+        existingEntity.setWriting_photo(writingDTO.getWritingImg());
+        // 데이터베이스에 업데이트된 엔티티를 저장합니다.
+        WritingEntity updatedEntity = writingRepository.save(existingEntity);
+
+        // 업데이트된 엔티티를 DTO로 변환하여 반환합니다.
+        return convertEntityToDTO(updatedEntity);
+    }
+
+
+
+
+    public WritingDTO convertEntityToDTO(WritingEntity entity) {
+        WritingDTO dto = new WritingDTO();
+        dto.setWriting_Id(entity.getWid());
+        dto.setWriting_name(entity.getWriting_name());
+        dto.setCategory(entity.getCategory());
+        dto.setDetail_category(entity.getDetail_category());
+        dto.setCount(entity.getCount());
+        dto.setPrice(entity.getPrice());
+        dto.setContent(entity.getContent());
+        dto.setWritingImg(entity.getWriting_photo());
+        return dto;
+    }
+
 
 }

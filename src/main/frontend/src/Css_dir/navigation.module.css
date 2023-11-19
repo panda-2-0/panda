@@ -26,6 +26,7 @@
     right: 0;
     position: fixed;
     z-index: 21;
+    white-space:nowrap;
 }
 .logo_box{
     cursor: pointer;

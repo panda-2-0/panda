@@ -98,7 +98,27 @@ public class WritingController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("경매 최고가 업데이트 실패: " + e.getMessage());
         }
     }
+    @PostMapping("/notice/noticeChange/{id}")
+    public ResponseEntity<WritingDTO> setWritingChangeDTO(@PathVariable Integer id, @RequestBody WritingDTO writingDTO) {
+        // 여기에서 받아온 writingDTO와 id를 사용하여 데이터를 수정하는 서비스 메서드를 호출합니다.
+        writingDTO.setWriting_Id(id);
+        WritingDTO updatedWriting = writingService.updateWriting(writingDTO);
 
+        if (updatedWriting == null) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        return new ResponseEntity<>(updatedWriting, HttpStatus.OK);
+    }
+
+
+    @PostMapping("/notice/getData")
+    public WritingDTO getDataList(@RequestParam("wid") int wid)
+    {
+        List<WritingDTO> writingDTOList = new ArrayList<>();
+        WritingDTO writingDTO = writingService.findById(wid);
+        return writingDTO;
+    }
     @PostMapping("/notice/writing_content")
     public List<WritingContentDTO> writingContent(@RequestParam("wid") int wid) {
         List<WritingContentDTO> writingContentDTO = writingService.findBycontentId(wid);

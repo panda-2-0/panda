@@ -34,11 +34,11 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Transactional
 public class SignService {
-//    private final AuthenticationManagerBuilder managerBuilder;
+    //    private final AuthenticationManagerBuilder managerBuilder;
     private final UserRepository userRepository;
     private final UserSaveRepository userSaveRepository;
     private final PasswordEncoder passwordEncoder;
-//    private final TokenProvider tokenProvider;
+    //    private final TokenProvider tokenProvider;
     private final ChatRoomRepository chatRoomRepository;
     private final ChatRepository chatRepository;
 

@@ -134,26 +134,26 @@ function Mem() {
     };
     return (
         <>
-        <div>
-            <form name='mem_form' id='mem_form' method='post'>
-                <input type='text' className={styles.input} placeholder='E-mail' name='user_id' onChange={changeEmail} value={email} onKeyDown={handleOnKeyPress}></input>
-                {!email_regex.test(email) && email !== '' ? <div className={styles.error_message}>{email_error}</div>:<div className={styles.error_message}></div>}
-                <input type='password' className={styles.input} placeholder='Password : 영어, 숫자 포함 8자리 이상' name='pw' onChange={changePw} value={pw} onKeyDown={handleOnKeyPress}></input>
-                {!pw_regex.test(pw) && pw !== '' ? <div className={styles.error_message}>{pw_error}</div>:<div className={styles.error_message}></div>}
-                <input type='password' className={styles.input} placeholder='Password 확인 : Password를 한번 더 입력' name='pw_ch' onChange={changePw_check} value={pw_ch} onKeyDown={handleOnKeyPress}></input>
-                {pw !== pw_ch ? <div className={styles.error_message}>{pwch_error}</div>:<div className={styles.error_message}></div>}
-                <input type='text' className={styles.input} placeholder='닉네임' name='name' onChange={changeNickname} value={nickname} onKeyDown={handleOnKeyPress}></input>
-                <div className={styles.error_message}></div>
-                <input type='text' className={styles.input} placeholder='휴대폰 : 숫자만 입력(- 자동 입력)' name='phone' onChange={changePhone} value={phone} onKeyDown={handleOnKeyPress}></input>
-                {!phone_regex.test(phone) && phone !== '' ? <div className={styles.error_message}>{phone_error}</div>:<div className={styles.error_message}></div>}
-                <input type='text' className={styles.input} placeholder='주소 : 구매자들이 알 수 있는 정도의 대략적인 주소를 입력해 주세요.' name='address' onChange={changeAddr} value={addr} onKeyDown={handleOnKeyPress}></input>
-                <div className={styles.error_message}></div>
-                <div className={styles.login_btn_wrap}>
-                    <button className={styles.mem_btn_under}>회원가입</button>
-                    <button className={styles.mem_btn} onClick={join_mem}><span>회원가입</span></button>
-                </div>
-            </form>
-        </div>
+            <div>
+                <form name='mem_form' id='mem_form' method='post'>
+                    <input type='text' className={styles.input} placeholder='E-mail' name='user_id' onChange={changeEmail} value={email} onKeyDown={handleOnKeyPress}></input>
+                    {!email_regex.test(email) && email !== '' ? <div className={styles.error_message}>{email_error}</div>:<div className={styles.error_message}></div>}
+                    <input type='password' className={styles.input} placeholder='Password : 영어, 숫자 포함 8자리 이상' name='pw' onChange={changePw} value={pw} onKeyDown={handleOnKeyPress}></input>
+                    {!pw_regex.test(pw) && pw !== '' ? <div className={styles.error_message}>{pw_error}</div>:<div className={styles.error_message}></div>}
+                    <input type='password' className={styles.input} placeholder='Password 확인 : Password를 한번 더 입력' name='pw_ch' onChange={changePw_check} value={pw_ch} onKeyDown={handleOnKeyPress}></input>
+                    {pw !== pw_ch ? <div className={styles.error_message}>{pwch_error}</div>:<div className={styles.error_message}></div>}
+                    <input type='text' className={styles.input} placeholder='닉네임' name='name' onChange={changeNickname} value={nickname} onKeyDown={handleOnKeyPress}></input>
+                    <div className={styles.error_message}></div>
+                    <input type='text' className={styles.input} placeholder='휴대폰 : 숫자만 입력(- 자동 입력)' name='phone' onChange={changePhone} value={phone} onKeyDown={handleOnKeyPress}></input>
+                    {!phone_regex.test(phone) && phone !== '' ? <div className={styles.error_message}>{phone_error}</div>:<div className={styles.error_message}></div>}
+                    <input type='text' className={styles.input} placeholder='주소 : 구매자들이 알 수 있는 정도의 대략적인 주소를 입력해 주세요.' name='address' onChange={changeAddr} value={addr} onKeyDown={handleOnKeyPress}></input>
+                    <div className={styles.error_message}></div>
+                    <div className={styles.login_btn_wrap}>
+                        <button className={styles.mem_btn_under} onClick={join_mem}>회원가입</button>
+                        <button className={styles.mem_btn} onClick={join_mem}><span>회원가입</span></button>
+                    </div>
+                </form>
+            </div>
         </>
     )
 }

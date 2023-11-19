@@ -116,9 +116,9 @@ function Chat() {
                                 evaluateSeller: evaluateRoom.evaluateSeller}));
 
                             setMessages(prevState => {
-                             const newArray = [...prevState];
-                             newArray[0].type = "evaluate";
-                             return newArray;
+                                const newArray = [...prevState];
+                                newArray[0].type = "evaluate";
+                                return newArray;
                             });
                         }
                         else if (type === "exit") {
@@ -151,9 +151,9 @@ function Chat() {
                             let myRoomId = parsedMap.myRoomId;  // 현재 내가 보고있는 채팅창 번호
 
                             chatList.forEach((room, index) => {
-                               if(room.roomId === myRoomId) {
+                                if(room.roomId === myRoomId) {
                                     room.noRead = false;
-                               }
+                                }
                             });
 
                             setToMessageList(prevState => ({...prevState,
@@ -163,7 +163,7 @@ function Chat() {
 
                             setMessages(chatList);
                         }
-                        // 상대나 자신이 메시지를 보낸게 아니면
+                            // 상대나 자신이 메시지를 보낸게 아니면
                         // 메시지 리스트를 가져와 저장
 
                         else if (type === "chat") {    // chat != null -> 상대나 내가 메시지를 보냈다는 의미
@@ -180,7 +180,7 @@ function Chat() {
                                         if (chatRoom.roomId === chat.roomId) {
                                             if(myRoomId !== chat.roomId) {
                                                 return {...chatRoom, lastContent: chat.content, lastDate: chat.chatDate,
-                                                noRead: true, noReadBuyer: amIBuyer, isExitBuyer:false, isExitSeller:false}
+                                                    noRead: true, noReadBuyer: amIBuyer, isExitBuyer:false, isExitSeller:false}
                                             }
                                             return {...chatRoom, lastContent: chat.content, lastDate: chat.chatDate, isExitBuyer:false, isExitSeller:false};
                                         }
@@ -283,11 +283,11 @@ function Chat() {
         setToMessageList(prevState => ({...prevState, op_Id: op, amIBuyer: amIBuyer, userImg:userImg, roomId:roomId}));
         setToChatList(prevState => ({...prevState, roomId:roomId}));
         setChatRooms(prevChatRooms => {
-           return prevChatRooms.map(chatRoom => {
-               if (chatRoom.roomId === roomId)
-                   return { ...chatRoom, noRead:false };
-               return chatRoom;
-           });
+            return prevChatRooms.map(chatRoom => {
+                if (chatRoom.roomId === roomId)
+                    return { ...chatRoom, noRead:false };
+                return chatRoom;
+            });
         });
     };
 
@@ -317,7 +317,7 @@ function Chat() {
             };  // text
             setSendText('');
         }
-        
+
         room.send(JSON.stringify(message));
         setPreviewImage(null);
         setIsBigger(false);
@@ -359,7 +359,7 @@ function Chat() {
             </div>
             <div className={styles.plist}>
                 <ul>
-                <li className={styles.profile_First}>
+                    <li className={styles.profile_First}>
                         <div className={styles.p_profile}>
                             <img src={userImg == null ? profile : atob(userImg)} width="100%" height="100%"></img>
                         </div>
@@ -389,8 +389,8 @@ function Chat() {
                                 <img src={previewImage} width="100%" height="100%"/>
                             </div>
                         </div>
-                    <textarea name={styles.send_message} placeholder={"메시지를 입력하세요."} rows="3" value={sendText} onChange={(event) => setSendText(event.target.value)} onKeyPress={handleKeyPress}></textarea>
-                    <button onClick={handleUpload}>전송</button>
+                        <textarea name={styles.send_message} placeholder={"메시지를 입력하세요."} rows="3" value={sendText} onChange={(event) => setSendText(event.target.value)} onKeyPress={handleKeyPress}></textarea>
+                        <button onClick={handleUpload}>전송</button>
                         <img src={Painting} className={styles.painting} onClick={imageSelectClick} />
                         {/*<img src={guidance} className={styles.map}  />*/}
                         <input type="file" ref={imageInput} className={styles.button_hidden} key={fileInputKey} onChange={handleFileChange} />

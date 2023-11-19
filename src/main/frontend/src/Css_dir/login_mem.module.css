@@ -53,6 +53,7 @@
 }
 .input{
     cursor: text;
+    padding: 0;
 }
 .input:hover {
     border-color: #51996b;
@@ -84,6 +85,7 @@
     line-height: 43px;
     background-color: black;
     font-weight: bold;
+    padding: 0;
 }
 .login_btn{
     position: absolute;
@@ -99,6 +101,7 @@
     font-weight: bold;
     line-height: 43px;
     transition: height 0.4s ease;
+    padding: 0;
 }
 .login_btn > span{
     line-height: 43px;
@@ -124,6 +127,7 @@
     color: white;
     background-color: #51996b;
     font-weight: bold;
+    padding: 0;
 }
 .mem_btn{
     position: absolute;
@@ -139,6 +143,7 @@
     font-weight: bold;
     line-height: 43px;
     transition: height 0.4s ease;
+    padding: 0;
 }
 .mem_btn > span{
     line-height: 43px;
@@ -164,6 +169,7 @@
     color: white;
     background-color: black;
     font-weight: bold;
+    padding: 0;
 }
 
 .cancel_btn{
@@ -180,6 +186,7 @@
     font-weight: bold;
     line-height: 43px;
     transition: all 0.4s ease;
+    padding: 0;
 }
 .cancel_btn > span{
     line-height: 43px;

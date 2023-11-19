@@ -46,9 +46,10 @@
 }
 .board_title
 {
-    margin-top:150px;
+    margin-top:70px;
     font-size:10px;
     margin-bottom: 30px;
+    /* background-color: darkgray; */
 }
 
 .board_title strong
@@ -434,10 +435,11 @@
 .board_view_wrap
 {
     font-size:10px;
-    width: 90vw;
+    margin-bottom: 30px;
     max-width: 1000px;
     margin:100px auto;
     margin-top: 0px;
+
 }
 
 @media (max-width: 1000px)
